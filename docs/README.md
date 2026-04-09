@@ -1,0 +1,102 @@
+# KORA Documentation
+
+KORA is a standalone open-source execution control layer for AI systems. It structures requests into task graphs, runs deterministic work first, and escalates to model inference only when needed.
+
+This documentation is the technical entrypoint for understanding how KORA works, how its execution model is organized, and where to go next when working on the project.
+
+## What You'll Find in These Docs
+
+The documentation is organized to help developers move from high-level concepts to implementation details.
+
+- foundational ideas behind deterministic-first execution
+- architecture and runtime model
+- task graphs, execution semantics, and validation
+- telemetry, observability, and control surfaces
+- benchmarks, experiments, and supporting research
+
+## Recommended Reading Path for New Developers
+
+If you are new to KORA, start here:
+
+1. Read the root `README.md` for project positioning and v0.1 scope.
+2. Read the foundation documents to understand the core concepts and terminology.
+3. Read the architecture documents to understand execution flow and system structure.
+4. Read the core specification documents for task graphs, budgets, validation, and telemetry.
+5. Review experiments and benchmarks to see how the execution model is evaluated in practice.
+
+## Documentation Map
+
+### `docs/01_foundation/`
+
+High-level conceptual documents for understanding what KORA is and why it exists.
+
+- project philosophy
+- glossary and terminology
+- execution-oriented design perspective
+- naming, framing, and foundational concepts
+
+### `docs/02_architecture/`
+
+Architecture documents explaining how KORA is structured internally.
+
+- execution model
+- runtime architecture
+- decomposition model
+- system diagrams
+- design principles
+
+### `docs/03_core_spec/`
+
+Core execution semantics, technical definitions, and project operating constraints.
+
+- task graph model
+- task IR and execution semantics
+- budget controls
+- reasoning and validation boundaries
+- telemetry and observability
+- governance and security guidance
+- testing and evolution guidance
+
+### `docs/04_models/`
+
+Analytical and modeling documents related to behavior, limits, and tradeoffs.
+
+- performance model
+- break-even reasoning
+- limitations
+- falsifiability and evaluation framing
+
+### `docs/05_experiments/`
+
+Benchmarks, experiments, evaluation notes, and experiment-oriented research material.
+
+- benchmark reports
+- workload comparisons
+- stress testing
+- experiment writeups
+- evaluation planning material
+
+### `docs/06_research/`
+
+Longer-range research, roadmap material, and supporting strategic documents.
+
+- research agenda
+- roadmap documents
+- whitepaper and extended notes
+- longer-range supporting material
+
+### `docs/specs/`
+
+Entrypoint for locating formal specifications, manifests, and versioned interfaces.
+
+Use this section when you need to find stable technical definitions, navigate the specification set, or locate versioned interface material.
+
+## Notes on Specs and Versioning
+
+Some parts of KORA are still evolving as the project moves through its early public releases. In general:
+
+- descriptive documents explain concepts and intended behavior
+- manifests and entrypoints help locate the relevant specification set
+- versioned specifications define stable technical interfaces where needed
+
+For most new contributors, the best approach is to start with the conceptual and architecture documents, then move into the relevant spec entrypoints and versioned documents for the area being changed.
