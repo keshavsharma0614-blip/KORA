@@ -5,15 +5,39 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "kora"
 version = "0.1.0a0"
-description = "KORA v0.1-alpha scaffold"
+description = "Open-source execution control for AI systems"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
+authors = [
+  { name = "hkalbertkim" },
+]
+maintainers = [
+  { name = "hkalbertkim" },
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
   "pydantic",
   "jsonschema",
   "requests",
 ]
+
+[project.urls]
+Homepage = "https://github.com/hkalbertkim/KORA"
+Repository = "https://github.com/hkalbertkim/KORA"
+Issues = "https://github.com/hkalbertkim/KORA/issues"
+
+[project.scripts]
+kora = "kora.cli:main"
 
 [project.optional-dependencies]
 dev = [
