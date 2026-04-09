@@ -63,28 +63,28 @@ python3 -m pip install -e ".[dev]"
 
 ## Quickstart
 
-Planned v0.1 CLI flow:
+Terminal-first v0.1 CLI flow:
 
 ```bash
-kora init
 kora examples list
-kora run examples/structured_qa
-kora trace last
+kora run hello_kora
+kora run direct_vs_kora
+kora telemetry --input artifacts/run.json
 ```
 
 Current examples available in this repository:
 
-- `examples/hello_kora`
-- `examples/direct_vs_kora`
-- `examples/retry_demo`
-- `examples/real_workload_harness`
-- `examples/stress_test`
+- examples/hello_kora
+- examples/direct_vs_kora
+- examples/retry_demo
+- examples/real_workload_harness
+- examples/stress_test
 
 Example local runs:
 
 ```bash
-python3 examples/hello_kora/run.py
-python3 examples/direct_vs_kora/run.py
+python3 -m kora run hello_kora
+python3 -m kora run direct_vs_kora
 python3 -m kora telemetry --input artifacts/run.json
 ```
 
