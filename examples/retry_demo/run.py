@@ -17,7 +17,7 @@ def main() -> None:
 
     result = run_graph(normalized)
     payload = {
-        "final_output": result["final_output"],
+        "final_output": result["final"],
         "event_count": len(result["events"]),
     }
     print(json.dumps(payload, indent=2))
