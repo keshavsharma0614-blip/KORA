@@ -24,11 +24,22 @@ def _examples_root() -> Path:
     return Path(__file__).resolve().parent.parent / "examples"
 
 
+def _example_descriptions() -> dict[str, str]:
+    return {
+        "hello_kora": "basic deterministic hello-world graph",
+        "retry_demo": "retry/recovery flow example",
+        "direct_vs_kora": "direct call vs KORA-controlled path",
+        "real_workload_harness": "benchmark/report flow example",
+        "stress_test": "repeated-run stress harness",
+    }
+
+
 def _discover_examples() -> list[dict[str, object]]:
     root = _examples_root()
     if not root.exists():
         return []
 
+    descriptions = _example_descriptions()
     examples: list[dict[str, object]] = []
     for child in sorted(root.iterdir(), key=lambda path: path.name):
         if not child.is_dir():
@@ -41,6 +52,7 @@ def _discover_examples() -> list[dict[str, object]]:
                 "name": child.name,
                 "run_path": run_path,
                 "has_graph": (child / "graph.json").exists(),
+                "description": descriptions.get(child.name, "runnable example"),
             }
         )
     return examples
@@ -55,7 +67,7 @@ def _print_examples_list() -> None:
     print("Runnable examples")
     for example in examples:
         graph_label = "yes" if example["has_graph"] else "no"
-        print(f"- {example['name']} (graph.json: {graph_label})")
+        print(f"- {example['name']}: {example['description']} (graph.json: {graph_label})")
 
 
 def _run_example(example_name: str, extra_args: list[str]) -> int:
