@@ -84,6 +84,7 @@ Example local runs:
 
 ```bash
 python3 -m kora run hello_kora
+python3 -m kora run retry_demo
 python3 -m kora run direct_vs_kora
 python3 -m kora run direct_vs_kora -- --offline
 python3 -m kora telemetry --input docs/reports/real_app_benchmark.json
