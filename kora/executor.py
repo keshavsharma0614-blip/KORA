@@ -547,7 +547,7 @@ def run_graph(graph: TaskGraph) -> dict[str, Any]:
                     output = _run_det_task(task, state)
                     det_delta = time.monotonic() - det_start
                     stage_timings["det_total_s"] = stage_timings.get("det_total_s", 0.0) + det_delta
-                    det_verify_schema = task.verify.schema if task.verify is not None else None
+                    det_verify_schema = task.verify.json_schema if task.verify is not None else None
                     if det_verify_schema:
                         stage = Stage.VERIFY
                         verify_start = time.monotonic()

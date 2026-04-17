@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, Field, ValidationError, model_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 
 class Budget(BaseModel):
@@ -39,7 +39,9 @@ VerifyRule = Annotated[VerifyRuleRequired | VerifyRuleRange, Field(discriminator
 class VerifySpec(BaseModel):
     """Verification settings for a task."""
 
-    schema: dict[str, Any] | None = None
+    model_config = ConfigDict(populate_by_name=True)
+
+    json_schema: dict[str, Any] | None = Field(default=None, alias="schema")
     rules: list[VerifyRule] = Field(default_factory=list)
 
 
@@ -204,8 +206,8 @@ def normalize_graph(graph: TaskGraph) -> TaskGraph:
         if task.run.kind == "llm":
             if task.verify is None:
                 task.verify = VerifySpec(schema=task.run.spec.output_schema, rules=[])
-            elif task.verify.schema is None:
-                task.verify.schema = task.run.spec.output_schema
+            elif task.verify.json_schema is None:
+                task.verify.json_schema = task.run.spec.output_schema
 
     return normalized
 
@@ -227,7 +229,7 @@ def validate_graph(graph: TaskGraph) -> None:
                 raise ValueError(f"task '{task.id}' depends on unknown task '{dep}'")
 
         if task.run.kind == "llm":
-            if task.verify is None or task.verify.schema is None:
+            if task.verify is None or task.verify.json_schema is None:
                 raise ValueError(
                     f"llm task '{task.id}' must include verify.schema (directly or via normalization)"
                 )

@@ -40,8 +40,8 @@ def apply_rules(output: dict[str, Any], rules: list[Any]) -> None:
 
 def verify_output(task: Task, output: dict[str, Any]) -> None:
     """Validate task output with schema and rules."""
-    if task.verify is None or task.verify.schema is None:
+    if task.verify is None or task.verify.json_schema is None:
         raise ValueError(f"task '{task.id}' missing verify.schema")
 
-    validate_schema(output, task.verify.schema)
+    validate_schema(output, task.verify.json_schema)
     apply_rules(output, task.verify.rules)
