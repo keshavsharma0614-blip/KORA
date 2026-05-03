@@ -1,172 +1,139 @@
 # Contributing to KORA
 
-KORA is an execution architecture, not a feature collection.
+## Project status
 
-Contributions must preserve structural discipline.
+KORA is currently at `v0.1.0-alpha`.
 
-Before submitting code, understand the philosophy:
+This is an alpha release with a small terminal-first public surface. The current focus is keeping the CLI, examples, telemetry path, and release smoke checks reliable while the project matures.
 
-- Determinism before inference
-- Native decomposition
-- Budget governance
-- Schema validation
-- Compute neutrality
+KORA is not a production release yet. Contributions should be conservative, well-scoped, and easy to verify.
 
-KORA is minimal by design.
+## Who this project is for
 
----
+KORA is for developers and researchers building AI systems that need stronger execution control.
 
-## 1. Contribution Principles
+Good contributors are interested in:
 
-All contributions must satisfy the following:
+- deterministic-first execution
+- explicit task graphs
+- bounded model invocation
+- schema validation
+- telemetry and repeatable verification
+- clear examples and documentation
 
-### 1. Structure Over Convenience
+## Local setup
 
-Do not introduce shortcuts that reintroduce inference reflexivity.
+Start from a clean checkout of the repository.
 
-Every model invocation must be:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -e ".[dev]"
+```
 
-- Explicit
-- Bounded
-- Schema-validated
+The editable install should install KORA and its development dependencies into the virtual environment.
 
-No hidden calls.
-No silent retries.
+## First verification commands
 
----
+Before making changes, run the release smoke check:
 
-### 2. Deterministic-First Discipline
+```bash
+./scripts/release_smoke.sh
+```
 
-If a task can be resolved without inference, it must not invoke a model.
+Then run the test suite:
 
-Contributors should always ask:
+```bash
+python3 -m pytest -q
+```
 
-*Can this be deterministic?*
+Both commands should pass before you open a pull request.
 
-If yes, implement deterministic resolution.
+## How to choose a first issue
 
----
+For a first contribution, choose a task that is small and easy to review.
 
-### 3. No Feature Bloat
+Good first issues usually:
 
-KORA is not:
+- touch one or two files
+- improve clarity without changing behavior
+- add or tighten a narrow test
+- explain an existing example or telemetry artifact
+- preserve the current public CLI surface
 
-- A chatbot wrapper
-- An agent playground
-- A prompt template library
-- A model training framework
+Avoid starting with large runtime changes, new public commands, broad refactors, or changes that alter model-routing semantics.
 
-Do not add features that expand surface area without strengthening structure.
+## Good first contribution types
 
-Minimalism preserves clarity.
+Good first contribution types include:
 
----
+- docs improvements
+- example explanations
+- small tests
+- telemetry docs
+- benchmark docs
+- CLI help wording
 
-### 4. Measurability Required
+If you are unsure whether a change expands the public surface, open an issue or discussion before implementing it.
 
-All new features must be measurable.
+## Branch and PR workflow
 
-Add telemetry where appropriate.
+Use a short topic branch name:
 
-If a change affects:
+```bash
+git switch -c your-name/small-description
+```
 
-- Model invocation count
-- Token usage
-- Latency
-- Retry behavior
+Keep pull requests focused. A good PR should explain:
 
-It must be observable.
+- what problem it solves
+- what files changed
+- how behavior is affected, if at all
+- what verification commands were run
 
-Architecture without metrics degrades.
+Prefer one logical change per PR. Do not bundle documentation cleanup, runtime edits, and unrelated formatting in the same pull request.
 
----
+## Testing expectations
 
-## 2. Code Standards
+At minimum, run:
 
-### Deterministic Layer
+```bash
+./scripts/release_smoke.sh
+python3 -m pytest -q
+```
 
-- Pure functions where possible
-- No hidden state
-- Explicit error handling
+If your change touches a specific module, also run the relevant focused test file when possible.
 
-### Model Layer
+Examples:
 
-- Invocation must pass through reasoning adapter
-- Budget constraints required
-- Schema required
-- Retry count bounded
+```bash
+python3 -m pytest tests/test_executor.py -q
+python3 -m pytest tests/test_task_ir.py -q
+```
 
-### Validation Layer
+Include the commands and results in your PR description.
 
-- No acceptance of unvalidated model output
-- Strict JSON schema enforcement
-- No additionalProperties by default
+## Contribution rules
 
----
+- Keep PRs small.
+- Do not include unrelated refactors.
+- Run tests before opening a PR.
+- Do not expand the public CLI or public task surface without prior discussion.
+- Keep KORA deterministic-first: deterministic work should run before model inference when possible.
+- Do not introduce hidden model calls.
+- Keep retries, budgets, and validation explicit.
+- Preserve schema validation around model outputs.
+- Avoid broad claims in docs unless they are backed by committed verification artifacts.
 
-## 3. Pull Request Guidelines
+## Community expectations
 
-Each pull request should include:
+Be direct, practical, and respectful.
 
-- Clear problem statement
-- Explanation of structural impact
-- Measurable change description
-- Telemetry implications
-- Budget implications
+Good project communication is specific:
 
-If adding model invocation, justify necessity.
+- describe the concrete issue
+- explain the tradeoff
+- show the verification result
+- ask for review when scope is uncertain
 
----
-
-## 4. Architectural Review Checklist
-
-Before approval, confirm:
-
-| Question | Required |
-|----------|----------|
-| Does this introduce hidden inference? | Must be No |
-| Is budget enforcement preserved? | Must be Yes |
-| Is schema validation enforced? | Must be Yes |
-| Is deterministic-first principle preserved? | Must be Yes |
-| Is compute neutrality maintained? | Must be Yes |
-
-If any answer fails, revision is required.
-
----
-
-## 5. Experimental Contributions
-
-For research-oriented contributions:
-
-- Include falsifiable hypothesis
-- Define measurable variables
-- Provide before-and-after metrics
-- Include break-even analysis where applicable
-
-KORA favors empiricism over assumption.
-
----
-
-## 6. Long-Term Direction
-
-Contributors should align with:
-
-- Decomposition-native evolution
-- Heterogeneous routing
-- CPU-first viability
-- Budget-aware reasoning
-
-Short-term convenience must not undermine long-term architecture.
-
----
-
-## 7. Tone and Documentation
-
-Documentation must:
-
-- Avoid hype language
-- Avoid vendor bias
-- Use ASCII punctuation
-- Include rendered tables when relevant
-- Include Mermaid diagrams where structural clarity improves understanding
-- Use bold and italic on
+KORA values careful, measurable changes over large speculative additions.

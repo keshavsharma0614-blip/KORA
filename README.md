@@ -24,6 +24,8 @@ KORA is a standalone open-source execution control layer for AI systems. It stru
 
 KORA v0.1 is terminal-first and developer-oriented.
 
+Want to contribute? Start with [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## What KORA Is
 
 KORA sits between a request and a model call.
