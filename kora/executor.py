@@ -766,8 +766,9 @@ def run_graph(graph: TaskGraph) -> dict[str, Any]:
                             verifier_ok = _gate_output_verifier_ok(task, output)
                             meta["gate_verifier_ok"] = verifier_ok
                             if verifier_ok:
-                                meta["escalate_recommended"] = False
-                                meta["stop_reason"] = "accepted_gate_verified"
+                                if not meta.get("escalate_recommended"):
+                                    meta["escalate_recommended"] = False
+                                    meta["stop_reason"] = "accepted_gate_verified"
                             else:
                                 if next_stage_token is None:
                                     meta["escalate_recommended"] = False

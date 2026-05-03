@@ -340,7 +340,7 @@ def test_gate_verifier_reduces_tail_full_within_coverage_budget() -> None:
                     "ok": True,
                     "output": {"status": "ok", "task_id": task_id, "answer": gate_answer},
                     "usage": {"time_ms": 1, "tokens_in": 1, "tokens_out": 1},
-                    "meta": {"adapter": "mock_gatev:gate", "model": "mock-gate", "confidence": 0.2},
+                    "meta": {"adapter": "mock_gatev:gate", "model": "mock-gate"},
                 }
 
         old_mini = executor_module._AdapterRegistry.providers.get("mock_gatev")
@@ -480,7 +480,7 @@ def test_gate_verifier_stage_detection_and_stop_reason() -> None:
                     "ok": True,
                     "output": {"status": "ok", "task_id": task_id, "answer": gate_answer},
                     "usage": {"time_ms": 1, "tokens_in": 1, "tokens_out": 1},
-                    "meta": {"adapter": "mock_gatev:gate", "model": "mock-gate", "confidence": 0.2},
+                    "meta": {"adapter": "mock_gatev:gate", "model": "mock-gate"},
                 }
 
         old_mini = executor_module._AdapterRegistry.providers.get("mock_gatev")
