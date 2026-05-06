@@ -12,7 +12,7 @@ Public truth:
 
 Current `origin/main` HEAD:
 
-- `f40da300b2518c76538e5669feaa4f66f065f63d`
+- `83bd8d5e013701c0d3aca6703e2a14a5d5189021`
 
 Published release:
 
@@ -37,6 +37,12 @@ Release URL:
 - Task 125/125B URL and remote migration updates merged.
 - Task 126/126B Albert-Sumanta GitHub sync setup merged.
 - Task 127/128/128B README migration notice compacted and merged.
+- Task 129/129B category thesis and context foundation merged.
+- Task 130/130B claim registry and public language guide merged.
+- Task 131/131B OSS operating system documentation merged.
+- Task 132/132B GitHub full-platform setup plan merged.
+- Task 133/133B repository hygiene audit merged.
+- Task 134/134B docs index and navigation map merged.
 
 Note:
 
@@ -51,10 +57,11 @@ Note:
 
 ## Current Recommended Next Tasks
 
-- Create Claim Registry.
-- Create KORA OSS Operating System.
-- Create Sumanta Community OS + LLM Promptbook.
-- Create GitHub full-platform setup plan.
+- Task 136: safe docs cross-link cleanup using `docs/README.md` and the docs navigation map.
+- Task 137: repo-managed PR template and CODEOWNERS draft.
+- Task 138: Sumanta Community OS + LLM Promptbook.
+- Task 139: GitHub manual setup execution log.
+- Task 140: v0.2.1-alpha OSS polish roadmap.
 
 ## Current Safe Benchmark Claim
 
