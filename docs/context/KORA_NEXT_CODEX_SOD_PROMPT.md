@@ -35,6 +35,13 @@ Release state:
 - Raw benchmark artifacts uploaded: none.
 - Package version unchanged: pyproject.toml remains 0.1.0a0.
 
+Community/social launch branch note:
+- Branch `task206_community_manager_guide` exists.
+- It includes the KORA Community Manager Guide, KORA Social Media Announcement Guide, social launch hooks, image-generation prompt samples, and the community/social EOD report.
+- PR creation may need to be done manually because automated PR creation was permission-blocked.
+- Manual compare URL: https://github.com/Krako-Labs/KORA/compare/main...task206_community_manager_guide?expand=1
+- Completion convention: response must start exactly with `Task ###` and end exactly with `Task ###`.
+
 Current v0.3.0-alpha state:
 - Runtime evidence architecture design exists.
 - Initial runtime-path benchmark harness exists.
