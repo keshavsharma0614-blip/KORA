@@ -89,6 +89,14 @@ python3 -m kora run direct_vs_kora -- --offline
 
 Use `--offline` for the reproducible first-run demo path without OpenAI credentials.
 
+Expected first-run shape:
+
+- `hello_kora` completes with JSON containing `status: "ok"` and `message: "hello from kora"`. It shows the basic deterministic graph path.
+- `retry_demo` completes with `final_output.status: "ok"`, `message: "recovered"`, and an `event_count` greater than one. It shows retry/recovery behavior without changing the public CLI.
+- `direct_vs_kora -- --offline` prints `Running direct_vs_kora in offline mock mode`, then a local direct-vs-KORA comparison with simulated call counters such as `llm_calls_direct_total`, `llm_calls_kora_total`, and `llm_calls_reduced_total`.
+
+The offline comparison uses mock local behavior and does not call external APIs. Treat it as a first-run demonstration, not production benchmark evidence. For benchmark evidence and regeneration policy, see [experiments/README.md](experiments/README.md) and [benchmark_artifact_policy.md](docs/reports/benchmark_artifact_policy.md).
+
 If KORA is installed as a command-line package, the equivalent commands are:
 
 ```bash
