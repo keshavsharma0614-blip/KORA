@@ -67,6 +67,10 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 
 ### B. Contributors And Community
 
+- [Canonical governance document](../GOVERNANCE.md)
+- [Contributing guide](../CONTRIBUTING.md)
+- [Security policy](../SECURITY.md)
+- [Code of conduct](../CODE_OF_CONDUCT.md)
 - [KORA open roles](community/2026-05-06-kora-open-roles.md)
 - [AI-assisted contribution guide](community/2026-05-06-ai-assisted-contribution-guide.md)
 - [Albert-Sumanta GitHub sync](community/2026-05-06-albert-sumanta-github-sync.md)
