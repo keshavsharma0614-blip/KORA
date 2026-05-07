@@ -38,6 +38,9 @@ List anything the contributor should not change.
 Suggested commands:
 
 ```bash
-./scripts/release_smoke.sh
-python3 -m pytest -q
+python3 -m pytest
+python3 -m kora --help
+python3 -m kora examples list
 ```
+
+Adjust verification to the change type using [CONTRIBUTING.md](../../CONTRIBUTING.md).

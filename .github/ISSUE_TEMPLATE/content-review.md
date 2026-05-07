@@ -33,6 +33,15 @@ Paste the draft copy here.
 - [ ] Medium
 - [ ] High
 
+## Claim Boundary Check
+
+- [ ] No production cost reduction proof claimed
+- [ ] No real API-cost reduction proof claimed
+- [ ] No production benchmark proof claimed
+- [ ] No full runtime-integrated benchmark evidence claimed
+- [ ] No broad workload superiority proof claimed
+- [ ] No energy reduction evidence claimed
+
 ## Review Request
 
 - [ ] Albert review requested

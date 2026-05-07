@@ -14,6 +14,12 @@ What problem would this solve?
 
 Describe the smallest useful version of the idea.
 
+## KORA relevance
+
+- How does this preserve deterministic-first execution?
+- Can it reduce unnecessary inference, improve validation, clarify telemetry, or improve contributor onboarding?
+- Does it affect benchmark evidence or public claims?
+
 ## Public surface impact
 
 Would this add or change CLI commands, examples, task schema, telemetry output, or documented behavior?
@@ -31,3 +37,5 @@ How could this be tested or smoke-checked?
 ## Notes
 
 Add links or prior discussion if relevant.
+
+Do not include sensitive vulnerability details here. Use [SECURITY.md](../../SECURITY.md) for security reports.

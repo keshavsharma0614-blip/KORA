@@ -14,6 +14,14 @@ Name the page, section, or example.
 
 Describe what confused you or what is missing.
 
+Check any relevant issue:
+
+- [ ] Stale wording
+- [ ] Broken link
+- [ ] Local path leak
+- [ ] Claim-boundary confusion
+- [ ] Example or command unclear
+
 ## Suggested change
 
 Keep the suggested change small and concrete.
@@ -23,6 +31,7 @@ Keep the suggested change small and concrete.
 - Does this change only documentation?
 - Does it avoid new runtime behavior?
 - Does it avoid broad claims that are not verified?
+- Does it avoid local absolute paths?
 
 ## Verification
 
