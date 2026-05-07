@@ -14,6 +14,20 @@ It is an operations guide, not a technical proof document. Use it to route conve
 
 For channel-specific release copy and social/community announcement templates, use the [KORA Social Media Announcement Guide](KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md).
 
+## Social Launch Focus
+
+For the `v0.3.0-alpha` launch, start with the [KORA Social Media Announcement Guide](KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md). It gives Sumanta ready-to-use launch hooks, post drafts, and reusable image-generation prompt samples.
+
+The main social emphasis should be:
+
+- short attention hooks that make developers stop scrolling
+- the `80 of 100 simulated model invocations` avoided benchmark point
+- the reproducible local evidence flow
+- the release URL: https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha
+- LinkedIn first, then X/Twitter, Telegram/Discord, and GitHub Discussions
+
+Keep this section focused on launch momentum. Use the rest of this guide for moderation, issue triage, claim-boundary review, and maintainer escalation.
+
 ## Current Project State
 
 - KORA `v0.3.0-alpha` is available as a GitHub prerelease.

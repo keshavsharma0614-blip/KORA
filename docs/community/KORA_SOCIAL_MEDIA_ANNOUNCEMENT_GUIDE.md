@@ -377,6 +377,38 @@ Create a friendly but technical community announcement banner. Main text: "KORA 
 
 Avoid text implying production cost, real API cost, energy savings, or production validation.
 
+### Prompt 9: Execution Routing Diagram
+
+Suggested aspect ratio: 16:9
+
+Suggested channel: LinkedIn, GitHub Discussions
+
+Logo placeholder: include optional `KORA` logo placeholder.
+
+Prompt:
+
+```text
+Create a simple technical routing diagram for an AI execution-control layer. Show one incoming request flowing into a KORA routing layer, then splitting into three labeled paths: deterministic route, fallback route, and telemetry summary. Keep the diagram readable for developers, with clean arrows, restrained colors, dark navy and electric cyan accents, and no cost, savings, or production validation language. Include a small optional KORA logo placeholder.
+```
+
+Avoid text implying production cost, real API cost, energy savings, or production validation.
+
+### Prompt 10: Evidence Packet Visual
+
+Suggested aspect ratio: 16:9
+
+Suggested channel: LinkedIn, GitHub Discussions, Discord
+
+Logo placeholder: include optional `KORA` logo placeholder.
+
+Prompt:
+
+```text
+Create a polished documentation-style graphic showing KORA reviewer artifacts: JSON output, Markdown report, and telemetry summary. Arrange the artifacts as three clean panels connected to a local benchmark command. Main text: "Runtime-path benchmark evidence flow." Style: modern open-source developer documentation, crisp typography, neutral background with cyan accents, no production proof or cost-reduction language.
+```
+
+Avoid text implying production cost, real API cost, energy savings, or production validation.
+
 ## Visual Text Snippets
 
 Use these as overlays, subtitles, or post openers:
