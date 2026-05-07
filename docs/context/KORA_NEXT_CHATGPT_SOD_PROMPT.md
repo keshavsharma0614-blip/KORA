@@ -3,7 +3,7 @@
 Copy and paste this prompt into ChatGPT for the next KORA work session.
 
 ```text
-You are helping Albert continue KORA after the 2026-05-06 EOD handoff.
+You are helping Albert continue KORA after the 2026-05-07 v0.3.0-alpha prerelease.
 
 Official repo:
 - https://github.com/Krako-Labs/KORA
@@ -11,36 +11,66 @@ Official repo:
 Public truth:
 - origin/main on Krako-Labs/KORA
 
-Current origin/main HEAD:
-- 83bd8d5e013701c0d3aca6703e2a14a5d5189021
+Current public HEAD:
+- 078de0777178f8b233877f126a4ed844247da7d7
 
-Published release:
-- v0.2.0-alpha
+Released tag:
+- v0.3.0-alpha
 
-Release URL:
-- https://github.com/Krako-Labs/KORA/releases/tag/v0.2.0-alpha
+GitHub Release URL:
+- https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha
 
-Today completed:
-- Task 124/124B: repository migration checklist created and merged.
-- Task 125/125B: migrated official repo URL and local remote references to Krako-Labs/KORA.
-- Task 126/126B: Albert-Sumanta GitHub sync setup created and merged.
-- Task 127/128/128B: README migration notice added, then compacted and merged.
-- Task 129/129B: category thesis and context foundation created and merged.
-- Task 130/130B: claim registry and public language guide created and merged.
-- Task 131/131B: OSS operating system, open roles, AI-assisted contribution guide, Korean ops coordinator handbook, and paper contribution policy created and merged.
-- Task 132/132B: GitHub full-platform setup plan, label taxonomy, discussions/wiki plan, Actions roadmap, and manual setup checklist created and merged.
-- Task 133/133B: repository hygiene audit created and merged.
-- Task 134/134B: docs index and navigation map created and merged.
+Release state:
+- v0.3.0-alpha is published as a GitHub prerelease.
+- Draft: false.
+- Prerelease: true.
+- Release assets: none.
+- Raw benchmark artifacts uploaded: none.
+- Package version unchanged: pyproject.toml remains 0.1.0a0.
 
-Current strategic position:
-- KORA is a category-building open-source infrastructure project.
-- Official category: AI Execution Control Layer.
-- Vision phrase: Inference OS for AI systems.
-- Official repo: Krako-Labs/KORA.
-- GitHub is the OSS operating HQ for development, community, paper, EIC/grant, investor, partner, and operator readiness.
+Workspace paths:
+- Active clean repo: /Users/albertkim/02_PROJECTS/05_KORA_Project/repo/KORA
+- Worktree root: /Users/albertkim/02_PROJECTS/05_KORA_Project/worktrees/
+- Local ChatGPT context: /Users/albertkim/02_PROJECTS/05_KORA_Project/local/chatgpt_context/
+- Legacy/dirty old repo: /Users/albertkim/02_PROJECTS/05_KORA
+
+Repository rules:
+- Use /Users/albertkim/02_PROJECTS/05_KORA_Project/repo/KORA as the active clean repo.
+- Create fresh worktrees under /Users/albertkim/02_PROJECTS/05_KORA_Project/worktrees/ for public repo changes.
+- Do not use or modify /Users/albertkim/02_PROJECTS/05_KORA.
+- Do not create additional tags or GitHub Releases without explicit approval.
+- Do not upload release assets or raw benchmark artifacts without explicit approval.
+- Do not change package version without explicit approval.
+- Do not delete task branches or worktrees unless explicitly approved.
+
+Current v0.3.0-alpha state:
+- Runtime evidence architecture design exists.
+- Initial runtime-path benchmark harness exists.
+- Runtime benchmark JSON output path exists.
+- Markdown evidence packet/report generator exists.
+- Telemetry-connected runtime summary path exists.
+- Reviewer-facing reproduction guide exists.
+- Release-readiness checklist exists.
+- Docs cross-link and claim-boundary audit exists.
+- Draft changelog entry exists.
+- Release validation packet exists.
+- Release approval checkpoint exists.
+- v0.3.0-alpha tag and GitHub prerelease exist.
+
+Current official runtime benchmark command:
+python3 -m kora run runtime_integrated_benchmark -- --offline
+
+Current official temporary JSON output command:
+python3 -m kora run runtime_integrated_benchmark -- --offline --json-out /tmp/kora_runtime_integrated_benchmark.json
+
+Current official report-generation command:
+python3 examples/runtime_integrated_benchmark/report.py --input /tmp/kora_runtime_integrated_benchmark.json --md-out /tmp/kora_runtime_integrated_benchmark.md
+
+Current telemetry summary command:
+python3 -m kora telemetry --input /tmp/kora_runtime_integrated_benchmark.json --json-out /tmp/kora_runtime_integrated_benchmark.telemetry.json --md-out /tmp/kora_runtime_integrated_benchmark.telemetry.md
 
 Current safe benchmark claim:
-“In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.”
+"In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline."
 
 Do not claim:
 - production cost reduction proof
@@ -50,17 +80,16 @@ Do not claim:
 - broad workload superiority proof
 - energy reduction evidence
 - formal government validation
-- signed cloud/data center/telco partnership unless actually signed
+- signed partner validation unless actually signed and documented
 - guaranteed adoption or funding
 
-Next priorities:
-- Task 136: safe docs cross-link cleanup using docs/README.md and docs/ops/2026-05-06-kora-docs-navigation-map.md.
-- Task 137: repo-managed PR template and CODEOWNERS draft.
-- Task 138: Sumanta Community OS + LLM Promptbook.
-- Task 139: GitHub manual setup execution log.
-- Task 140: v0.2.1-alpha OSS polish roadmap.
+Recommended next tasks:
+- Post-release cleanup plan for old task branches/worktrees, without deleting anything unless explicitly approved.
+- v0.3.1-alpha planning.
+- Broader workload/evidence roadmap.
+- External reviewer onboarding docs.
 
-Start by summarizing the current state, then propose the next single Codex task prompt.
+Start by summarizing the current release state, then propose the next single Codex task prompt.
 
 When responding to Albert, use Korean honorific style.
 When writing Codex task prompts, write them in English.
