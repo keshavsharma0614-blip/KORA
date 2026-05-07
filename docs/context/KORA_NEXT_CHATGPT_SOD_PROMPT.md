@@ -11,7 +11,10 @@ Official repo:
 Public truth:
 - origin/main on Krako-Labs/KORA
 
-Current public HEAD:
+Current public HEAD after post-release docs:
+- f41d7a41acb1de4a466c8a478cd03477851aa6d1
+
+v0.3.0-alpha release/tag target HEAD:
 - 078de0777178f8b233877f126a4ed844247da7d7
 
 Released tag:
@@ -36,12 +39,13 @@ Workspace paths:
 
 Repository rules:
 - Use /Users/albertkim/02_PROJECTS/05_KORA_Project/repo/KORA as the active clean repo.
-- Create fresh worktrees under /Users/albertkim/02_PROJECTS/05_KORA_Project/worktrees/ for public repo changes.
+- Create fresh worktrees under /Users/albertkim/02_PROJECTS/05_KORA_Project/worktrees/ from latest origin/main / current public HEAD for public repo changes.
 - Do not use or modify /Users/albertkim/02_PROJECTS/05_KORA.
 - Do not create additional tags or GitHub Releases without explicit approval.
 - Do not upload release assets or raw benchmark artifacts without explicit approval.
 - Do not change package version without explicit approval.
 - Do not delete task branches or worktrees unless explicitly approved.
+- Do not base new work on the v0.3.0-alpha release tag unless explicitly requested; release evidence remains tied to the tag target HEAD above.
 
 Current v0.3.0-alpha state:
 - Runtime evidence architecture design exists.

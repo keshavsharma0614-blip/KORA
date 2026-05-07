@@ -10,7 +10,8 @@ Continue KORA after the v0.3.0-alpha prerelease.
 Repository and workspace rules:
 - Official repo: https://github.com/Krako-Labs/KORA
 - Public truth: origin/main on Krako-Labs/KORA
-- Current public HEAD: 078de0777178f8b233877f126a4ed844247da7d7
+- Current public HEAD after post-release docs: f41d7a41acb1de4a466c8a478cd03477851aa6d1
+- v0.3.0-alpha release/tag target HEAD: 078de0777178f8b233877f126a4ed844247da7d7
 - Released tag: v0.3.0-alpha
 - GitHub Release URL: https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha
 - Active clean repo path: /Users/albertkim/02_PROJECTS/05_KORA_Project/repo/KORA
@@ -18,7 +19,8 @@ Repository and workspace rules:
 - Local ChatGPT context path: /Users/albertkim/02_PROJECTS/05_KORA_Project/local/chatgpt_context/
 - Legacy/dirty old repo: /Users/albertkim/02_PROJECTS/05_KORA
 - Do not use or modify the legacy/dirty old repo.
-- Create fresh worktrees under /Users/albertkim/02_PROJECTS/05_KORA_Project/worktrees/ for public repo changes.
+- Create fresh worktrees under /Users/albertkim/02_PROJECTS/05_KORA_Project/worktrees/ from latest origin/main / current public HEAD for public repo changes.
+- Do not base new work on the v0.3.0-alpha release tag unless explicitly requested; release evidence remains tied to the tag target HEAD above.
 - Do not create additional tags or GitHub Releases without explicit approval.
 - Do not upload release assets or raw benchmark artifacts without explicit approval.
 - Do not create GitHub issues, project boards, repo setting changes, package version changes, collaborator changes, or raw benchmark artifacts unless explicitly approved.
