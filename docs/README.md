@@ -11,7 +11,7 @@ The documentation is organized by audience and use case so developers, contribut
 ## Start Here
 
 - [Main README](../README.md)
-- [Current v0.2.0-alpha release](https://github.com/Krako-Labs/KORA/releases/tag/v0.2.0-alpha)
+- [Current v0.3.0-alpha prerelease](https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha)
 - [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
 - [KORA Project Source](context/KORA_PROJECT_SOURCE.md)
 - [KORA Claim Registry](claims/kora-claim-registry.md)
@@ -22,7 +22,7 @@ The documentation is organized by audience and use case so developers, contribut
 
 ## Current Benchmark Evidence Path
 
-Use this path for the current `v0.2.0-alpha` benchmark evidence and regeneration flow:
+Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and regeneration flow:
 
 1. Current workload: [`experiments/workloads/deterministic_heavy_v1_100.json`](../experiments/workloads/deterministic_heavy_v1_100.json)
 2. Workload generator: [`experiments/generate_workload.py`](../experiments/generate_workload.py)
@@ -39,13 +39,15 @@ Next evidence architecture: [`docs/design/v0.3.0-runtime-integrated-benchmark-ev
 
 Reviewer-facing runtime evidence flow: [`docs/reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md`](reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md)
 
-Future `v0.3.0-alpha` release-readiness checklist: [`docs/reports/v0.3.0-alpha-release-readiness-checklist.md`](reports/v0.3.0-alpha-release-readiness-checklist.md)
+`v0.3.0-alpha` release-readiness checklist: [`docs/reports/v0.3.0-alpha-release-readiness-checklist.md`](reports/v0.3.0-alpha-release-readiness-checklist.md)
 
 Final `v0.3.0-alpha` docs and claim audit: [`docs/reports/v0.3.0-alpha-docs-claim-audit.md`](reports/v0.3.0-alpha-docs-claim-audit.md)
 
-Draft `v0.3.0-alpha` release validation packet: [`docs/reports/v0.3.0-alpha-release-validation-packet.md`](reports/v0.3.0-alpha-release-validation-packet.md)
+`v0.3.0-alpha` release validation packet: [`docs/reports/v0.3.0-alpha-release-validation-packet.md`](reports/v0.3.0-alpha-release-validation-packet.md)
 
 `v0.3.0-alpha` release approval checkpoint: [`docs/reports/v0.3.0-alpha-release-approval-checkpoint.md`](reports/v0.3.0-alpha-release-approval-checkpoint.md)
+
+Post-release EOD report: [`docs/eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md`](eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md)
 
 Initial runtime-path harness command:
 
@@ -149,6 +151,7 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 - [KORA_CODEX_OPERATING_CONTEXT.md](context/KORA_CODEX_OPERATING_CONTEXT.md)
 - [KORA_CURRENT_STATE.md](context/KORA_CURRENT_STATE.md)
 - [EOD reports](eod/)
+- [v0.3.0-alpha post-release EOD report](eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md)
 - [Release and readiness reports](reports/)
 
 ## Evidence Preservation Note
