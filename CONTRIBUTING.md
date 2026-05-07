@@ -2,11 +2,25 @@
 
 ## Project status
 
-KORA is currently at `v0.1.0-alpha`.
+Current published release: [`v0.2.0-alpha`](https://github.com/Krako-Labs/KORA/releases/tag/v0.2.0-alpha).
 
-This is an alpha release with a small terminal-first public surface. The current focus is keeping the CLI, examples, telemetry path, and release smoke checks reliable while the project matures.
+KORA remains alpha / prerelease software with a small terminal-first public surface. The current focus is keeping the CLI, examples, telemetry path, benchmark evidence, and release smoke checks reliable while the project matures.
 
 KORA is not a production release yet. Contributions should be conservative, well-scoped, and easy to verify.
+
+## Contributor path
+
+Start here when orienting yourself:
+
+- [README.md](README.md): project overview, current release status, quickstart, examples, and bounded benchmark evidence.
+- [docs/README.md](docs/README.md): public docs navigation, current evidence path, artifact policy, and historical report labels.
+- [experiments/README.md](experiments/README.md): deterministic-heavy benchmark workload and regeneration flow.
+- [CHANGELOG.md](CHANGELOG.md): release history.
+- [SECURITY.md](SECURITY.md): supported reporting path for security issues.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): community expectations.
+- [GOVERNANCE.md](GOVERNANCE.md): project governance expectations.
+- [.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/): issue templates.
+- [.github/pull_request_template.md](.github/pull_request_template.md): pull request checklist.
 
 ## Who this project is for
 
@@ -93,25 +107,64 @@ Keep pull requests focused. A good PR should explain:
 
 Prefer one logical change per PR. Do not bundle documentation cleanup, runtime edits, and unrelated formatting in the same pull request.
 
-## Testing expectations
+## Verification expectations
 
-At minimum, run:
+Use verification that matches the change type. Include the commands and results in your PR description.
+
+For documentation-only changes, check that public docs use relative repo paths and do not add unsupported claims. When relevant, scan changed docs for machine-local paths:
 
 ```bash
-./scripts/release_smoke.sh
-python3 -m pytest -q
+rg -n "/Users/|/home/" <changed-docs>
 ```
 
-If your change touches a specific module, also run the relevant focused test file when possible.
+For CLI or example changes, run the CLI smoke checks and the relevant example:
 
-Examples:
+```bash
+python3 -m kora --help
+python3 -m kora examples list
+python3 -m kora run <example_name>
+```
+
+For benchmark or evidence changes, run tests and follow the regeneration flow in [experiments/README.md](experiments/README.md). Keep raw benchmark JSON artifacts governed by [docs/reports/benchmark_artifact_policy.md](docs/reports/benchmark_artifact_policy.md).
+
+```bash
+python3 -m pytest
+```
+
+For general code changes, run the full test suite and at least one relevant CLI smoke test:
+
+```bash
+python3 -m pytest
+python3 -m kora --help
+python3 -m kora run direct_vs_kora -- --offline
+```
+
+If your change touches a specific module, also run the relevant focused test file when possible:
+
 
 ```bash
 python3 -m pytest tests/test_executor.py -q
 python3 -m pytest tests/test_task_ir.py -q
 ```
 
-Include the commands and results in your PR description.
+## Claim hygiene
+
+Do not claim:
+
+- production cost reduction proof
+- real API-cost reduction proof
+- production benchmark proof
+- full runtime-integrated benchmark evidence
+- broad workload superiority proof
+- energy reduction evidence
+
+If you reference current benchmark evidence, use only this bounded claim:
+
+> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+
+## Local-path hygiene
+
+Public docs should use relative repo paths. Do not include machine-local absolute paths, and keep local-only context outside public documentation.
 
 ## Contribution rules
 

@@ -5,16 +5,19 @@ Describe the change in one or two sentences.
 ## Type of change
 
 - [ ] Docs only
-- [ ] Test only
-- [ ] Bug fix
-- [ ] Small internal improvement
-- [ ] Feature discussion follow-up
+- [ ] CLI / example
+- [ ] Benchmark / evidence
+- [ ] Code / tests
+- [ ] Security-sensitive
 
 ## Verification
 
-- [ ] `./scripts/release_smoke.sh`
-- [ ] `python3 -m pytest -q`
-- [ ] Docs-only change; runtime tests not applicable
+- [ ] Validation commands were run or marked not applicable.
+- [ ] Claim hygiene checked.
+- [ ] No unsupported production, API-cost, benchmark, broad workload, or energy claims added.
+- [ ] No raw benchmark JSON artifacts committed.
+- [ ] No local absolute paths introduced.
+- [ ] No release, tag, package-version, or release-asset changes unless explicitly approved.
 
 List commands run and results:
 
@@ -22,13 +25,15 @@ List commands run and results:
 
 ```
 
+Useful references: [CONTRIBUTING.md](../CONTRIBUTING.md), [SECURITY.md](../SECURITY.md), [experiments/README.md](../experiments/README.md), and [docs/README.md](../docs/README.md).
+
 ## Scope check
 
 - [ ] No unrelated refactors
 - [ ] No public surface expansion without discussion
 - [ ] Deterministic-first behavior preserved
 - [ ] No hidden model calls introduced
-- [ ] README, docs, and examples remain factual and alpha-scoped
+- [ ] README, docs, examples, and templates remain factual and alpha-scoped
 
 ## Notes for reviewer
 

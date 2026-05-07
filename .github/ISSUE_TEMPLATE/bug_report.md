@@ -18,6 +18,14 @@ Steps or command:
 
 ```
 
+Does this affect one or more of these areas?
+
+- [ ] CLI
+- [ ] Example
+- [ ] Benchmark / evidence
+- [ ] Documentation
+- [ ] Other
+
 ## Expected behavior
 
 What should have happened?
@@ -37,3 +45,5 @@ What happened instead?
 ## Notes
 
 Add logs, traceback excerpts, or links if helpful.
+
+Do not paste secrets, tokens, private paths, or sensitive vulnerability details into public issues. Use [SECURITY.md](../../SECURITY.md) for sensitive security reports.

@@ -29,6 +29,8 @@ Add draft copy, link, screenshot, notes, or expected output here.
 - [ ] Does not claim production cost reduction
 - [ ] Does not claim real API-cost reduction
 - [ ] Does not claim production benchmark proof
+- [ ] Does not claim full runtime-integrated benchmark evidence
+- [ ] Does not claim broad workload superiority
 - [ ] Does not claim energy reduction evidence
 - [ ] Does not claim formal partnership
 - [ ] Does not claim government validation

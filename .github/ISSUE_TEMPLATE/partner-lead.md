@@ -52,3 +52,5 @@ Who owns the next action?
 ## Claim Boundary Reminder
 
 Do not describe interest as validation unless formally signed or documented.
+
+Do not claim production cost reduction proof, real API-cost reduction proof, production benchmark proof, full runtime-integrated benchmark evidence, broad workload superiority proof, or energy reduction evidence.
