@@ -84,6 +84,8 @@ This mode preserves the current alpha claim boundary. It should not be described
 
 Local model-call mode should run through a local runtime or local provider abstraction, such as Ollama, llama.cpp, vLLM, or a repo-supported local adapter if one is added later.
 
+See the [local model adapter design](local-model-adapter-design.md) for the provider-neutral local runtime pathway and configuration principles.
+
 Properties:
 
 - records measured local model invocation count
@@ -414,6 +416,8 @@ The interface should report:
 ### Phase 3: Local Model-Call Mode
 
 Add local model-call execution with a local runtime or local adapter abstraction.
+
+Use the [local model adapter design](local-model-adapter-design.md) as the configuration and adapter-boundary contract for this phase.
 
 This phase should not require remote provider credentials and should not commit raw model responses.
 
