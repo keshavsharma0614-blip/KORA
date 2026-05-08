@@ -147,3 +147,5 @@ Not allowed:
 ## Next Validation Step
 
 The next step after this packet is a local model adapter or remote provider adapter using the same reporting structure, while preserving privacy and claim boundaries.
+
+See the [local model adapter design](local-model-adapter-design.md) for the next local runtime pathway after local/no-network validation.

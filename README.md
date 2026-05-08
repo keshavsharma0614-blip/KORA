@@ -102,6 +102,8 @@ Local no-network validation examples can generate Markdown reports with `--repor
 
 Reviewer packet: [local no-network validation](docs/benchmarks/local-validation-reviewer-packet.md).
 
+Local model adapter design: [provider-neutral local runtime path](docs/benchmarks/local-model-adapter-design.md).
+
 ## Help Test KORA
 
 Good candidate workloads:
