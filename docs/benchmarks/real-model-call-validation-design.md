@@ -283,6 +283,8 @@ The example can generate a reviewer-facing Markdown report from aggregate counte
 
 For a reviewer-facing walkthrough, see the [local no-network validation reviewer packet](local-validation-reviewer-packet.md).
 
+The reviewer packet includes adapter-selection commands, no-network baseline counters, fail-closed adapter checks, and the local Markdown report generation path for synthetic workloads.
+
 Claim boundary: this is not real provider validation, real API-cost validation, production validation, production cost reduction proof, broad workload superiority proof, or energy reduction evidence.
 
 ## Customer-Support Triage Local Validation Example

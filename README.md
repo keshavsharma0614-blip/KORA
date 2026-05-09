@@ -104,6 +104,8 @@ Local no-network validation examples support `--adapter local_validation`.
 
 Reviewer packet: [local no-network validation](docs/benchmarks/local-validation-reviewer-packet.md).
 
+The reviewer packet includes the no-network baseline checklist, adapter-selection commands, fail-closed safety checks, and local Markdown report generation examples.
+
 Local model adapter design: [provider-neutral local runtime path](docs/benchmarks/local-model-adapter-design.md).
 
 ## Help Test KORA

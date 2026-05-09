@@ -44,6 +44,33 @@ python3 -m kora run real_model_call_validation_fake -- --offline
 python3 -m kora run customer_support_triage_fake_validation -- --offline
 ```
 
+## No-Network Baseline Checklist
+
+Run these commands from a fresh checkout of `origin/main` to reproduce the current local/no-network baseline pass:
+
+```bash
+python3 -m pytest
+python3 -m kora --help
+python3 -m kora examples list
+
+python3 -m kora run direct_vs_kora -- --offline
+python3 -m kora run runtime_integrated_benchmark -- --offline
+
+python3 -m kora run real_model_call_validation_fake -- --offline --adapter local_validation
+python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_validation
+
+python3 -m kora run customer_support_triage_fake_validation -- --offline --report-md /tmp/kora_customer_support_validation.md
+```
+
+Observed local/no-network baseline examples from the current reviewer pass:
+
+| Command | Expected reviewer result |
+|---|---:|
+| `direct_vs_kora --offline` | direct calls `2`, KORA calls `1` |
+| `runtime_integrated_benchmark --offline` | avoided simulated invocations `80/100` |
+| `real_model_call_validation_fake --offline --adapter local_validation` | baseline `10`, KORA `4`, avoided `6` |
+| `customer_support_triage_fake_validation --offline --adapter local_validation` | baseline `12`, KORA `4`, avoided `8` |
+
 ## Generate Reviewer Reports
 
 ```bash
@@ -66,6 +93,17 @@ python3 -m kora run customer_support_triage_fake_validation -- --offline --adapt
 ```
 
 The `blocked` and `local_runtime_placeholder` adapter kinds are fail-closed safety paths. `blocked` represents an unconfigured model-call path. `local_runtime_placeholder` is design-only, makes no runtime calls, and does not contact local HTTP endpoints, subprocess runtimes, remote providers, or provider APIs.
+
+Fail-closed checks:
+
+```bash
+python3 -m kora run real_model_call_validation_fake -- --offline --adapter blocked
+python3 -m kora run real_model_call_validation_fake -- --offline --adapter local_runtime_placeholder
+python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter blocked
+python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_runtime_placeholder
+```
+
+These commands are expected to exit non-zero. The `local_runtime_placeholder` path reports that no provider call was attempted. Reviewers should treat this as a safety check, not as a validation failure.
 
 ## Expected Generic Local Validation Counters
 
@@ -145,6 +183,13 @@ Not allowed:
 - KORA is production-proven for customer support.
 - KORA reduces energy consumption.
 - KORA has real provider validation from this packet.
+
+Safe interpretation of this packet:
+
+- The examples use synthetic workloads.
+- The examples run local/no-network validation paths.
+- The counters are model-call events or simulated invocations, depending on the command.
+- The Markdown report path is a local review artifact unless explicitly selected for public review.
 
 ## Troubleshooting
 
