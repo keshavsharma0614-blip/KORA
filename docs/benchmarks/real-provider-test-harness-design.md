@@ -8,6 +8,8 @@ The harness exists to test provider adapter boundaries, fixture rules, reporting
 
 This document does not implement provider calls, network calls, HTTP clients, subprocess runtimes, provider credential handling, external model downloads, provider dependencies, or raw benchmark artifacts.
 
+KORA includes a small schema validator for dry-run fixture metadata in `kora/provider_fixture.py`. The validator is local and non-executing: it checks fixture shape, counters, and safety flags, but it does not construct provider requests, load credentials, call providers, call network endpoints, invoke subprocess runtimes, or download models.
+
 ## Non-Goals
 
 This packet does not provide:
@@ -44,19 +46,57 @@ Dry-run mode should never construct, send, replay, or simulate a raw provider re
 
 Dry-run fixtures should describe metadata and expected counter behavior, not provider payloads.
 
-Recommended fixture fields:
+Supported dry-run contract fields:
 
-- `fixture_id`
 - `fixture_version`
-- `mode`: `provider_dry_run`
 - `provider_label`: fake provider name only
 - `model_label`: fake model name only
+- `mode`: `dry_run` or `fixture`
+- `request_id`
+- `baseline_candidate_events`
+- `kora_routed_events`
+- `avoided_model_call_events`
+- `provider_attempted_events`
+- `provider_blocked_events`
+- `no_network`: must be `true`
+- `no_provider_call`: must be `true`
+- `contains_real_provider_response`: must be `false`
+- `contains_customer_data`: must be `false`
+- `contains_secret_material`: must be `false`
+- `notes`: safe explanatory strings only
+
+Design-only harnesses may wrap this per-request contract in a larger fixture envelope with fields such as:
+
+- `fixture_id`
 - `workload_id`
 - `privacy_class`: `synthetic` or `sanitized`
 - `requests`
 - `expected_counters`
 - `claim_boundary`
 - `artifact_policy`
+
+Minimal validator input example:
+
+```json
+{
+  "fixture_version": "0.1",
+  "provider_label": "example-provider",
+  "model_label": "example-model",
+  "mode": "dry_run",
+  "request_id": "dry_run_request_001",
+  "baseline_candidate_events": 2,
+  "kora_routed_events": 1,
+  "avoided_model_call_events": 1,
+  "provider_attempted_events": 0,
+  "provider_blocked_events": 2,
+  "no_network": true,
+  "no_provider_call": true,
+  "contains_real_provider_response": false,
+  "contains_customer_data": false,
+  "contains_secret_material": false,
+  "notes": ["Synthetic metadata only."]
+}
+```
 
 Recommended request fields:
 
@@ -90,7 +130,7 @@ This example is illustrative only. It is not a runnable fixture and it contains 
 {
   "fixture_id": "provider_dry_run_synthetic_example_v1",
   "fixture_version": "0.1",
-  "mode": "provider_dry_run",
+  "mode": "dry_run",
   "provider_label": "example-provider",
   "model_label": "example-model",
   "workload_id": "synthetic_provider_dry_run_v1",
@@ -141,6 +181,21 @@ This example is illustrative only. It is not a runnable fixture and it contains 
 ## Fixture Safety Rules
 
 Fixtures must be safe for public review by default.
+
+The current schema validator enforces these fail-closed rules:
+
+- `mode` must be `dry_run` or `fixture`
+- `no_network` must be `true`
+- `no_provider_call` must be `true`
+- `contains_real_provider_response` must be `false`
+- `contains_customer_data` must be `false`
+- `contains_secret_material` must be `false`
+- `provider_attempted_events` must be `0`
+- `provider_blocked_events` must be zero or greater
+- `avoided_model_call_events` must be zero or greater
+- all counter fields must be integers and non-negative
+
+Invalid fixtures raise a clear validation error before any report generation or future provider boundary is reached.
 
 Required rules:
 
@@ -246,8 +301,13 @@ Reports should not include cost fields in dry-run mode. If cost fields are added
 Future CI tests can validate the dry-run contract without provider access:
 
 - fixture schema accepts safe synthetic metadata
+- fixture schema rejects `no_network=false`
+- fixture schema rejects `no_provider_call=false`
 - fixture schema rejects secret-like values
 - fixture schema rejects raw provider responses
+- fixture schema rejects customer data flags
+- fixture schema rejects negative counters
+- fixture schema rejects unknown modes
 - dry-run mode keeps `provider_attempted_events` at `0`
 - provider-required routes increment `provider_blocked_events`
 - deterministic routes reduce `kora_routed_events`
