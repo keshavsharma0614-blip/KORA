@@ -67,3 +67,5 @@ KORA Studio planning does not create new benchmark claims. It should only visual
 - [Report viewer requirements](report-viewer-requirements.md)
 - [Dashboard counter schema](dashboard-counter-schema.md)
 - [Fixtures plan](fixtures-plan.md)
+- [Fixture schema reference](fixture-schema-reference.md)
+- [Phase 0 sample fixtures](fixtures/README.md)

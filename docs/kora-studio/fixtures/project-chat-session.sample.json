@@ -1,0 +1,78 @@
+{
+  "fixture_id": "kora_studio_project_chat_session_v0_1",
+  "fixture_type": "project_chat_session",
+  "project": {
+    "project_id": "studio_demo_project_001",
+    "name": "Synthetic support planning demo",
+    "mode": "kora_boost",
+    "selected_model": "deterministic-local",
+    "runtime": "local_validation",
+    "privacy_class": "synthetic"
+  },
+  "messages": [
+    {
+      "message_id": "msg_001",
+      "role": "user",
+      "content": "Where can I find the shipping status for a sample order?"
+    },
+    {
+      "message_id": "msg_002",
+      "role": "assistant",
+      "content": "Use the account order page and select the sample tracking link. This fixture answer follows a deterministic support-policy route."
+    },
+    {
+      "message_id": "msg_003",
+      "role": "user",
+      "content": "A sample customer says the order status and account email do not match. What should happen next?"
+    },
+    {
+      "message_id": "msg_004",
+      "role": "assistant",
+      "content": "The fixture routes this ambiguous account-support request to model escalation, then validates that the answer asks for safe account-verification steps without exposing private data."
+    }
+  ],
+  "execution_traces": [
+    {
+      "trace_id": "trace_001",
+      "message_id": "msg_002",
+      "selected_route": "deterministic_policy",
+      "model_called": false,
+      "deterministic_route_used": true,
+      "model_escalation_used": false,
+      "validation_result": "passed",
+      "latency_ms": 12,
+      "counters": {
+        "baseline_model_calls": 1,
+        "kora_model_calls": 0,
+        "avoided_model_calls": 1,
+        "deterministic_routes": 1,
+        "model_escalations": 0,
+        "validation_pass_count": 1,
+        "validation_fail_count": 0,
+        "error_count": 0,
+        "fallback_count": 0
+      }
+    },
+    {
+      "trace_id": "trace_002",
+      "message_id": "msg_004",
+      "selected_route": "model_required",
+      "model_called": true,
+      "deterministic_route_used": false,
+      "model_escalation_used": true,
+      "validation_result": "passed",
+      "latency_ms": 86,
+      "counters": {
+        "baseline_model_calls": 1,
+        "kora_model_calls": 1,
+        "avoided_model_calls": 0,
+        "deterministic_routes": 0,
+        "model_escalations": 1,
+        "validation_pass_count": 1,
+        "validation_fail_count": 0,
+        "error_count": 0,
+        "fallback_count": 0
+      }
+    }
+  ]
+}

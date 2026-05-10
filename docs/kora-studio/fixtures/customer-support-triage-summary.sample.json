@@ -1,0 +1,32 @@
+{
+  "fixture_id": "kora_studio_customer_support_triage_summary_v0_1",
+  "fixture_type": "customer_support_triage_summary",
+  "workload_id": "customer_support_triage_synthetic_v1",
+  "mode": "customer_support_triage_local_validation",
+  "provider": "local_validation",
+  "model": "deterministic-local",
+  "privacy_class": "synthetic",
+  "total_requests": 12,
+  "baseline_model_calls": 12,
+  "kora_model_calls": 4,
+  "avoided_model_calls": 8,
+  "avoided_model_call_rate": 0.6667,
+  "deterministic_routes": 8,
+  "model_escalations": 4,
+  "validation_pass_count": 12,
+  "validation_fail_count": 0,
+  "error_count": 0,
+  "fallback_count": 0,
+  "route_classes": [
+    "deterministic_faq",
+    "deterministic_policy",
+    "structured_lookup",
+    "model_required"
+  ],
+  "notes": [
+    "Static sample fixture for future KORA Studio workload and report UI planning.",
+    "Uses synthetic customer-support route classes and aggregate counters only.",
+    "No external APIs, provider credentials, raw prompts, or private user data are included."
+  ],
+  "claim_boundary": "This fixture is synthetic local/no-network sample data for UI planning. It is not real provider validation, real API-cost reduction evidence, production validation, production cost reduction proof, or energy reduction evidence."
+}

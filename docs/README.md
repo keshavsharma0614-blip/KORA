@@ -41,6 +41,7 @@ KORA Studio is future planning only. It is not implemented yet.
 - [KORA Studio report viewer requirements](kora-studio/report-viewer-requirements.md)
 - [KORA Studio dashboard counter schema](kora-studio/dashboard-counter-schema.md)
 - [KORA Studio fixtures plan](kora-studio/fixtures-plan.md)
+- [KORA Studio fixture schema reference](kora-studio/fixture-schema-reference.md)
 
 ## Run
 
