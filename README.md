@@ -146,6 +146,7 @@ Useful entry points:
 - [Examples directory](examples/)
 - [Telemetry and observability counters](docs/telemetry-and-observability.md)
 - [Public language guide](docs/claims/kora-public-language-guide.md)
+- [KORA Studio planning docs](docs/kora-studio/README.md)
 - [Contact and discussion routes](docs/community/contact-and-discussion-routes.md)
 - [Community manager guide](docs/community/KORA_COMMUNITY_MANAGER_GUIDE.md)
 - [Contributing guide](CONTRIBUTING.md)

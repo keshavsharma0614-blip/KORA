@@ -27,6 +27,17 @@ KORA control layer architecture.
 - [Research agenda](research-agenda.md)
 - [Whitepaper](whitepaper.md)
 
+## KORA Studio Planning
+
+KORA Studio is future planning only. It is not implemented yet.
+
+- [KORA Studio overview](kora-studio/README.md)
+- [KORA Studio v0.1 product spec](kora-studio/kora-studio-v0-1-product-spec.md)
+- [KORA Studio MVP user flow](kora-studio/kora-studio-mvp-user-flow.md)
+- [KORA Studio architecture](kora-studio/kora-studio-architecture.md)
+- [KORA Boost copy system](kora-studio/kora-boost-copy-system.md)
+- [KORA Studio UI composition](kora-studio/kora-studio-ui-composition.md)
+
 ## Run
 
 - [Examples directory](../examples/)
