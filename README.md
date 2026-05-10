@@ -217,6 +217,7 @@ KORA is a standalone open-source execution-control layer for AI workloads.
 
 Want to contribute? Start with:
 
+- [Contributor pathway](docs/community/contributor-pathway.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [Good first issue candidates](docs/good_first_issues.md)
 - [SECURITY.md](SECURITY.md)
