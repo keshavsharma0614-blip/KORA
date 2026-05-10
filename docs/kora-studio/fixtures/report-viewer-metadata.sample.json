@@ -1,0 +1,36 @@
+{
+  "fixture_id": "kora_studio_report_viewer_metadata_v0_1",
+  "fixture_type": "report_viewer_metadata",
+  "report_title": "Local No-Network Validation Report",
+  "report_path": "/tmp/kora_customer_support_validation.md",
+  "generated_at": "2026-05-10T00:00:00Z",
+  "mode": "customer_support_triage_local_validation",
+  "workload_id": "customer_support_triage_synthetic_v1",
+  "privacy_class": "synthetic",
+  "sections": [
+    "Summary",
+    "Counters",
+    "Boundary",
+    "Reproduction",
+    "Notes"
+  ],
+  "counters": {
+    "total_requests": 12,
+    "baseline_model_calls": 12,
+    "kora_model_calls": 4,
+    "avoided_model_calls": 8,
+    "avoided_model_call_rate": 0.6667,
+    "deterministic_routes": 8,
+    "model_escalations": 4,
+    "validation_pass_count": 12,
+    "validation_fail_count": 0,
+    "error_count": 0,
+    "fallback_count": 0
+  },
+  "boundary_warnings": [
+    "Local/no-network validation counters only.",
+    "No cloud upload by default.",
+    "Do not commit generated reports by default.",
+    "Do not treat fixture counters as production evidence."
+  ]
+}

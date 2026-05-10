@@ -1,0 +1,95 @@
+{
+  "fixture_id": "kora_studio_dashboard_counters_v0_1",
+  "fixture_type": "dashboard_counters",
+  "title": "Local validation counter cards",
+  "cards": [
+    {
+      "key": "total_requests",
+      "label": "Total requests",
+      "value": 12,
+      "unit": "requests",
+      "explanation": "Number of synthetic requests in the local validation fixture.",
+      "claim_safety_note": "Display as local fixture data only."
+    },
+    {
+      "key": "baseline_model_calls",
+      "label": "Baseline model calls",
+      "value": 12,
+      "unit": "events",
+      "explanation": "Model-call events counted for the direct baseline path.",
+      "claim_safety_note": "Do not convert this value into billing or production evidence."
+    },
+    {
+      "key": "kora_model_calls",
+      "label": "KORA model calls",
+      "value": 4,
+      "unit": "events",
+      "explanation": "Model-call events counted for the KORA-controlled path.",
+      "claim_safety_note": "Label as local/no-network validation counters."
+    },
+    {
+      "key": "avoided_model_calls",
+      "label": "Avoided model calls",
+      "value": 8,
+      "unit": "events",
+      "explanation": "Baseline model calls minus KORA model calls in the fixture.",
+      "claim_safety_note": "Do not convert this value into billing or production evidence."
+    },
+    {
+      "key": "avoided_model_call_rate",
+      "label": "Avoided model-call rate",
+      "value": 0.6667,
+      "unit": "ratio",
+      "explanation": "Avoided model calls divided by baseline model calls in the fixture.",
+      "claim_safety_note": "Do not convert this ratio into billing, provider, or energy claims."
+    },
+    {
+      "key": "deterministic_routes",
+      "label": "Deterministic routes",
+      "value": 8,
+      "unit": "routes",
+      "explanation": "Requests handled through deterministic or fast local paths.",
+      "claim_safety_note": "Applies only to the synthetic fixture."
+    },
+    {
+      "key": "model_escalations",
+      "label": "Model escalations",
+      "value": 4,
+      "unit": "routes",
+      "explanation": "Requests escalated to the selected model-call path.",
+      "claim_safety_note": "Display as local fixture routing behavior."
+    },
+    {
+      "key": "validation_pass_count",
+      "label": "Validation passes",
+      "value": 12,
+      "unit": "checks",
+      "explanation": "Validation checks that passed in the fixture.",
+      "claim_safety_note": "Does not imply production validation."
+    },
+    {
+      "key": "validation_fail_count",
+      "label": "Validation failures",
+      "value": 0,
+      "unit": "checks",
+      "explanation": "Validation checks that failed in the fixture.",
+      "claim_safety_note": "Applies only to sample fixture data."
+    },
+    {
+      "key": "error_count",
+      "label": "Errors",
+      "value": 0,
+      "unit": "events",
+      "explanation": "Runtime or validation errors counted in the fixture.",
+      "claim_safety_note": "Does not imply production reliability."
+    },
+    {
+      "key": "fallback_count",
+      "label": "Fallbacks",
+      "value": 0,
+      "unit": "events",
+      "explanation": "Requests that fell back because a route was unsupported or unresolved.",
+      "claim_safety_note": "Display as synthetic fixture behavior only."
+    }
+  ]
+}

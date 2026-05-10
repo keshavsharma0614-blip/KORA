@@ -34,6 +34,8 @@ Deliverables:
 - `docs/kora-studio/fixtures-plan.md`
 - `docs/kora-studio/report-viewer-requirements.md`
 - `docs/kora-studio/dashboard-counter-schema.md`
+- `docs/kora-studio/fixture-schema-reference.md`
+- `docs/kora-studio/fixtures/`
 
 No code required.
 

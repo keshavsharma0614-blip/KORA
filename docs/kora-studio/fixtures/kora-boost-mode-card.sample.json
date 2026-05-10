@@ -1,0 +1,22 @@
+{
+  "fixture_id": "kora_studio_kora_boost_mode_card_v0_1",
+  "fixture_type": "kora_boost_mode_card",
+  "card_title": "KORA Boost",
+  "marketing_message": "Less waiting. Better answers. No hardware upgrade.",
+  "technical_explanation": "KORA Boost handles simple work through fast paths and saves model power for the tasks that need it.",
+  "standard_mode_copy": {
+    "title": "Standard Mode",
+    "description": "Run the local model directly."
+  },
+  "kora_boost_copy": {
+    "title": "KORA Boost",
+    "description": "Less waiting. Better answers. No hardware upgrade."
+  },
+  "tooltip": "Simple tasks take the fast path. Harder tasks use the model when it matters.",
+  "claim_safety": [
+    "no production cost reduction claim",
+    "no real API-cost reduction claim",
+    "no energy reduction claim",
+    "no claim that larger models physically run without validation"
+  ]
+}

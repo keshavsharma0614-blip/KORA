@@ -6,6 +6,10 @@ This plan defines safe fixture types for future KORA Studio prototypes before ru
 
 Fixtures should use synthetic, aggregate, local-only data and should not imply that KORA Studio is implemented.
 
+## Phase 0 Fixture Location
+
+Phase 0 sample fixtures now live under `docs/kora-studio/fixtures/`. The fixture directory contains reviewed static JSON samples for future Studio UI and implementation planning.
+
 ## Sample Fixture Types
 
 - local validation summary fixture

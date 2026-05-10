@@ -1,0 +1,25 @@
+{
+  "fixture_id": "kora_studio_local_validation_summary_v0_1",
+  "fixture_type": "local_validation_summary",
+  "mode": "local_no_network_model_call_validation",
+  "provider": "local_validation",
+  "model": "deterministic-local",
+  "privacy_class": "synthetic",
+  "total_requests": 10,
+  "baseline_model_calls": 10,
+  "kora_model_calls": 4,
+  "avoided_model_calls": 6,
+  "avoided_model_call_rate": 0.6,
+  "deterministic_routes": 6,
+  "model_escalations": 4,
+  "validation_pass_count": 10,
+  "validation_fail_count": 0,
+  "error_count": 0,
+  "fallback_count": 0,
+  "notes": [
+    "Static sample fixture for future KORA Studio UI planning.",
+    "Uses aggregate local/no-network validation counters only.",
+    "No provider request, provider response, credential, or customer data is included."
+  ],
+  "claim_boundary": "This fixture is synthetic local/no-network sample data for UI planning. It is not real provider validation, real API-cost reduction evidence, production validation, production cost reduction proof, or energy reduction evidence."
+}
