@@ -142,7 +142,7 @@ Acceptance criteria:
 
 ## Phase 6 — Project Chat Mock
 
-Goal: Create ChatGPT-like project chat shell with mock/local placeholder messages.
+Goal: Create a project-based chat shell with mock/local placeholder messages.
 
 Scope:
 
