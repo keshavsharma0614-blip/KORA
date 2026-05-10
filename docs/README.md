@@ -47,6 +47,16 @@ python3 -m kora run direct_vs_kora -- --offline
 python3 -m kora run runtime_integrated_benchmark -- --offline
 ```
 
+A local `python3 -m kora examples list` run should include entries like these; your checkout may list additional examples:
+
+```text
+Runnable examples
+- customer_support_triage_fake_validation: customer-support triage local no-network validation example (graph.json: no)
+- direct_vs_kora: direct call vs KORA-controlled path (graph.json: yes)
+- real_model_call_validation_fake: local no-network model-call validation example (graph.json: no)
+- runtime_integrated_benchmark: initial runtime-path benchmark harness (graph.json: no)
+```
+
 Some example command names are compatibility-preserving. The local validation examples emit public-facing `local_validation` provider labels.
 Use `--report-md /tmp/kora_validation.md` with local validation examples to generate reviewer-facing Markdown reports from aggregate counters.
 
