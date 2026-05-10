@@ -96,6 +96,8 @@ Additional evidence and release docs:
 ## Help Test
 
 - [Help Test KORA](community/help-test-kora.md)
+- [Contributor pathway](community/contributor-pathway.md)
+- [Workload proposal template](community/workload-proposal-template.md)
 - [KORA validation roadmap](benchmarks/validation-roadmap.md)
 - [KORA social media announcement guide](community/KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md)
 - [KORA community manager guide](community/KORA_COMMUNITY_MANAGER_GUIDE.md)
@@ -112,6 +114,9 @@ Good candidate workloads:
 
 - [Canonical governance document](../GOVERNANCE.md)
 - [Contributing guide](../CONTRIBUTING.md)
+- [Contributor pathway](community/contributor-pathway.md)
+- [Good first issue candidates](community/good-first-issue-candidates.md)
+- [Workload proposal template](community/workload-proposal-template.md)
 - [Security policy](../SECURITY.md)
 - [Code of conduct](../CODE_OF_CONDUCT.md)
 - [KORA open roles](community/2026-05-06-kora-open-roles.md)

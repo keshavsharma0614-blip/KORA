@@ -77,6 +77,14 @@ Good first issues usually:
 
 Avoid starting with large runtime changes, new public commands, broad refactors, or changes that alter model-routing semantics.
 
+## Finding a first contribution
+
+Use the [contributor pathway](docs/community/contributor-pathway.md) to choose the right route for questions, bugs, PRs, and workload proposals.
+
+For candidate tasks that maintainers may later convert into GitHub issues, see [good first issue candidates](docs/community/good-first-issue-candidates.md).
+
+For validation workload ideas, use the [workload proposal template](docs/community/workload-proposal-template.md). Keep proposals synthetic or sanitized and do not include secrets, private data, proprietary datasets, or raw provider responses.
+
 ## Good first contribution types
 
 Good first contribution types include:
