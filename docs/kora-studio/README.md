@@ -116,3 +116,4 @@ The page is preview-only. It uses embedded HTML/CSS, does not auto-launch a brow
 - [Fixtures plan](fixtures-plan.md)
 - [Fixture schema reference](fixture-schema-reference.md)
 - [Phase 0 sample fixtures](fixtures/README.md)
+- [Local server placeholder page](kora-studio-local-server-placeholder-page.md)

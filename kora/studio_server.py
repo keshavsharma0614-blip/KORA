@@ -94,7 +94,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
 <head>
   <meta charset=\"utf-8\">
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-  <title>KORA Studio Preview</title>
+  <title>KORA Studio</title>
   <style>
     :root {{
       color-scheme: dark;
@@ -205,19 +205,22 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <span class=\"badge\">Preview / Local-only</span>
     </div>
     <div class=\"hero\">
-      <h1>KORA Studio Preview</h1>
+      <h1>KORA Studio</h1>
       <p class=\"boost\">{boost_message}</p>
-      <p class=\"technical\">{boost_explanation}</p>
+      <p class=\"technical\">This is a local placeholder page for the KORA Studio v0.1 skeleton. {boost_explanation}</p>
     </div>
     <div class=\"grid\">
       <section>
         <h2>Current Status</h2>
         <ul class=\"status-list\">
           <li><strong>Local server skeleton</strong></li>
+          <li>Deterministic-first local workflow exploration</li>
           <li>No full frontend yet</li>
           <li>No browser launch yet</li>
-          <li>No Ollama/provider calls</li>
+          <li>No provider calls</li>
+          <li>No Ollama integration</li>
           <li>No API keys required</li>
+          <li>No production/API-cost/energy claims</li>
         </ul>
       </section>
       <section>

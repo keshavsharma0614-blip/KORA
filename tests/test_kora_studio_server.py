@@ -116,7 +116,7 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert status["server"] == "local-only"
     assert status["provider_calls_enabled"] is False
     assert status["ollama_calls_enabled"] is False
-    assert "KORA Studio Preview" in html
+    assert "KORA Studio" in html
     assert APPROVED_BOOST_MESSAGE in html
     assert "Preview / Local-only" in html
     assert "/health" in html
@@ -131,14 +131,18 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     html = render_studio_placeholder_html(get_studio_server_status())
 
     assert html.startswith("<!doctype html>")
-    assert "KORA Studio Preview" in html
+    assert "KORA Studio" in html
     assert "Preview / Local-only" in html
     assert APPROVED_BOOST_MESSAGE in html
     assert TECHNICAL_EXPLANATION in html
+    assert "local placeholder page for the KORA Studio v0.1 skeleton" in html
     assert "local server skeleton" in html.lower()
+    assert "Deterministic-first local workflow exploration" in html
+    assert "No production/API-cost/energy claims" in html
     assert "No full frontend yet" in html
     assert "No browser launch yet" in html
-    assert "No Ollama/provider calls" in html
+    assert "No provider calls" in html
+    assert "No Ollama integration" in html
     assert "No API keys required" in html
     assert "/health" in html
     assert "/status" in html
