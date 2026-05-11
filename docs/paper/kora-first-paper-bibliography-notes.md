@@ -72,6 +72,20 @@ Recommended next pass:
 
 Select the final citation style or perform a narrow manuscript integration pass for `[R11]` through `[R18]`, then normalize bibliography metadata without adding unsupported claims.
 
+## Manuscript v0.3 Reference Integration Plan
+
+[KORA First Paper Manuscript v0.3 Reference Integration Plan](kora-first-paper-manuscript-v0-3-reference-integration-plan.md) has been created.
+
+Status:
+
+- Integration of `[R11]` through `[R18]` remains planned but not yet executed.
+- The plan recommends integrating `[R11]`, `[R12]`, and `[R13]` in v0.3.
+- The plan keeps `[R14]`, `[R15]`, and `[R16]` optional depending on section expansion.
+- The plan defers `[R17]` and `[R18]` until target venue or artifact package planning.
+- BibTeX remains pending.
+- Final citation style remains pending.
+- Synthetic workload / benchmark-construction references remain pending.
+
 ## Target Citation Areas
 
 - LLM serving and inference systems.

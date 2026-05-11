@@ -114,3 +114,13 @@ The second verified reference pass collected 8 additional citation candidates:
 - Systems artifact evaluation practices: USENIX NSDI artifact guidance, MLSys artifact evaluation guidance.
 
 These references are not yet integrated into manuscript v0.2. They should be used in a later manuscript pass only as background, positioning, reproducibility, or future-work context. They should not support production, API-cost, energy, broad superiority, artifact approval, or submission-readiness claims.
+
+## Manuscript v0.3 Integration Planning
+
+The [manuscript v0.3 reference integration plan](kora-first-paper-manuscript-v0-3-reference-integration-plan.md) maps `[R11]` through `[R18]` to future manuscript decisions.
+
+Summary:
+
+- Integrate `[R11]`, `[R12]`, and `[R13]` if v0.3 expands agent/tool-use and programmatic workflow related work.
+- Keep `[R14]`, `[R15]`, and `[R16]` optional unless caching, local runtime, or reproducibility sections expand.
+- Defer `[R17]` and `[R18]` until target venue or artifact package planning.
