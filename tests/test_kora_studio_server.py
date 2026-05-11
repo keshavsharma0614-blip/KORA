@@ -16,6 +16,7 @@ from kora.studio_server import (
     get_studio_server_status,
     get_studio_status_payload,
     is_allowed_studio_host,
+    render_studio_placeholder_html,
     render_studio_server_status_text,
 )
 
@@ -115,6 +116,48 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert status["server"] == "local-only"
     assert status["provider_calls_enabled"] is False
     assert status["ollama_calls_enabled"] is False
-    assert "KORA Studio Preview" in html
+    assert "KORA Studio" in html
     assert APPROVED_BOOST_MESSAGE in html
-    assert "No provider calls. No browser launch. No Ollama calls." in html
+    assert "Preview / Local-only" in html
+    assert "/health" in html
+    assert "/status" in html
+    assert "provider calls enabled" not in html.lower()
+    assert "production cost reduction" not in html.lower()
+    assert "real api-cost reduction" not in html.lower()
+    assert "energy reduction" not in html.lower()
+
+
+def test_static_preview_html_content_is_safe_and_complete() -> None:
+    html = render_studio_placeholder_html(get_studio_server_status())
+
+    assert html.startswith("<!doctype html>")
+    assert "KORA Studio" in html
+    assert "Preview / Local-only" in html
+    assert APPROVED_BOOST_MESSAGE in html
+    assert TECHNICAL_EXPLANATION in html
+    assert "local placeholder page for the KORA Studio v0.1 skeleton" in html
+    assert "local server skeleton" in html.lower()
+    assert "Deterministic-first local workflow exploration" in html
+    assert "No production/API-cost/energy claims" in html
+    assert "No full frontend yet" in html
+    assert "No browser launch yet" in html
+    assert "No provider calls" in html
+    assert "No model/runtime integration yet" in html
+    assert "No Ollama integration" in html
+    assert "No API keys required" in html
+    assert "/health" in html
+    assert "/status" in html
+    assert "docs/kora-studio/README.md" in html
+    assert "docs/kora-studio/fixtures/" in html
+    assert "CLI status" in html
+    assert "fixture-backed planning data" in html
+    assert "report viewer" in html
+    assert "counter dashboard" in html
+    assert "project chat shell" in html
+    assert "Ollama detection" in html
+    assert "OPENAI_API_KEY" not in html
+    assert "ANTHROPIC_API_KEY" not in html
+    assert "provider calls enabled" not in html.lower()
+    assert "production cost reduction" not in html.lower()
+    assert "real api-cost reduction" not in html.lower()
+    assert "energy reduction" not in html.lower()

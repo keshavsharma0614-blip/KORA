@@ -82,6 +82,8 @@ Acceptance criteria:
 
 ## Phase 3 — Static Web UI Prototype
 
+Status: The local server root now serves a static preview page. The next step is to expand that placeholder into a static UI prototype while keeping it local-only and framework-free until a full frontend decision is made.
+
 Goal: Create a static UI prototype for KORA Studio.
 
 Screens:
