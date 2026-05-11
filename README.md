@@ -130,6 +130,8 @@ How to help test KORA with a real workload.
 
 See [Help Test KORA](docs/community/help-test-kora.md) for the workload submission template.
 
+> When proposing workloads for KORA validation, use only synthetic or sanitized examples. Do not include secrets, API keys, private user data, proprietary datasets, raw provider responses, or production logs.
+
 ## Documentation
 
 Start with the [KORA Documentation Index](docs/README.md) for the developer path:
