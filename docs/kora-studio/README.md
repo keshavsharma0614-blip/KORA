@@ -92,6 +92,22 @@ Status:
 
 The server skeleton is not the full KORA Studio runtime or frontend. It exists to define the local server boundary for future Studio implementation work.
 
+## Static Preview Page
+
+The local server root serves a static preview page:
+
+```bash
+python3 -m kora studio --serve
+```
+
+Open locally:
+
+```text
+http://127.0.0.1:8765/
+```
+
+The page is preview-only. It uses embedded HTML/CSS, does not auto-launch a browser, does not call Ollama or providers, does not require API keys, and does not use a frontend framework yet.
+
 ## Implementation Planning
 
 - [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md)

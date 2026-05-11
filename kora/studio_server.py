@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
@@ -81,27 +82,176 @@ def render_studio_server_status_text(status: dict[str, Any]) -> str:
 
 
 def render_studio_placeholder_html(status: dict[str, Any]) -> str:
-    """Render a minimal placeholder page for the preview server."""
+    """Render the static KORA Studio preview page."""
 
-    return """<!doctype html>
-<html lang="en">
+    docs_path = html.escape(str(status["docs_path"]), quote=True)
+    fixtures_path = html.escape(str(status["fixtures_path"]), quote=True)
+    boost_message = html.escape(str(status["kora_boost_message"]), quote=True)
+    boost_explanation = html.escape(str(status["kora_boost_technical_explanation"]), quote=True)
+
+    return f"""<!doctype html>
+<html lang=\"en\">
 <head>
-  <meta charset="utf-8">
+  <meta charset=\"utf-8\">
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
   <title>KORA Studio Preview</title>
+  <style>
+    :root {{
+      color-scheme: dark;
+      --bg: #071014;
+      --panel: #0d1b22;
+      --panel-2: #10242d;
+      --text: #edf7fa;
+      --muted: #9fb3bd;
+      --cyan: #32d1e6;
+      --amber: #f0b44c;
+      --green: #57d68d;
+      --line: #24424d;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }}
+    main {{
+      width: min(1040px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0;
+    }}
+    .topline {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }}
+    .badge {{
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--green);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }}
+    h1 {{
+      margin: 0 0 12px;
+      font-size: clamp(34px, 6vw, 64px);
+      letter-spacing: 0;
+      line-height: 1.05;
+    }}
+    h2 {{
+      margin: 0 0 14px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }}
+    p {{ margin: 0; }}
+    .hero {{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius: 8px;
+      padding: 28px;
+    }}
+    .boost {{
+      color: var(--cyan);
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 18px;
+    }}
+    .technical {{
+      color: var(--muted);
+      max-width: 760px;
+      margin-top: 10px;
+      font-size: 16px;
+    }}
+    .grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }}
+    section {{
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+    }}
+    ul {{
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }}
+    li + li {{ margin-top: 8px; }}
+    code {{
+      color: var(--amber);
+      background: #071014;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 6px;
+      overflow-wrap: anywhere;
+    }}
+    a {{ color: var(--cyan); }}
+    .status-list strong {{ color: var(--text); }}
+  </style>
 </head>
 <body>
   <main>
-    <h1>KORA Studio Preview</h1>
-    <p>Less waiting. Better answers. No hardware upgrade.</p>
-    <p>No provider calls. No browser launch. No Ollama calls.</p>
-    <p>Docs: {docs_path}</p>
-    <p>Fixtures: {fixtures_path}</p>
+    <div class=\"topline\">
+      <strong>KORA Studio</strong>
+      <span class=\"badge\">Preview / Local-only</span>
+    </div>
+    <div class=\"hero\">
+      <h1>KORA Studio Preview</h1>
+      <p class=\"boost\">{boost_message}</p>
+      <p class=\"technical\">{boost_explanation}</p>
+    </div>
+    <div class=\"grid\">
+      <section>
+        <h2>Current Status</h2>
+        <ul class=\"status-list\">
+          <li><strong>Local server skeleton</strong></li>
+          <li>No full frontend yet</li>
+          <li>No browser launch yet</li>
+          <li>No Ollama/provider calls</li>
+          <li>No API keys required</li>
+        </ul>
+      </section>
+      <section>
+        <h2>What Works Today</h2>
+        <ul>
+          <li>CLI status</li>
+          <li>localhost server skeleton</li>
+          <li>health/status endpoints</li>
+          <li>fixture-backed planning data</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Coming Next</h2>
+        <ul>
+          <li>report viewer</li>
+          <li>counter dashboard</li>
+          <li>project chat shell</li>
+          <li>Ollama detection</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Local References</h2>
+        <ul>
+          <li><a href=\"/health\">/health</a></li>
+          <li><a href=\"/status\">/status</a></li>
+          <li><code>{docs_path}</code></li>
+          <li><code>{fixtures_path}</code></li>
+        </ul>
+      </section>
+    </div>
   </main>
 </body>
 </html>
-""".format(
-        docs_path=status["docs_path"], fixtures_path=status["fixtures_path"]
-    )
+"""
 
 
 def create_studio_request_handler(status_provider: StatusProvider | None = None) -> type[BaseHTTPRequestHandler]:
