@@ -25,6 +25,16 @@ Completed on 2026-05-11.
 - Bibliography status: BibTeX not added in this pass; final bibliography remains pending.
 - Manuscript status: no manuscript citation integration in this pass.
 
+### Manuscript Integration Pass 1
+
+Completed on 2026-05-11.
+
+- Manuscript v0.2 created.
+- Verified references from pass 1 integrated into v0.2 as preliminary citation labels.
+- Preliminary references section added to the manuscript using verified tracker entries only.
+- Final citation style, final bibliography normalization, and BibTeX remain pending.
+- No fake citations or unsupported production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims added.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems

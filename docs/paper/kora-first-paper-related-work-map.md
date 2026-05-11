@@ -88,3 +88,16 @@ The first verified reference pass collected 10 citation candidates:
 - Local model runtime systems: llama.cpp official repository.
 
 These references are candidates for manuscript integration. They should not be used to support production, API-cost, energy, or broad workload superiority claims.
+
+## Manuscript v0.2 Mapping
+
+Manuscript v0.2 integrates the first verified reference pass as preliminary citation labels:
+
+- LLM serving and inference systems: [R01], [R02], [R03].
+- Agent/tool routing and programmatic AI workflows: [R04], [R05].
+- Retrieval-augmented generation: [R06].
+- Workflow and DAG orchestration: [R07], [R08].
+- Local model/runtime systems: [R03], [R09].
+- Benchmarking and artifact evaluation: [R02], [R10].
+
+These labels remain preliminary until final citation style and bibliography normalization are complete.

@@ -33,14 +33,14 @@
 - Repeated runs.
 - Figure generation.
 - Bibliography/references.
-- Manuscript citation integration.
+- Manuscript v0.2 reference-integration review.
 - Final verified bibliography.
 
 ## References and figures needed
 
 - Additional verified related work references.
-- Manuscript citation integration for verified references.
-- Verified bibliography entries.
+- Final citation format and bibliography normalization.
+- Verified BibTeX entries if a BibTeX workflow is selected.
 - Figure 1 architecture.
 - Figure 2 execution-control layer.
 - Figure 3 benchmark result.
@@ -61,8 +61,8 @@ First verified reference pass:
 
 - 10 references partially collected across the target related-work categories.
 - Verified references recorded in the reference tracker.
-- Manuscript citation integration still pending.
-- Final bibliography and BibTeX still pending.
+- Manuscript v0.2 created with verified references integrated as preliminary citation labels.
+- Final citation format, final bibliography, and BibTeX still pending.
 
 ## Follow-Up Papers / Technical Reports
 
