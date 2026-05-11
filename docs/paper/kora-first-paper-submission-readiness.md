@@ -8,6 +8,8 @@ The current paper track has a thesis, manuscript v0.2, claim-boundary docs, revi
 
 The reference scaffold now exists, and the first verified reference pass has collected 10 citation candidates across the major related-work categories. Manuscript v0.2 integrates those verified references as preliminary citation labels. No fake citations or unverified BibTeX entries have been added.
 
+Citation audit v0.1 exists and maps preliminary references to manuscript use, traceability status, and claim boundaries.
+
 ## Ready
 
 - Thesis.
@@ -21,12 +23,14 @@ The reference scaffold now exists, and the first verified reference pass has col
 - Figure and table planning docs.
 - Reference scaffold.
 - First verified reference pass.
+- Citation audit v0.1.
 
 ## Needed Before arXiv / Workshop Submission
 
 - More references collected and verified.
 - Final citation style selected.
 - Final bibliography entries normalized.
+- Final citation audit review completed.
 - Figure drafts created.
 - Tables finalized.
 - Clean command transcript captured.
@@ -53,6 +57,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, and manuscript v0.2 integrates the verified references as preliminary citation labels and a preliminary references section. The paper is still not submission-ready because the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
+The first verified reference pass is complete, manuscript v0.2 integrates the verified references as preliminary citation labels and a preliminary references section, and citation audit v0.1 exists. The paper is still not submission-ready because the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.

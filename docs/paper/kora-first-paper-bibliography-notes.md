@@ -35,9 +35,21 @@ Status:
 - Final citation style is still pending.
 - Final bibliography normalization and citation audit are still pending.
 
+## Citation Audit v0.1
+
+[KORA First Paper Citation Audit v0.1](kora-first-paper-citation-audit-v0-1.md) has been created.
+
+Status:
+
+- Preliminary references are traceable to [R01] through [R10].
+- BibTeX remains pending.
+- Final citation style remains pending.
+- Metadata normalization remains pending.
+- The audit maps reference use to claim boundaries and forbidden citation uses.
+
 Recommended next pass:
 
-Normalize the final bibliography style, audit every citation against the tracker, and add BibTeX only if all required fields are fully verified from official sources.
+Choose a citation style, normalize the final bibliography, audit every citation against the tracker, and add BibTeX only if all required fields are fully verified from official sources.
 
 ## Target Citation Areas
 

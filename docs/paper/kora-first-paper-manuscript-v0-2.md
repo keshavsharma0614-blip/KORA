@@ -212,7 +212,7 @@ KORA is complementary to model serving systems, workflow orchestrators, agent fr
 
 ## References
 
-This preliminary references section uses only verified entries from the first reference pass. Citation style and BibTeX are not final.
+This preliminary references section uses only verified entries from the first reference pass. Citation style and BibTeX are not final. See [KORA First Paper Citation Audit v0.1](kora-first-paper-citation-audit-v0-1.md) for citation consistency, traceability, and claim-boundary notes.
 
 - [R01] Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody Hao Yu, Joseph E. Gonzalez, Hao Zhang, and Ion Stoica. "Efficient Memory Management for Large Language Model Serving with PagedAttention." SOSP 2023; arXiv:2309.06180. Source: https://arxiv.org/abs/2309.06180; https://doi.org/10.48550/arXiv.2309.06180
 - [R02] Vijay Janapa Reddi et al. "MLPerf Inference Benchmark." arXiv:1911.02549, 2019; revised 2020. Source: https://arxiv.org/abs/1911.02549

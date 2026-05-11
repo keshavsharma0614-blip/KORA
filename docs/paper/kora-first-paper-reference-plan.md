@@ -35,6 +35,15 @@ Completed on 2026-05-11.
 - Final citation style, final bibliography normalization, and BibTeX remain pending.
 - No fake citations or unsupported production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims added.
 
+### Citation Audit v0.1
+
+Completed on 2026-05-11.
+
+- Citation audit v0.1 created.
+- References [R01] through [R10] checked for manuscript use, References-section presence, tracker status, and source traceability.
+- Claim-support mapping added for related-work context and the KORA 80/100 benchmark result.
+- Bibliography normalization and citation style selection remain pending.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems
