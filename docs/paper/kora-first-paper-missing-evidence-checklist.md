@@ -34,12 +34,14 @@
 - Figure generation.
 - Bibliography/references.
 - Manuscript v0.2 reference-integration review.
+- Citation audit v0.1 review.
 - Final verified bibliography.
 
 ## References and figures needed
 
 - Additional verified related work references.
 - Final citation format and bibliography normalization.
+- Final citation audit review.
 - Verified BibTeX entries if a BibTeX workflow is selected.
 - Figure 1 architecture.
 - Figure 2 execution-control layer.
@@ -62,7 +64,16 @@ First verified reference pass:
 - 10 references partially collected across the target related-work categories.
 - Verified references recorded in the reference tracker.
 - Manuscript v0.2 created with verified references integrated as preliminary citation labels.
+- Citation audit v0.1 created.
 - Final citation format, final bibliography, and BibTeX still pending.
+
+Additional reference categories still pending:
+
+- Agent/tool-use references.
+- Semantic caching references if the manuscript discusses caching in more detail.
+- Synthetic workload reproducibility references.
+- Local runtime references beyond the current preliminary context.
+- Venue-specific artifact guidance.
 
 ## Follow-Up Papers / Technical Reports
 
