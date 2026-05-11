@@ -55,6 +55,17 @@ Completed on 2026-05-11.
 - Remaining gaps: synthetic workload and benchmark-construction references, optional additional semantic-cache references, and final target-venue citation/artifact guidance.
 - Bibliography status: BibTeX not added in this pass; final citation style and bibliography normalization remain pending.
 
+### Manuscript v0.3 Reference Integration Plan
+
+Completed on 2026-05-11.
+
+- Manuscript v0.3 reference integration plan created.
+- References `[R11]` through `[R18]` mapped to candidate manuscript sections and integration decisions.
+- Selected references will be integrated later based on the plan.
+- Remaining gaps: synthetic workload / benchmark-construction references and final target-venue citation/artifact guidance.
+- Manuscript v0.3 has not been created.
+- BibTeX and final citation style remain pending.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems

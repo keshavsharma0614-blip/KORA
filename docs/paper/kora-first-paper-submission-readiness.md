@@ -12,6 +12,8 @@ Citation audit v0.1 exists and maps preliminary references to manuscript use, tr
 
 Additional reference verification pass 2 has collected 8 more verified references for remaining bibliography gaps. These references are recorded in the tracker and audit, but manuscript integration is deferred.
 
+Manuscript v0.3 reference integration planning now exists for [R11] through [R18]. Manuscript v0.3 has not been created.
+
 ## Ready
 
 - Thesis.
@@ -27,10 +29,12 @@ Additional reference verification pass 2 has collected 8 more verified reference
 - First verified reference pass.
 - Additional reference verification pass 2.
 - Citation audit v0.1.
+- Manuscript v0.3 reference integration plan.
 
 ## Needed Before arXiv / Workshop Submission
 
 - More references collected and verified.
+- Manuscript v0.3 created if the selected reference integration plan is accepted.
 - Final citation style selected.
 - Final bibliography entries normalized.
 - Final citation audit review completed.
@@ -60,6 +64,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, and additional reference verification pass 2 has added 8 verified tracker entries. The paper is still not submission-ready because the new references are not yet integrated into the manuscript, the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
+The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, and a manuscript v0.3 reference integration plan exists. The paper is still not submission-ready because manuscript v0.3 has not been created, the new references are not yet integrated into the manuscript, the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.
