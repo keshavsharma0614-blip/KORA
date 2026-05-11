@@ -10,7 +10,7 @@ This audit covers:
 
 - manuscript v0.2
 - manuscript v0.3 selected reference integration
-- references [R01] through [R18]
+- references [R01] through [R24]
 - preliminary references section
 - related work framing
 - claim boundary language
@@ -39,6 +39,12 @@ It does not add BibTeX, final citation style, manuscript-integrated citations be
 | [R16] | NeurIPS reproducibility program report | No, future integration | No, future integration | verified | needs manuscript integration decision |
 | [R17] | USENIX NSDI artifact guidance | No, future integration | No, future integration | verified | needs manuscript integration decision |
 | [R18] | MLSys artifact evaluation guidance | No, future integration | No, future integration | verified | needs manuscript integration decision |
+| [R19] | BIG-bench | No, future integration | No, future integration | verified | needs manuscript integration decision |
+| [R20] | HELM | No, future integration | No, future integration | verified | needs manuscript integration decision |
+| [R21] | SWE-bench | No, future integration | No, future integration | verified | needs manuscript integration decision |
+| [R22] | AgentBench | No, future integration | No, future integration | verified | needs manuscript integration decision |
+| [R23] | Dynabench | No, future integration | No, future integration | verified | needs manuscript integration decision |
+| [R24] | CheckList | No, future integration | No, future integration | verified | needs manuscript integration decision |
 
 ## Reference Normalization Status
 
@@ -54,7 +60,7 @@ It does not add BibTeX, final citation style, manuscript-integrated citations be
 - Preliminary reference usability: usable as a preliminary benchmark-methodology reference.
 - Metadata still missing: final citation-format normalization and full author handling.
 - BibTeX ready: no.
-- Source traceability: traceable to arXiv URL recorded in the tracker.
+- Source traceability: traceable to arXiv URL and DOI recorded in the tracker.
 
 ### [R03] ONNX Runtime docs
 
@@ -168,6 +174,48 @@ It does not add BibTeX, final citation style, manuscript-integrated citations be
 - BibTeX ready: no.
 - Source traceability: traceable to official MLSys URL recorded in the tracker.
 
+### [R19] BIG-bench
+
+- Preliminary reference usability: usable as benchmark-construction and broad task-suite background after manuscript integration.
+- Metadata still missing: final citation-format normalization and final author-list handling.
+- BibTeX ready: no.
+- Source traceability: traceable to arXiv URL and DOI recorded in the tracker.
+
+### [R20] HELM
+
+- Preliminary reference usability: usable as holistic evaluation and multi-metric benchmark-methodology background after manuscript integration.
+- Metadata still missing: final citation-format normalization and final author-list handling.
+- BibTeX ready: no.
+- Source traceability: traceable to arXiv URL and DOI recorded in the tracker.
+
+### [R21] SWE-bench
+
+- Preliminary reference usability: usable as a software-engineering benchmark-construction example after manuscript integration.
+- Metadata still missing: final citation-format normalization.
+- BibTeX ready: no.
+- Source traceability: traceable to arXiv URL and DOI recorded in the tracker.
+
+### [R22] AgentBench
+
+- Preliminary reference usability: usable as agent-benchmark background after manuscript integration.
+- Metadata still missing: final citation-format normalization and final author-list handling.
+- BibTeX ready: no.
+- Source traceability: traceable to arXiv URL and DOI recorded in the tracker.
+
+### [R23] Dynabench
+
+- Preliminary reference usability: usable as dynamic benchmark-methodology background after manuscript integration.
+- Metadata still missing: final citation-format normalization and final author-list handling.
+- BibTeX ready: no.
+- Source traceability: traceable to arXiv URL and DOI recorded in the tracker.
+
+### [R24] CheckList
+
+- Preliminary reference usability: usable as behavior-oriented evaluation design background after manuscript integration.
+- Metadata still missing: final citation-format normalization.
+- BibTeX ready: no.
+- Source traceability: traceable to ACL Anthology URL and DOI recorded in the tracker.
+
 ## Claim-Support Mapping
 
 | Claim or statement type | References used | Supported use | Boundary |
@@ -184,6 +232,7 @@ It does not add BibTeX, final citation style, manuscript-integrated citations be
 | Additional local runtime context | [R15] | Future manuscript background for local runtime systems | Does not support current KORA Ollama integration evidence. |
 | Additional reproducibility context | [R16] | Future manuscript background on reproducibility programs and checklists | Does not make KORA submission-ready or formally reproducible by venue standards. |
 | Venue-specific artifact guidance | [R17], [R18] | Future manuscript/readiness background on artifact-evaluation expectations | Does not indicate artifact approval or formal artifact evaluation. |
+| Benchmark-construction and evaluation methodology context | [R19], [R20], [R21], [R22], [R23], [R24] | Future methodology/background context for benchmark breadth, metric coverage, task benchmark construction, agent evaluation, dynamic benchmarking, and behavior-oriented tests | Does not support KORA production benchmark proof, production/API-cost/energy claims, or broad workload superiority. |
 | KORA 80/100 result | KORA benchmark docs and reproducible deterministic-heavy benchmark evidence | Supports the approved deterministic-heavy benchmark claim | External references do not imply production savings, real API-cost reduction, energy reduction, or broad superiority. |
 
 ## Forbidden Citation Uses
@@ -202,7 +251,7 @@ It does not add BibTeX, final citation style, manuscript-integrated citations be
 - Exact venue/metadata audit pending where needed.
 - Additional references for agent/tool-use partially expanded in pass 2.
 - Semantic caching reference partially added in pass 2.
-- Synthetic workload reproducibility references may be needed.
+- Synthetic workload and benchmark-construction references partially added in the benchmark-construction pass.
 - Local runtime references partially expanded in pass 2.
 - Venue-specific artifact guidance partially expanded in pass 2.
 
@@ -248,8 +297,39 @@ Status:
 - BibTeX remains pending.
 - Final citation style remains pending.
 
+## Benchmark-Construction Reference Verification Pass
+
+Pass date: 2026-05-11.
+
+Additional verified references: 6.
+
+New verified labels: `[R19]` through `[R24]`.
+
+Categories covered:
+
+- broad benchmark-suite construction for language-model capabilities
+- holistic and multi-metric evaluation methodology
+- software-engineering task benchmark construction
+- agent benchmark construction
+- dynamic benchmark methodology
+- behavior-oriented evaluation and test design
+
+Categories still missing:
+
+- references that specifically discuss deterministic-heavy synthetic workload construction for model-call routing systems
+- final target-venue guidance after venue selection
+- final decisions about which benchmark-methodology references belong in manuscript text
+
+Manuscript integration status:
+
+- References `[R19]` through `[R24]` are tracker/audit entries only in this pass.
+- They are intended to support future benchmark-methodology background, not current manuscript claims.
+- KORA's 80/100 result remains supported by KORA's own reproducible deterministic-heavy benchmark evidence, not by external references.
+- These references do not prove production cost reduction, real API-cost reduction, energy reduction, production benchmark evidence, or broad workload superiority.
+- This pass does not complete final citation style, BibTeX, final bibliography normalization, or final citation audit.
+
 ## Next Step
 
-- Task 319B or later: review manuscript v0.3 if safe.
-- Later: select final citation style or verify synthetic workload / benchmark-construction references.
+- Decide whether selected `[R19]` through `[R24]` references should be integrated into a future benchmark-methodology section.
+- Select final citation style before final bibliography normalization and BibTeX preparation.
 - Manuscript v0.3 still requires final bibliography and claim-audit review before any submission-readiness claim.

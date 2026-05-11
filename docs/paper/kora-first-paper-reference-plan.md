@@ -76,6 +76,17 @@ Completed on 2026-05-11.
 - Remaining gaps: synthetic workload / benchmark-construction references and final target-venue citation/artifact guidance.
 - BibTeX and final citation style remain pending.
 
+### Benchmark-Construction Reference Verification Pass
+
+Completed on 2026-05-11.
+
+- Additional verified references collected: 6.
+- New verified labels: `[R19]` through `[R24]`.
+- Categories covered: broad benchmark-suite construction, holistic and multi-metric evaluation methodology, software-engineering task benchmark construction, agent benchmark construction, dynamic benchmarking, and behavior-oriented evaluation design.
+- Manuscript integration deferred; references are tracker/audit entries only until a later methodology-section pass.
+- Remaining gaps: deterministic-heavy synthetic workload construction references specific to model-call routing systems, final target-venue guidance, final citation style, and bibliography normalization.
+- Bibliography status: BibTeX not added in this pass; final citation style and bibliography normalization remain pending.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems
@@ -244,7 +255,13 @@ Partially verified. See [KORA first paper reference tracker](kora-first-paper-re
 | R16 | Benchmarking and reproducibility | NeurIPS reproducibility program report | Paper | Context for reproducibility programs and checklist discipline | Verified in pass 2 | Do not imply KORA has venue reproducibility approval. |
 | R17 | Systems papers with artifact evaluation practices | USENIX NSDI artifact guidance | Official venue guidance | Support artifact and reproduction discipline | Verified in pass 2 | Does not imply KORA artifact approval. |
 | R18 | Systems papers with artifact evaluation practices | MLSys artifact evaluation guidance | Official venue guidance | Support ML/systems artifact appendix expectations | Verified in pass 2 | Does not imply KORA artifact approval. |
-| R19 | Benchmarking and reproducibility | Synthetic workload evaluation reference | Paper or technical report | Context for local/no-network synthetic workload design | Pending | Keep claim language narrow. |
+| R19 | Benchmarking and reproducibility | BIG-bench | Paper | Broad benchmark-suite construction and diverse task design context | Verified in benchmark-construction pass | Methodology/background only; do not use as KORA production benchmark evidence. |
+| R20 | Benchmarking and reproducibility | HELM | Paper | Holistic and multi-metric evaluation methodology context | Verified in benchmark-construction pass | Do not imply KORA has broad HELM-style coverage. |
+| R21 | Benchmarking and reproducibility | SWE-bench | Paper | Software-engineering task benchmark construction example | Verified in benchmark-construction pass | Do not compare KORA results against SWE-bench. |
+| R22 | Benchmarking and reproducibility | AgentBench | Paper | Agent benchmark construction and interactive-environment evaluation context | Verified in benchmark-construction pass | Do not claim KORA outperforms agent systems. |
+| R23 | Benchmarking and reproducibility | Dynabench | Paper | Dynamic benchmark methodology context | Verified in benchmark-construction pass | Do not use as KORA production evidence. |
+| R24 | Benchmarking and reproducibility | CheckList | Paper / ACL Anthology | Behavior-oriented evaluation and test-design context | Verified in benchmark-construction pass | Do not imply KORA has completed broad behavioral testing. |
+| R25 | Benchmarking and reproducibility | Deterministic-heavy synthetic workload construction reference | Paper or technical report | More direct context for local/no-network synthetic workload design | Pending | Keep claim language narrow. |
 
 ## Next Verification Procedure
 

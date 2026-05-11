@@ -77,10 +77,18 @@ Additional reference verification pass 2:
 
 Additional reference categories still pending:
 
-- Synthetic workload and benchmark-construction references.
+- Benchmark-construction references are partially collected as `[R19]` through `[R24]`, with manuscript integration pending.
+- More direct deterministic-heavy synthetic workload construction references may still be needed.
 - Optional additional semantic caching references if the manuscript discusses caching in more detail.
 - Target-venue-specific citation and artifact guidance after venue selection.
 - Final citation style and BibTeX.
+
+Benchmark-construction verification pass:
+
+- 6 additional references verified for benchmark-suite construction, holistic and multi-metric evaluation methodology, software-engineering task benchmarks, agent benchmarks, dynamic benchmarking, and behavior-oriented test design.
+- These references are tracker/audit entries only for now.
+- They do not provide production benchmark evidence for KORA.
+- Final citation style, final bibliography normalization, and BibTeX remain pending.
 
 ## Follow-Up Papers / Technical Reports
 

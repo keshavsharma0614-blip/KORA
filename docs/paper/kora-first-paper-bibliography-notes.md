@@ -99,6 +99,28 @@ Status:
 - Final bibliography normalization remains pending.
 - Synthetic workload / benchmark-construction references remain pending.
 
+## Benchmark-Construction Reference Verification Pass
+
+Status:
+
+- Additional verified references collected in this pass: 6.
+- New verified labels: `[R19]` through `[R24]`.
+- Categories covered: broad benchmark-suite construction, holistic and multi-metric evaluation methodology, software-engineering task benchmark construction, agent benchmark construction, dynamic benchmarking, and behavior-oriented evaluation design.
+- Manuscript integration was deferred. The new references are tracker/audit entries only until a later manuscript methodology pass decides whether they are needed.
+- BibTeX not added in this pass.
+- Final citation style remains pending.
+- Final bibliography normalization remains pending.
+
+Categories still needing more coverage:
+
+- Deterministic-heavy synthetic workload construction for model-call routing systems.
+- Final target-venue citation and artifact guidance after venue selection.
+- Final decision on which benchmark-methodology references belong in manuscript text.
+
+Recommended next pass:
+
+Decide whether selected `[R19]` through `[R24]` references should be integrated into a future benchmark-methodology section, or select the final citation style before bibliography normalization. Do not use these references as evidence for production benchmark results, production cost reduction, real API-cost reduction, energy reduction, or broad superiority.
+
 ## Target Citation Areas
 
 - LLM serving and inference systems.

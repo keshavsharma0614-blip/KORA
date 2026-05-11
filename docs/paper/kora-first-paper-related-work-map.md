@@ -130,3 +130,16 @@ Summary:
 Manuscript v0.3 now integrates `[R11]`, `[R12]`, and `[R13]` as related-work background for agent/tool-use and program-aided language-model workflows.
 
 `[R14]` through `[R18]` remain tracker/audit-only, optional, or deferred. They should not be used to support production, API-cost, energy, broad superiority, artifact approval, or submission-readiness claims.
+
+## Benchmark-Construction Reference Pass Mapping
+
+The benchmark-construction reference pass collected 6 additional citation candidates:
+
+- Benchmark-suite construction and broad task design: BIG-bench.
+- Holistic and multi-metric language-model evaluation: HELM.
+- Software-engineering task benchmark construction: SWE-bench.
+- Agent benchmark construction: AgentBench.
+- Dynamic benchmark methodology: Dynabench.
+- Behavior-oriented evaluation and test design: CheckList.
+
+These references are tracker/audit entries only for now. They may support a later benchmark-methodology section, but they should not be used to imply KORA has production benchmark evidence, production cost reduction, real API-cost reduction, energy reduction, or broad workload superiority.
