@@ -130,6 +130,19 @@ Completed on 2026-05-12.
 - No manuscript changes were made.
 - Next step: preliminary BibTeX preparation for ready records only, with blocked records deferred until their metadata/style gaps are resolved.
 
+### Final Blocked Metadata Review v0.1
+
+Completed on 2026-05-12.
+
+- Final blocked metadata review v0.1 created for all remaining blocked records.
+- Docs/repo, artifact guidance, and paper/preprint blockers are consolidated at planning/classification level.
+- Candidate records for later expanded BibTeX are identified, but only after final field check.
+- Deferred and still-not-eligible records remain blocked before BibTeX.
+- No new references were added.
+- No BibTeX was generated.
+- No manuscript changes were made.
+- Next step: expanded BibTeX for the candidate subset only after final field check.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems

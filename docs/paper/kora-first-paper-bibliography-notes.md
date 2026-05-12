@@ -255,6 +255,20 @@ Status:
 - No manuscript changes were made.
 - The paper remains not submission-ready.
 
+## Final Blocked Metadata Review
+
+[KORA First Paper Final Blocked Metadata Review v0.1](kora-first-paper-final-blocked-metadata-review-v0-1.md) has been created.
+
+Status:
+
+- Remaining blocked records are consolidated across docs/repo, artifact guidance, and paper/preprint groups.
+- Expanded BibTeX should be limited to the candidate subset after final field check: `[R03]`, `[R04]`, `[R05]`, `[R07]`, `[R09]`, `[R10]`, `[R12]`, `[R13]`, `[R16]`.
+- `[R17]` and `[R18]` remain deferred until target venue selection.
+- `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` remain not eligible until author-list, split, or venue/style decisions are resolved.
+- No BibTeX was generated.
+- Final bibliography / claim audit remains pending.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.

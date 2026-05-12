@@ -36,6 +36,8 @@ Artifact guidance style resolution v0.1 exists for `[R10]`, `[R17]`, and `[R18]`
 
 Paper/preprint style resolution v0.1 exists for `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]`. Full BibTeX and final bibliography review are still pending, and the paper remains not submission-ready.
 
+Final blocked metadata review v0.1 exists. It consolidates remaining blocked records and identifies the later expanded-BibTeX candidate subset, deferred records, and still-not-eligible records. Full BibTeX and final bibliography review are still pending, and the paper remains not submission-ready.
+
 ## Ready
 
 - Thesis.
@@ -62,6 +64,7 @@ Paper/preprint style resolution v0.1 exists for `[R02]`, `[R05]`, `[R12]`, `[R13
 - Docs/repo style resolution v0.1.
 - Artifact guidance style resolution v0.1.
 - Paper/preprint style resolution v0.1.
+- Final blocked metadata review v0.1.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 
@@ -70,7 +73,7 @@ Paper/preprint style resolution v0.1 exists for `[R02]`, `[R05]`, `[R12]`, `[R13
 - More references collected and verified.
 - Decide whether selected benchmark-construction references should be integrated if the evaluation-methodology section is expanded.
 - More direct deterministic-heavy synthetic workload construction references if needed.
-- Remaining metadata/style gap resolution for blocked records.
+- Expanded BibTeX candidate subset final field check.
 - Final bibliography entries normalized.
 - Full BibTeX completion after blocked records are resolved.
 - Final citation audit review completed.

@@ -126,6 +126,25 @@ The following entries should not receive BibTeX yet:
 
 After this paper/preprint style pass, all paper/preprint blockers above remain blocked before BibTeX until final author-list, venue/status, or report/preprint metadata review is complete.
 
+## Final Blocked Metadata Review
+
+[KORA First Paper Final Blocked Metadata Review v0.1](kora-first-paper-final-blocked-metadata-review-v0-1.md) consolidates all remaining blocked records before any expanded BibTeX preparation.
+
+Status:
+
+- All remaining blocked records are grouped as docs/repo, artifact guidance, or paper/preprint records.
+- Candidate records for later expanded BibTeX after final field check: `[R03]`, `[R04]`, `[R05]`, `[R07]`, `[R09]`, `[R10]`, `[R12]`, `[R13]`, `[R16]`.
+- Deferred records until target venue selection: `[R17]`, `[R18]`.
+- Records still not eligible until author-list, split, or venue/style decision: `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, `[R23]`.
+- No BibTeX is generated for blocked records in the final review.
+
+Next action categories:
+
+- Resolve access-date and entry-type style for docs/repo and artifact-guidance candidate records.
+- Resolve venue/status or report/preprint treatment for candidate paper/preprint records.
+- Resolve author-list or approved `et al.` handling before any expanded BibTeX for long-author-list records.
+- Keep target-venue-specific artifact guidance deferred until the target venue is selected.
+
 ## Claim-Safety Note
 
 Metadata gap resolution does not change claim support.
