@@ -35,8 +35,8 @@ This artifact records readiness for a venue-neutral arXiv-style preprint package
 | Candidate categories | `cs.AI`, `cs.LG`, `cs.DC`, `cs.SE` | Candidates only; no category selected here |
 | Title / abstract | v0.5 title and abstract exist | Final human approval pending |
 | License | Pending arXiv distribution-license decision | User decision required |
-| Export format | Markdown draft exists; render/export readiness and export-route dry run completed | PDF/LaTeX/Markdown export package pending |
-| Source package | Text-only export manifest and route recommendation exist | Prepare final package only after user approvals |
+| Export format | Markdown draft exists; render/export readiness, export-route dry run, and local tooling plan completed | PDF/LaTeX/Markdown export package pending |
+| Source package | Text-only export manifest, route recommendation, command plan, and hygiene checklist exist | Prepare final package only after user approvals |
 | Figures/tables/algorithm assets | Inserted in manuscript v0.5 as Markdown/Mermaid/text assets | Render/conversion, numbering, and export treatment pending |
 | Review/survey/position framing | Avoided | Preserve original systems/evaluation framing |
 | Final human review | Pending | Required before any submission action |
@@ -92,6 +92,16 @@ The export-route dry run and recommendation now exist:
 - `docs/paper/kora-first-paper-arxiv-export-route-recommendation-v0-1.md`
 
 Pandoc is available and successfully generated LaTeX and HTML dry-run outputs under `/tmp/kora-paper-export-dry-run`. Direct PDF generation is blocked locally because no LaTeX engine is installed. Mermaid conversion is blocked locally because no Mermaid CLI is installed. The recommended route is Pandoc-to-LaTeX as a starting point, followed by manual source-package cleanup for diagrams, wide tables, and bibliography formatting.
+
+## Local Export Tooling Plan Status
+
+The local export tooling plan, dry-build command plan, and source-package hygiene checklist now exist:
+
+- `docs/paper/kora-first-paper-local-export-tooling-setup-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-dry-build-command-plan-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-source-package-hygiene-v0-1.md`
+
+No tools were installed automatically. The next practical step is user-approved installation or selection of a LaTeX/PDF engine and Mermaid handling path, followed by a `/tmp` dry build.
 
 ## Missing User Approvals
 

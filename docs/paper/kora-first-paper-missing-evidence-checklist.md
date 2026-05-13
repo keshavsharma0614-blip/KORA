@@ -124,6 +124,8 @@ Citation style decision:
 - No dedicated paper export pipeline has been found; final PDF/source-package generation remains pending.
 - arXiv export route dry-run report and recommendation have been created.
 - Pandoc-to-LaTeX is feasible as a starting route, but LaTeX/PDF tooling, Mermaid conversion, table layout, final bibliography formatting, and human approval remain pending.
+- Local export tooling setup guide, dry-build command plan, and source-package hygiene checklist have been created.
+- No tools were installed automatically and no full dry build was attempted because required export tools remain missing locally.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 

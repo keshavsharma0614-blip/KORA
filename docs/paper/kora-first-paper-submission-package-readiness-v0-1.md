@@ -101,3 +101,13 @@ No dedicated paper export pipeline was found in the repository. No PDF, rendered
 The export route dry run is recorded in `docs/paper/kora-first-paper-arxiv-export-route-dry-run-v0-1.md`, with the recommendation recorded in `docs/paper/kora-first-paper-arxiv-export-route-recommendation-v0-1.md`.
 
 Pandoc can produce a LaTeX starting point from manuscript v0.5, but direct PDF generation is blocked locally by missing LaTeX tooling and Mermaid conversion is blocked locally by missing Mermaid CLI tooling. Generated dry-run outputs were kept under `/tmp/kora-paper-export-dry-run` and were not committed.
+
+## Local Export Tooling and Hygiene Status
+
+Local export tooling setup guidance, a dry-build command plan, and a source-package hygiene checklist now exist:
+
+- `docs/paper/kora-first-paper-local-export-tooling-setup-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-dry-build-command-plan-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-source-package-hygiene-v0-1.md`
+
+No tools were installed, no full dry build was attempted, and no generated PDF/source package/binary output was committed.
