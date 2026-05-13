@@ -51,6 +51,16 @@ The local tooling plan and command plan now exist:
 
 No tools were installed automatically. A full dry build was not attempted because a LaTeX engine and Mermaid CLI are still missing locally.
 
+## Installed-Tools Dry Build Result
+
+The installed-tools dry build result now exists:
+
+- `docs/paper/kora-first-paper-arxiv-dry-build-result-v0-1.md`
+
+Using Tectonic 0.16.9 and Mermaid CLI 11.14.0, a `/tmp` dry build successfully generated rendered figure PDFs, LaTeX source, and a PDF after setting Mermaid CLI to use the locally installed browser. The result remains a dry build only: no generated PDFs, rendered figures, source packages, binary outputs, or raw benchmark artifacts were committed.
+
+Remaining route work is layout cleanup, final bibliography integration, source-package hygiene review, category/license approval, and final human review.
+
 ## BibTeX Handling
 
 The export route should use the conservative bibliography subset already aligned with manuscript v0.5. Full BibTeX remains incomplete, and deferred or still-not-eligible records should not be introduced during export cleanup.

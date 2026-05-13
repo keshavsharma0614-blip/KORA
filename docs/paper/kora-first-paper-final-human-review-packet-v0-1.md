@@ -61,6 +61,8 @@ This packet lists the human decisions still required before any submission-ready
 - Confirm whether the local export environment should use `pdflatex`, `xelatex`, `tectonic`, or another approved PDF generation route.
 - Approve or reject the local tooling setup commands before any tool installation.
 - Review the arXiv source package hygiene checklist before any source package is assembled or uploaded.
+- Review the installed-tools dry-build PDF and source-package folder under `/tmp` before approving any final export route.
+- Decide whether the Tectonic layout warnings require manuscript/table cleanup before final package assembly.
 
 ## Venue and Export Decisions
 

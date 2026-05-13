@@ -103,6 +103,14 @@ The local export tooling plan, dry-build command plan, and source-package hygien
 
 No tools were installed automatically. The next practical step is user-approved installation or selection of a LaTeX/PDF engine and Mermaid handling path, followed by a `/tmp` dry build.
 
+## Installed-Tools Dry Build Status
+
+The installed-tools dry-build result now exists:
+
+- `docs/paper/kora-first-paper-arxiv-dry-build-result-v0-1.md`
+
+With Tectonic and Mermaid CLI installed, a `/tmp` dry build generated rendered figure PDFs, LaTeX source, and a PDF after configuring Mermaid CLI to use the locally installed browser. No generated output was committed. The dry build still reports layout warnings, preliminary bibliography handling, and remaining source-package hygiene work, so the package remains not submission-ready.
+
 ## Missing User Approvals
 
 - Final title and abstract approval.
