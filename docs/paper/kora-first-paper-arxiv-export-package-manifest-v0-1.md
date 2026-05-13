@@ -20,6 +20,7 @@ This text-only manifest lists candidate source files and pending package items f
 | Local export tooling setup | `docs/paper/kora-first-paper-local-export-tooling-setup-v0-1.md` | User-run setup commands documented |
 | Dry-build command plan | `docs/paper/kora-first-paper-arxiv-dry-build-command-plan-v0-1.md` | Commands documented; full dry build pending tools |
 | Installed-tools dry-build result | `docs/paper/kora-first-paper-arxiv-dry-build-result-v0-1.md` | `/tmp` dry build completed; generated outputs not committed |
+| Dry-build output review | `docs/paper/kora-first-paper-arxiv-dry-build-output-review-v0-1.md` | `/tmp` output and source-package hygiene review completed |
 | Source package hygiene checklist | `docs/paper/kora-first-paper-arxiv-source-package-hygiene-v0-1.md` | Package hygiene checklist created |
 | Figure/table/algorithm drafts | `docs/paper/kora-first-paper-figure-table-algorithm-drafts-v0-1.md` | Source for inserted text assets |
 | Figure/table/algorithm plan | `docs/paper/kora-first-paper-figure-table-algorithm-plan-v0-1.md` | Planning/status source |
@@ -59,6 +60,7 @@ This text-only manifest lists candidate source files and pending package items f
 - Finalize bibliography and citation formatting.
 - Review table widths and caption placement for PDF layout.
 - Resolve Tectonic layout warnings before final package approval.
+- Review generated PDF and source-package folder before final package approval.
 - Capture final clean reproduction transcript.
 - Complete final human review.
 

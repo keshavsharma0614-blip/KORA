@@ -128,6 +128,8 @@ Citation style decision:
 - No tools were installed automatically and no full dry build was attempted because required export tools remain missing locally.
 - Installed-tools arXiv dry-build result has been created.
 - A `/tmp` PDF dry build now passes with Mermaid CLI and Tectonic, but layout warnings, bibliography integration, source-package hygiene review, and final human approval remain pending.
+- Dry-build output review and source-package hygiene review have been created for the current `/tmp` outputs.
+- Generated PDF visual review, layout cleanup, final bibliography integration, and final source-package hygiene review remain pending.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 

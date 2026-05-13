@@ -63,6 +63,7 @@ This packet lists the human decisions still required before any submission-ready
 - Review the arXiv source package hygiene checklist before any source package is assembled or uploaded.
 - Review the installed-tools dry-build PDF and source-package folder under `/tmp` before approving any final export route.
 - Decide whether the Tectonic layout warnings require manuscript/table cleanup before final package assembly.
+- Review the dry-build output review report and decide whether the generated figure PDFs, repository-document links, and preliminary bibliography handling are acceptable for the final package path.
 
 ## Venue and Export Decisions
 

@@ -131,6 +131,14 @@ These warnings do not block a dry build, but they do block treating the package 
 - Final source-package hygiene review.
 - Final human review of the exact PDF and source package.
 
+## Output Review Follow-Up
+
+The dry-build output review now exists:
+
+- `docs/paper/kora-first-paper-arxiv-dry-build-output-review-v0-1.md`
+
+The review confirms that the `/tmp` PDF, rendered figure PDFs, generated LaTeX, and cleaned source-package folder exist. It also records layout warnings, source-package hygiene findings, and remaining blockers before final package approval.
+
 ## Claim and Submission Status
 
 This dry build does not add evidence for production cost reduction, real API-cost reduction, production benchmark proof, broad workload superiority, energy reduction evidence, formal artifact approval, or paper submission readiness.
