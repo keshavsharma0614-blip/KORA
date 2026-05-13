@@ -61,3 +61,15 @@ Status:
 - No new references were added.
 - No BibTeX was generated.
 - BibTeX remains pending until ready records are selected from verified normalized fields.
+
+## Final Bibliography and Claim Audit Status
+
+[KORA First Paper Final Bibliography and Claim Audit v0.1](kora-first-paper-final-bibliography-claim-audit-v0-1.md) records bibliography readiness and claim-safety status after the expanded preliminary BibTeX candidate subset.
+
+Status:
+
+- Preliminary BibTeX includes `[R01]`, `[R03]`, `[R04]`, `[R05]`, `[R06]`, `[R07]`, `[R08]`, `[R09]`, `[R10]`, `[R11]`, `[R12]`, `[R13]`, `[R14]`, `[R16]`, `[R21]`, and `[R24]`.
+- Deferred records `[R17]` and `[R18]` remain excluded.
+- Still-not-eligible records `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` remain excluded.
+- Claim support remains limited to documented benchmark and local/no-network validation evidence.
+- Full BibTeX remains incomplete, and the paper remains not submission-ready.

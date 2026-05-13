@@ -108,8 +108,8 @@ Citation style decision:
 - Final blocked metadata review v0.1 has been created across the remaining blocked records.
 - Expanded BibTeX candidate audit v0.1 has been created for `[R03]`, `[R04]`, `[R05]`, `[R07]`, `[R09]`, `[R10]`, `[R12]`, `[R13]`, and `[R16]`.
 - Deferred records `[R17]` and `[R18]` and still-not-eligible records `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` remain excluded from BibTeX.
-- Expanded BibTeX remains preliminary because final bibliography / claim audit is still pending.
-- Final claim/citation audit is still pending.
+- Final bibliography and claim audit v0.1 has been created.
+- Expanded BibTeX remains preliminary, and full BibTeX is still incomplete until deferred and still-not-eligible records are resolved.
 - Paper is still not submission-ready.
 
 ## Follow-Up Papers / Technical Reports

@@ -282,6 +282,18 @@ Status:
 - No manuscript changes were made.
 - The paper remains not submission-ready.
 
+## Final Bibliography and Claim Audit
+
+[KORA First Paper Final Bibliography and Claim Audit v0.1](kora-first-paper-final-bibliography-claim-audit-v0-1.md) has been created.
+
+Status:
+
+- Ready and expanded preliminary BibTeX records are identified.
+- Deferred and still-not-eligible records remain excluded from preliminary BibTeX.
+- Remaining metadata blockers and claim boundaries are documented.
+- Full BibTeX remains incomplete.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.
