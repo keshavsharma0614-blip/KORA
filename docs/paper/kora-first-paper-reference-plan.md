@@ -382,6 +382,17 @@ Status:
 - No manuscript changes were made.
 - Final bibliography / claim audit remains the next bibliography step.
 
+## Final Bibliography and Claim Audit Status
+
+[KORA First Paper Final Bibliography and Claim Audit v0.1](kora-first-paper-final-bibliography-claim-audit-v0-1.md) has been created.
+
+Status:
+
+- Preliminary BibTeX includes the ready subset and expanded candidate subset only.
+- Deferred and still-not-eligible records remain excluded.
+- Remaining blockers are author-list, split, venue/status, target-venue, final formatting, and final claim-review work.
+- The paper remains not submission-ready.
+
 ## Next Verification Procedure
 
 1. Search official sources first.
