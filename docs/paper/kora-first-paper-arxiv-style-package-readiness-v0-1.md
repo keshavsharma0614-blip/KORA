@@ -111,6 +111,14 @@ The installed-tools dry-build result now exists:
 
 With Tectonic and Mermaid CLI installed, a `/tmp` dry build generated rendered figure PDFs, LaTeX source, and a PDF after configuring Mermaid CLI to use the locally installed browser. No generated output was committed. The dry build still reports layout warnings, preliminary bibliography handling, and remaining source-package hygiene work, so the package remains not submission-ready.
 
+## Dry Build Output Review Status
+
+The dry-build output review now exists:
+
+- `docs/paper/kora-first-paper-arxiv-dry-build-output-review-v0-1.md`
+
+The review confirms the `/tmp` output inventory and cleaned source-package folder. It records remaining layout, bibliography, link, and final human-review blockers. No generated PDFs, rendered figures, source packages, or binary outputs were committed.
+
 ## Missing User Approvals
 
 - Final title and abstract approval.

@@ -89,4 +89,4 @@ Before upload, confirm:
 
 ## Status
 
-This is a hygiene checklist only. No source package was created, no upload was performed, and the paper remains not submission-ready.
+The dry-build source-package hygiene review is recorded in `docs/paper/kora-first-paper-arxiv-dry-build-output-review-v0-1.md`. The reviewed `/tmp` folder contains only generated LaTeX, rendered figure PDFs, and the preliminary bibliography draft. Final package hygiene review remains pending for the exact final source package. No upload was performed, and the paper remains not submission-ready.
