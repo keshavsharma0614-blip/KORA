@@ -2,7 +2,11 @@
 
 ## Status
 
-KORA Studio is a future planning area. It is not implemented yet.
+KORA Studio is an early local implementation and planning area. It is not a complete product, hosted service, or production-ready workflow yet.
+
+## Planning Scope
+
+The Studio documents describe candidate UI, workflow, fixture, and report-viewer ideas until implementation work lands in code. Current KORA validation remains CLI-based through local examples and generated validation reports. Do not describe Studio behavior as shipped unless the corresponding runtime, CLI, or server code exists in this repository.
 
 ## Purpose
 
