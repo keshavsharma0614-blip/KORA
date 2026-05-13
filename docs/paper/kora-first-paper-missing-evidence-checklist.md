@@ -126,6 +126,8 @@ Citation style decision:
 - Pandoc-to-LaTeX is feasible as a starting route, but LaTeX/PDF tooling, Mermaid conversion, table layout, final bibliography formatting, and human approval remain pending.
 - Local export tooling setup guide, dry-build command plan, and source-package hygiene checklist have been created.
 - No tools were installed automatically and no full dry build was attempted because required export tools remain missing locally.
+- Installed-tools arXiv dry-build result has been created.
+- A `/tmp` PDF dry build now passes with Mermaid CLI and Tectonic, but layout warnings, bibliography integration, source-package hygiene review, and final human approval remain pending.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 

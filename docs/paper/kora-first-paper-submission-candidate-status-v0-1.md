@@ -124,6 +124,14 @@ The local export tooling setup guide, dry-build command plan, and source-package
 
 No system packages were installed automatically. A full `/tmp` dry build was not attempted because the required LaTeX/PDF and Mermaid rendering tools are still missing locally.
 
+## Installed-Tools Dry Build
+
+The installed-tools dry-build result now exists:
+
+- `docs/paper/kora-first-paper-arxiv-dry-build-result-v0-1.md`
+
+The `/tmp` dry build generated rendered Mermaid figure PDFs, LaTeX source, and a PDF using Mermaid CLI with a local browser path and Tectonic. Generated outputs stayed under `/tmp` and were not committed. Final layout cleanup, bibliography integration, source-package hygiene, and human review remain pending.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -137,4 +145,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final export tooling approval, asset rendering/conversion, table layout, bibliography formatting, source-package generation, and human review remain pending. The paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, installed-tools dry build has passed as a local `/tmp` dry run, and final layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The paper remains not submission-ready.

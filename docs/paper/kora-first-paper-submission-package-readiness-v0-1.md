@@ -111,3 +111,9 @@ Local export tooling setup guidance, a dry-build command plan, and a source-pack
 - `docs/paper/kora-first-paper-arxiv-source-package-hygiene-v0-1.md`
 
 No tools were installed, no full dry build was attempted, and no generated PDF/source package/binary output was committed.
+
+## Installed-Tools Dry Build Status
+
+The installed-tools dry build is recorded in `docs/paper/kora-first-paper-arxiv-dry-build-result-v0-1.md`.
+
+The `/tmp` dry build generated rendered figure PDFs, LaTeX source, and a PDF using Mermaid CLI with a local browser path and Tectonic. No generated PDF, rendered figure, source package, binary output, or raw benchmark artifact was committed. Layout warnings, bibliography integration, source-package hygiene, and final human review remain pending.
