@@ -28,14 +28,28 @@ This route can support human review of content and structure, but it should not 
 
 1. Confirm final arXiv category and category compatibility.
 2. Confirm arXiv license.
-3. Choose Mermaid handling:
+3. Approve local export tooling setup:
+   - recommended minimal path: `brew install tectonic`,
+   - Mermaid rendering path if needed: `npm install -g @mermaid-js/mermaid-cli`,
+   - fallback TeX options: MacTeX or BasicTeX.
+4. Choose Mermaid handling:
    - render Figure 1 and Figure 2 to approved figure assets,
    - convert diagrams to LaTeX/TikZ manually, or
    - replace diagrams with ASCII/text diagrams if source simplicity is preferred.
-4. Convert wide tables to layout-safe LaTeX tables or simplified text tables.
-5. Convert the preliminary BibTeX subset into the final package bibliography format.
-6. Generate a clean PDF/source package in a temporary or package-specific area.
-7. Run final human review before any upload.
+5. Convert wide tables to layout-safe LaTeX tables or simplified text tables.
+6. Convert the preliminary BibTeX subset into the final package bibliography format.
+7. Generate a clean PDF/source package in a temporary or package-specific area.
+8. Run final human review before any upload.
+
+## Local Tooling Plan
+
+The local tooling plan and command plan now exist:
+
+- `docs/paper/kora-first-paper-local-export-tooling-setup-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-dry-build-command-plan-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-source-package-hygiene-v0-1.md`
+
+No tools were installed automatically. A full dry build was not attempted because a LaTeX engine and Mermaid CLI are still missing locally.
 
 ## BibTeX Handling
 

@@ -59,6 +59,8 @@ This packet lists the human decisions still required before any submission-ready
 - Decide whether Mermaid diagrams should be rendered to image files, converted to another source format, or replaced with text/ASCII diagrams for final export.
 - Review the arXiv export route dry-run report and approve or reject the recommended Pandoc-to-LaTeX plus manual cleanup route.
 - Confirm whether the local export environment should use `pdflatex`, `xelatex`, `tectonic`, or another approved PDF generation route.
+- Approve or reject the local tooling setup commands before any tool installation.
+- Review the arXiv source package hygiene checklist before any source package is assembled or uploaded.
 
 ## Venue and Export Decisions
 

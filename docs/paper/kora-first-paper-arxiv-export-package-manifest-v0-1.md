@@ -17,6 +17,9 @@ This text-only manifest lists candidate source files and pending package items f
 | Render/export readiness report | `docs/paper/kora-first-paper-v0-5-render-export-readiness-v0-1.md` | Created in this pass |
 | Export route dry-run report | `docs/paper/kora-first-paper-arxiv-export-route-dry-run-v0-1.md` | Dry run completed with `/tmp` outputs only |
 | Export route recommendation | `docs/paper/kora-first-paper-arxiv-export-route-recommendation-v0-1.md` | Recommends Pandoc-to-LaTeX starting route with manual cleanup |
+| Local export tooling setup | `docs/paper/kora-first-paper-local-export-tooling-setup-v0-1.md` | User-run setup commands documented |
+| Dry-build command plan | `docs/paper/kora-first-paper-arxiv-dry-build-command-plan-v0-1.md` | Commands documented; full dry build pending tools |
+| Source package hygiene checklist | `docs/paper/kora-first-paper-arxiv-source-package-hygiene-v0-1.md` | Package hygiene checklist created |
 | Figure/table/algorithm drafts | `docs/paper/kora-first-paper-figure-table-algorithm-drafts-v0-1.md` | Source for inserted text assets |
 | Figure/table/algorithm plan | `docs/paper/kora-first-paper-figure-table-algorithm-plan-v0-1.md` | Planning/status source |
 | Reproduction checklist | `docs/paper/kora-first-paper-reproduction-transcript-checklist-v0-1.md` | Checklist exists; final transcript pending |

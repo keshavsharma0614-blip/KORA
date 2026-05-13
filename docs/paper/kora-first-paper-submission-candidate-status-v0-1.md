@@ -114,6 +114,16 @@ The export-route dry run and recommendation now exist:
 
 Pandoc-generated LaTeX and HTML outputs were tested under `/tmp/kora-paper-export-dry-run` only. No PDF was generated because a LaTeX engine is not installed locally. No generated outputs or binary figures were committed. The recommended route is a Pandoc-to-LaTeX starting export followed by manual cleanup for Mermaid diagrams, wide tables, and bibliography formatting.
 
+## Local Export Tooling Plan
+
+The local export tooling setup guide, dry-build command plan, and source-package hygiene checklist now exist:
+
+- `docs/paper/kora-first-paper-local-export-tooling-setup-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-dry-build-command-plan-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-source-package-hygiene-v0-1.md`
+
+No system packages were installed automatically. A full `/tmp` dry build was not attempted because the required LaTeX/PDF and Mermaid rendering tools are still missing locally.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -127,4 +137,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final export route approval, asset rendering/conversion, table layout, bibliography formatting, and human review remain pending. The paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final export tooling approval, asset rendering/conversion, table layout, bibliography formatting, source-package generation, and human review remain pending. The paper remains not submission-ready.
