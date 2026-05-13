@@ -55,6 +55,17 @@ No production, API-cost, energy, broad superiority, formal approval, or submissi
 
 No target venue was selected in this pass. The draft remains venue-neutral. Export/package preparation should wait until bibliography scope and target format are stable.
 
+## Submission Package Packet
+
+The venue-neutral submission package readiness packet now exists:
+
+- `docs/paper/kora-first-paper-submission-package-readiness-v0-1.md`
+- `docs/paper/kora-first-paper-final-human-review-packet-v0-1.md`
+- `docs/paper/kora-first-paper-reproduction-transcript-checklist-v0-1.md`
+- `docs/paper/kora-first-paper-artifact-package-inventory-v0-1.md`
+
+These files organize package blockers, human review decisions, reproduction transcript expectations, and artifact inventory. They do not select a venue, finalize an export package, or mark the paper as submission-ready.
+
 ## Status
 
 The manuscript has advanced to v0.4 submission-candidate draft status. Full BibTeX remains incomplete, and the paper remains not submission-ready.

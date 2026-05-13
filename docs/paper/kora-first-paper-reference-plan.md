@@ -415,6 +415,18 @@ Status:
 - The bounded 80% deterministic-heavy benchmark claim remains unchanged.
 - Full BibTeX remains incomplete, and the paper remains not submission-ready.
 
+## Submission Package Readiness Packet Status
+
+[KORA First Paper Submission Package Readiness v0.1](kora-first-paper-submission-package-readiness-v0-1.md), [KORA First Paper Final Human Review Packet v0.1](kora-first-paper-final-human-review-packet-v0-1.md), [KORA First Paper Reproduction Transcript Checklist v0.1](kora-first-paper-reproduction-transcript-checklist-v0-1.md), and [KORA First Paper Artifact Package Inventory v0.1](kora-first-paper-artifact-package-inventory-v0-1.md) have been created.
+
+Status:
+
+- Venue-neutral package blockers are now organized by component, severity, and decision owner.
+- Final human review decisions are listed but not answered.
+- Reproduction transcript commands are drafted from existing repository-documented commands only.
+- Artifact package inventory identifies tracked materials and deliberately excluded raw/private artifacts.
+- Full BibTeX remains incomplete, venue/export decisions remain user-owned, and the paper remains not submission-ready.
+
 ## Next Verification Procedure
 
 1. Search official sources first.
