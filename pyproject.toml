@@ -28,7 +28,6 @@ classifiers = [
 dependencies = [
   "pydantic",
   "jsonschema",
-  "requests",
 ]
 
 [project.urls]
@@ -40,6 +39,9 @@ Issues = "https://github.com/Krako-Labs/KORA/issues"
 kora = "kora.cli:main"
 
 [project.optional-dependencies]
+openai = [
+  "requests",
+]
 dev = [
   "pytest",
 ]

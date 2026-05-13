@@ -9,8 +9,6 @@ import time
 from pathlib import Path
 from typing import Any
 
-import requests
-
 from .base import BaseAdapter
 
 
@@ -77,6 +75,17 @@ class OpenAIAdapter(BaseAdapter):
             return {
                 "ok": False,
                 "error": "OPENAI_API_KEY is missing",
+                "output": {},
+                "usage": {"time_ms": 0, "tokens_in": 0, "tokens_out": 0},
+                "meta": {"adapter": "openai", "model": self.model},
+            }
+
+        try:
+            import requests
+        except ImportError:
+            return {
+                "ok": False,
+                "error": "OpenAI adapter requires the optional dependency 'requests'. Install KORA with the openai extra.",
                 "output": {},
                 "usage": {"time_ms": 0, "tokens_in": 0, "tokens_out": 0},
                 "meta": {"adapter": "openai", "model": self.model},
