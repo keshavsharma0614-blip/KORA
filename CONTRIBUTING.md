@@ -46,6 +46,18 @@ source .venv/bin/activate
 python3 -m pip install -e ".[dev]"
 ```
 
+If editable install reports that `setup.py`, `setup.cfg`, or install metadata is missing, verify that your checkout is current:
+
+```bash
+git remote -v
+git fetch origin
+git checkout main
+git pull origin main
+ls pyproject.toml
+```
+
+If `pyproject.toml` is still missing after pulling, re-clone from `https://github.com/Krako-Labs/KORA.git`.
+
 The editable install should install KORA and its development dependencies into the virtual environment.
 
 ## First verification commands
