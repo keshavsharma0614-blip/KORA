@@ -157,6 +157,14 @@ The image-inserted Word draft is superseded for review because human review foun
 
 Figure 1 and Figure 2 are placeholders only. Current figure rendering should not be treated as publication-ready. Final publication-quality figures must be rebuilt separately after manuscript-body review is complete and the body text is stable. No generated DOCX, PDF, image, source package, binary output, or local working Markdown was committed.
 
+## Word-First Text Review
+
+The Word-first manuscript text review note now exists:
+
+- `docs/paper/kora-first-paper-word-first-text-review-v0-1.md`
+
+The review covers abstract clarity, introduction/problem framing, KORA execution-control positioning, benchmark/evidence claim safety, method/system explanation clarity, related work and citation readiness, limitations/non-claims, submission blockers, and recommended next edits before final figure rebuild. Figure quality is out of scope for this text review because Figure 1 and Figure 2 remain placeholders only.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -170,4 +178,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. PDF/arXiv export remains paused until both manuscript text and final figures are ready. The paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The text review note confirms that the current manuscript text is coherent and claim-safe for continued Word-first human review, while recommended cleanup and final approval remain pending. PDF/arXiv export remains paused until both manuscript text and final figures are ready. The paper remains not submission-ready.
