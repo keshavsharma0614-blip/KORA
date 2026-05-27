@@ -4,6 +4,8 @@
 
 This is a planning architecture. The full KORA Studio runtime is not implemented yet. An initial local server skeleton exists for preview/status endpoints only.
 
+Harness requirements for measurable, claim-safe Studio execution paths are defined in the [KORA Studio harness engineering specification](kora-studio-harness-engineering-spec.md). The harness spec should guide Execution Viewer events, model capability estimates, Standard Mode vs KORA Boost comparisons, and local report export before broader product UI claims expand.
+
 ## Core Positioning
 
 KORA Studio turns a local machine into an AI Task Execution Router workspace. It routes each task to the right path: CPU deterministic fast path, structured lookup, local model, or larger execution path only when needed.

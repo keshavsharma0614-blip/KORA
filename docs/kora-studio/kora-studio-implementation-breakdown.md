@@ -38,12 +38,39 @@ Tasks:
 Deliverables:
 
 - `docs/kora-studio/fixtures-plan.md`
+- `docs/kora-studio/kora-studio-harness-engineering-spec.md`
 - `docs/kora-studio/report-viewer-requirements.md`
 - `docs/kora-studio/dashboard-counter-schema.md`
 - `docs/kora-studio/fixture-schema-reference.md`
 - `docs/kora-studio/fixtures/`
 
 No code required.
+
+## Phase 0.5 — Harness Engineering Specification
+
+Status: Specification only. This phase does not implement new runtime behavior, provider calls, model downloads, or external network behavior.
+
+Goal: Define the measurement and validation contract before expanding product UI claims.
+
+Before expanding product UI claims, Studio harness engineering must define how system profiling, route events, metrics, adapters, and local reports are captured and validated.
+
+Scope:
+
+- system profile detection boundary
+- model capability estimate boundary
+- deterministic route event capture
+- local model and adapter state event capture
+- SSE/event replay schema
+- Standard Mode vs KORA Boost comparison metrics
+- local report export boundary
+- provider/cloud disabled-by-default checks
+
+Acceptance criteria:
+
+- harness requirements are public-safe and claim-safe
+- event schema and metrics are documented before UI expansion depends on them
+- unsupported larger-model, production cost, real API-cost, and energy claims remain out of scope
+- no provider/cloud route is enabled by default
 
 ## Phase 1 — CLI Launch Skeleton
 

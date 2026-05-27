@@ -141,6 +141,7 @@ The page shows local status cards, endpoint references, a static workflow previe
 ## Implementation Planning
 
 - [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md)
+- [Harness engineering specification](kora-studio-harness-engineering-spec.md)
 - [Report viewer requirements](report-viewer-requirements.md)
 - [Dashboard counter schema](dashboard-counter-schema.md)
 - [Fixtures plan](fixtures-plan.md)
