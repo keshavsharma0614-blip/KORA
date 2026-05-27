@@ -10,7 +10,9 @@ The Studio documents describe candidate UI, workflow, fixture, and report-viewer
 
 ## Purpose
 
-KORA Studio is intended to become a local-first AI workspace for Mac and Linux that helps users run local LLM workflows, compare Standard Mode and KORA Boost, and inspect KORA execution paths, model-call counters, and validation reports.
+KORA Studio is intended to become a local-first AI Task Execution Router workspace for Mac and Linux. It should help users run local AI workflows, not just local models, by routing each task to the right execution path: CPU deterministic fast path, structured lookup, local model, or larger execution path only when needed.
+
+KORA Studio is not an LM Studio replacement and should not be framed as merely a local chatbot. LM Studio helps users run local models. KORA Studio should help users route local AI workflows while keeping the model as one execution path, not the default path.
 
 ## Core User Benefit
 
@@ -20,6 +22,10 @@ Less waiting. Better answers. No hardware upgrade.
 
 KORA Boost handles simple work through fast paths and saves model power for the tasks that need it.
 
+Standard Mode sends every step to the model. KORA Boost routes deterministic and structured tasks to CPU/local fast paths first. The model becomes one execution path, not the default path.
+
+KORA does not make large models smaller and does not remove RAM, VRAM, unified-memory, or model-loading requirements. Larger-model workflow feasibility depends on the user's actual system memory, runtime support, quantization, and validation. KORA can make larger-model workflows lighter by sending less work to the model.
+
 ## Initial Scope
 
 The first MVP should focus on:
@@ -27,6 +33,8 @@ The first MVP should focus on:
 - Mac and Linux first
 - CLI launch
 - local browser UI
+- system profile
+- model capability view
 - local runtime detection
 - Ollama-first model selection
 - Standard Mode vs KORA Boost
@@ -46,6 +54,9 @@ KORA Studio v0.1 planning is:
 - not an energy dashboard yet
 - not a real provider billing dashboard yet
 - not a claim that KORA Studio is implemented today
+- not an LM Studio replacement
+- not a claim that KORA removes model memory requirements
+- not a claim that unsupported larger models physically run on local hardware
 
 ## Source Artifacts
 
@@ -74,6 +85,21 @@ python3 -m kora studio
 ```
 
 The command prints the current KORA Studio status and links to the Studio docs and fixtures. It does not start a server, open a browser, call a model runtime, call a provider, or require API keys. The next implementation phases are tracked in the [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md).
+
+Planned default launch behavior:
+
+- `kora studio` starts the localhost-only Studio server
+- opens the default browser automatically
+- keeps provider calls disabled by default
+- keeps cloud sync disabled by default
+- requires no API key for default local mode
+- if browser launch fails, prints the local URL and keeps serving locally
+
+Planned developer options:
+
+- `kora studio --no-browser`
+- `kora studio --port 8765`
+- optional future browser selector, such as `--browser chrome`
 
 ## Local Server Skeleton
 
@@ -110,7 +136,7 @@ Open locally:
 http://127.0.0.1:8765/
 ```
 
-The page shows local status cards, endpoint references, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, does not auto-launch a browser, does not call Ollama or providers, does not connect a model/runtime, does not require API keys, and does not use a frontend framework yet.
+The page shows local status cards, endpoint references, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, does not auto-launch a browser, does not call Ollama or providers, does not connect a model/runtime, does not require API keys, and does not use a frontend framework yet. The preview should use AI Task Execution Router language: system profile, model capability, KORA Boost explanation, execution path UI, Standard Mode vs KORA Boost comparison, and local-only/provider-disabled status.
 
 ## Implementation Planning
 

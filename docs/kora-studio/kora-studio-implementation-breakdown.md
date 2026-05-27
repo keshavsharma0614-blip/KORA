@@ -6,13 +6,17 @@ This document breaks KORA Studio v0.1 planning into implementation phases. KORA 
 
 ## Implementation Principle
 
-KORA Studio should start as a local-first, single-user, no-cloud viewer/workspace for KORA validation artifacts and local model workflows.
+KORA Studio should start as a local-first, single-user, no-cloud AI Task Execution Router workspace for KORA validation artifacts, local model workflows, and task-path visibility.
+
+KORA Studio should not be framed as an LM Studio replacement or a generic local chatbot. It should help users run local AI workflows by routing each task to the right execution path: deterministic CPU fast path, structured lookup, local model, or larger execution path only when needed.
 
 - Mac/Linux first
 - CLI launch first
 - browser UI first
 - local-only storage first
 - Ollama-first runtime direction
+- system profile and model capability narrative
+- provider/cloud/distributed routes disabled by default
 - no provider billing dashboard in v0.1
 - no API-cost or energy claims
 
@@ -28,6 +32,8 @@ Tasks:
 - define project/chat mock data
 - define KORA Boost copy placement
 - define no-cloud/no-API-key onboarding copy
+- define AI Task Execution Router onboarding copy
+- define system profile, model capability, and execution path UI copy
 
 Deliverables:
 
@@ -43,15 +49,21 @@ No code required.
 
 Status: Initial CLI skeleton is available through `python3 -m kora studio`. It prints planning/preview status only; it does not start a server, open a browser, call a model runtime, or call a provider.
 
-Goal: Add a `kora studio` command that starts a placeholder local server or prints clear next-step status.
+Goal: Evolve `kora studio` into the default local launch command for the Studio workspace.
 
 Scope:
 
 - command registration
 - local-only status output
-- no browser launch required initially if too early
+- default behavior eventually starts the localhost-only Studio server
+- default behavior eventually opens the user's default browser automatically
+- fallback behavior prints the local URL and keeps serving locally if browser launch fails
+- developer mode supports `--no-browser` and `--port 8765`
+- optional future browser selector such as `--browser chrome`
 - no real model runtime calls
 - no provider calls
+- no cloud sync by default
+- no API key required for default local mode
 
 Acceptance criteria:
 
@@ -89,6 +101,8 @@ Goal: Create a static UI prototype for KORA Studio.
 Screens:
 
 - Welcome / Setup
+- System Profile
+- Model Capability
 - Model Selection
 - Project Chat Workspace
 - Execution Trace Panel
@@ -97,6 +111,10 @@ Screens:
 Scope:
 
 - static assets or minimal frontend structure
+- system profile copy that explains what the computer can physically run
+- model capability copy that separates physically runnable local models, larger-model workflow feasibility, and optional external/provider/distributed routes
+- KORA Boost copy explaining that deterministic and structured tasks route to CPU/local fast paths first
+- execution path UI copy for deterministic code, structured lookup, local model, larger model, and disabled-by-default external/provider/distributed route
 - no runtime calls
 - no model downloads
 - no account system
@@ -193,11 +211,15 @@ Scope:
 - system capability heuristic later
 - Standard Mode recommendation
 - KORA Boost workflow recommendation
+- explain that the user's machine may be comfortable with a specific local model tier
+- explain that KORA does not make large models smaller or remove model memory requirements
+- explain that larger-model workflow feasibility depends on memory, runtime support, quantization, and validation
 
 Acceptance criteria:
 
 - does not claim impossible model support
 - no bigger-model physical execution claim
+- no all-open-source-LLM support claim
 - uses benefit copy safely
 
 ## Phase 9 — Local Chat Integration
@@ -258,10 +280,15 @@ These are future issue candidates. Do not create the issues from this document w
 ## Claim-Safety Rules
 
 - do not claim KORA Studio exists until code exists
+- do not claim KORA Studio is an LM Studio replacement
+- do not frame KORA Studio as merely a local chatbot
 - do not claim production cost reduction
 - do not claim real API-cost reduction
 - do not claim energy reduction
 - do not claim larger models physically run unless validated
+- do not claim KORA removes RAM, VRAM, unified-memory, or model-loading requirements
+- do not claim all open-source LLMs are supported
+- keep provider/cloud/distributed execution disabled by default unless explicitly enabled
 - use "Less waiting. Better answers. No hardware upgrade." as product benefit copy
 - use technical explanation after benefit copy
 

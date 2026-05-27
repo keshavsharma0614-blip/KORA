@@ -72,6 +72,7 @@ def render_studio_server_status_text(status: dict[str, Any]) -> str:
         "KORA Studio local server skeleton starting.",
         f"Local URL: http://{status['host']}:{status['port']}/",
         "Server mode: preview/local-only.",
+        "Positioning: AI Task Execution Router workspace for local AI workflows.",
         "Browser launch: not implemented yet.",
         "Provider calls: disabled. No provider calls are made.",
         "Ollama calls: disabled. No Ollama calls are made.",
@@ -264,9 +265,10 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <span class=\"badge\">Preview / Local-only</span>
       </div>
       <h1>KORA Studio</h1>
-      <p class=\"subtitle\">A static prototype for deterministic-first local workflow exploration.</p>
+      <p class=\"subtitle\">A static AI Task Execution Router prototype for deterministic-first local workflow exploration. KORA Studio routes local AI workflows, not just local models.</p>
       <p class=\"boost\">{boost_message}</p>
       <p class=\"technical\">{boost_explanation}</p>
+      <p class=\"technical\">Standard Mode sends every step to the model. KORA Boost routes deterministic and structured tasks to CPU/local fast paths first, so the model becomes one execution path, not the default path.</p>
     </header>
 
     <section aria-label=\"Status Cards\" style=\"margin-top: 18px;\">
@@ -274,7 +276,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <div class=\"grid\">
         <div class=\"status-card card\"><h3>Server</h3><p class=\"status-value\">Server: local</p><p>Bound to the local Studio skeleton.</p></div>
         <div class=\"status-card card\"><h3>Provider Calls</h3><p class=\"status-value disabled\">Provider calls: disabled</p><p>No remote provider requests are made.</p></div>
-        <div class=\"status-card card\"><h3>Model Runtime</h3><p class=\"status-value disabled\">Model/runtime integration: not connected</p><p>Future runtime work is represented only as a placeholder.</p></div>
+        <div class=\"status-card card\"><h3>Model Runtime</h3><p class=\"status-value disabled\">Model/runtime integration: not connected</p><p>Future runtime work must distinguish physically runnable local models from workflow-usable models.</p></div>
         <div class=\"status-card card\"><h3>Browser Launch</h3><p class=\"status-value disabled\">Browser launch: disabled</p><p>The CLI does not open a browser automatically.</p></div>
         <div class=\"status-card card\"><h3>Ollama</h3><p class=\"status-value disabled\">Ollama integration: not connected</p><p>No Ollama detection or model calls happen here.</p></div>
       </div>
@@ -292,9 +294,9 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <section>
         <h2>Workflow Preview</h2>
         <div class=\"workflow\">
-          <div class=\"step\"><p class=\"step-number\">01</p><h3>Request</h3><p>Static sample request enters the Studio skeleton.</p></div>
-          <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic checks</h3><p>Fast-path checks are shown as UI planning only.</p></div>
-          <div class=\"step\"><p class=\"step-number\">03</p><h3>Local status</h3><p>Local server, fixtures, and endpoint status remain visible.</p></div>
+          <div class=\"step\"><p class=\"step-number\">01</p><h3>Request / System Profile</h3><p>Planned: show what this machine can physically run.</p></div>
+          <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic checks / Route Selection</h3><p>Planned: choose deterministic code, structured lookup, local model, or larger execution path only when needed.</p></div>
+          <div class=\"step\"><p class=\"step-number\">03</p><h3>Local status / KORA Boost</h3><p>Planned: route deterministic and structured work to CPU/local fast paths first.</p></div>
           <div class=\"step\"><p class=\"step-number\">04</p><h3>Future runtime integration placeholder</h3><p>Placeholder only; no runtime execution occurs on this page.</p></div>
         </div>
       </section>
@@ -308,6 +310,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <li>No browser launch</li>
           <li>No Ollama integration</li>
           <li>No production/API-cost/energy claims</li>
+          <li>No claim that KORA removes model memory requirements</li>
+          <li>External/provider/distributed routes disabled by default</li>
         </ul>
       </section>
 
@@ -320,7 +324,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       </section>
     </div>
 
-    <p class=\"footer\">Local-only skeleton. Claim-safe local preview; counters and claims remain limited to documented validation artifacts.</p>
+    <p class=\"footer\">Local-only skeleton. Claim-safe AI Task Execution Router preview; KORA does not make large models smaller or remove memory requirements.</p>
   </main>
 </body>
 </html>

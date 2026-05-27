@@ -1,7 +1,9 @@
 # KORA Studio v0 (Mac Demo Scaffold)
 
-KORA Studio v0 is a minimal local Execution Viewer demo for macOS development.
+KORA Studio v0 is a minimal local AI Task Execution Router / Execution Viewer demo for macOS development.
 It includes a small FastAPI backend and a single-screen React UI.
+
+The demo should be read as a local workflow-routing scaffold, not an LM Studio replacement or a generic local chatbot. LM Studio helps users run local models. KORA Studio routes local AI workflows by making the model one execution path, not the default path.
 
 ## What This Demo Shows
 
@@ -12,6 +14,16 @@ It includes a small FastAPI backend and a single-screen React UI.
 - Direct vs KORA comparison view using recent run history (cost/tokens/latency deltas for same prompt)
 - A metrics panel fed by backend demo telemetry (`LLM calls`, `tokens`, `estimated cost`, `stage counts`)
 - A local-only scaffold to iterate before wiring real runtime streaming
+
+## Capability Boundary
+
+- Your machine may be comfortable with a specific local model tier.
+- KORA does not make large models smaller.
+- KORA does not remove RAM, VRAM, unified-memory, or model-loading requirements.
+- KORA makes larger-model workflows lighter by sending less work to the model.
+- KORA routes deterministic and structured work to CPU/local fast paths first.
+- The model becomes one execution path, not the default path.
+- Provider, cloud, and distributed routes are not enabled by default in this demo.
 
 ## Current API Wiring
 

@@ -458,7 +458,11 @@ export default function App() {
     <main className="page">
       <header className="header">
         <h1>KORA Studio v0</h1>
-        <p>Execution Viewer Demo (Mac local scaffold)</p>
+        <p>AI Task Execution Router / Execution Viewer Demo (Mac local scaffold)</p>
+        <p>
+          Route local AI workflows through deterministic fast paths, structured lookup, local model, or larger
+          execution path only when needed.
+        </p>
       </header>
 
       <section className="controls card">

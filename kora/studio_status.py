@@ -37,8 +37,12 @@ def render_studio_status_text(status: dict[str, Any]) -> str:
 
     lines = [
         "KORA Studio is in planning/preview mode.",
+        "Positioning: local-first AI Task Execution Router workspace.",
+        "KORA Studio routes local AI workflows; it is not an LM Studio replacement or generic local chatbot.",
         str(status["kora_boost_message"]),
         str(status["kora_boost_technical_explanation"]),
+        "KORA does not remove RAM/VRAM/unified-memory or model-loading requirements.",
+        "Provider/cloud/distributed routes: disabled by default unless explicitly enabled.",
         "Current status: CLI skeleton with optional local server skeleton.",
         "Server skeleton: available with python3 -m kora studio --serve.",
         "Default status command: no local server is started yet.",
