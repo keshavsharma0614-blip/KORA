@@ -58,7 +58,7 @@ def test_get_studio_server_status_fields() -> None:
     assert status["studio_status"]["implementation"] == "local_server_skeleton"
     assert status["studio_status"]["positioning"] == "local-first AI Task Execution Router workspace"
     assert status["studio_status"]["v0_2_status"]["milestone"] == "v0.2"
-    assert status["studio_status"]["v0_2_status"]["readiness"] == "in_progress"
+    assert status["studio_status"]["v0_2_status"]["readiness"] == "local_preview_demo_ready"
     assert "local preview/demo readiness milestone" in status["studio_status"]["v0_2_status"]["claim_boundary"]
     assert status["v0_2_status"] == status["studio_status"]["v0_2_status"]
     assert status["v0_1_readiness_status"] == "local_fixture_demo_ready"

@@ -90,7 +90,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     v0_2_status = {
         "milestone": "v0.2",
         "status": "first_run_preview",
-        "readiness": "in_progress",
+        "readiness": "local_preview_demo_ready",
         "description": "Local first-run setup preview for the AI Task Execution Router demo.",
         "first_run_section_order": list(first_run_section_order),
         "claim_boundary": (

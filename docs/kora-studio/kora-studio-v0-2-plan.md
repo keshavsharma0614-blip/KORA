@@ -94,7 +94,7 @@ Add a non-mutating smoke-test helper or documented procedure for checking `/heal
 
 ### Task 422 — v0.2 Readiness Report
 
-Create the v0.2 readiness report after validation. It should include current HEAD, validated commands, implemented surfaces, non-scope, claim boundaries, known limitations, and the next recommended milestone.
+Create the v0.2 readiness report after validation. It should include current HEAD, validated commands, implemented surfaces, non-scope, claim boundaries, known limitations, and the next recommended milestone. Initial report target: `docs/kora-studio/kora-studio-v0-2-readiness-report.md`.
 
 ## Claim Boundaries
 
