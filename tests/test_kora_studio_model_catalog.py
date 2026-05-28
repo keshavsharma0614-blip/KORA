@@ -38,6 +38,13 @@ def test_recommendations_for_unknown_memory_are_conservative() -> None:
     for item in recommendations:
         assert item["download_available"] is False
         assert item["execution_available"] is False
+        assert item["download_action_enabled"] is False
+        assert item["run_action_enabled"] is False
+        assert item["download_action_label"] == "Download not connected yet"
+        assert item["run_action_label"] == "Run not connected yet"
+        assert item["download_action_status"] == "not_connected"
+        assert item["run_action_status"] == "not_connected"
+        assert "not connected" in item["runtime_guidance"].lower()
         assert item["catalog_candidate"] is True
         assert item["installed_locally"] is False
         assert item["execution_connected"] is False
@@ -71,7 +78,25 @@ def test_recommendations_distinguish_catalog_runtime_and_installed_status() -> N
         assert item["runtime_service_reachable"] is False
         assert item["installed_locally"] is False
         assert item["download_available"] is False
+        assert item["download_action_enabled"] is False
+        assert item["download_action_label"] == "Download not connected yet"
         assert item["execution_connected"] is False
+        assert item["run_action_enabled"] is False
+        assert item["run_action_label"] == "Run not connected yet"
+
+
+def test_recommendations_include_disabled_action_guidance() -> None:
+    recommendations = _recommend_for_memory(16)
+
+    assert recommendations
+    for item in recommendations:
+        assert item["download_action_status"] == "not_connected"
+        assert item["download_action_enabled"] is False
+        assert item["run_action_status"] == "not_connected"
+        assert item["run_action_enabled"] is False
+        assert "KORA does not remove model memory requirements" in item["action_claim_boundary"]
+        assert "Download now" not in str(item)
+        assert "Run now" not in str(item)
 
 
 def test_recommendations_for_mid_memory_tiers() -> None:

@@ -50,6 +50,8 @@ The preview also includes a static local model catalog scaffold. Catalog recomme
 
 Runtime status is also exposed as a local scaffold. Executable detection is local-only, catalog examples are not installed models, service reachability and installed-model detection may remain unknown, and download/execution actions are not connected.
 
+Catalog action labels are disabled planning scaffolds only. The preview may show "Download not connected yet" and "Run not connected yet"; these labels do not download, execute, call a registry, or call a provider.
+
 The separate FastAPI/React demo scaffold can still be run manually:
 
 From repo root:

@@ -12,6 +12,10 @@ MODEL_CATALOG_CLAIM_BOUNDARY = (
     "KORA does not remove model memory requirements. "
     "Download and execution are not connected yet."
 )
+MODEL_ACTION_CLAIM_BOUNDARY = (
+    "Model actions are disabled planning scaffolds. Catalog examples are not installed models. "
+    "KORA does not remove model memory requirements."
+)
 
 REQUIRED_MODEL_CATALOG_FIELDS = {
     "model_id",
@@ -137,6 +141,34 @@ def _is_candidate_allowed(entry: dict[str, Any], memory_gb: float | None) -> boo
     return estimated_memory <= max(memory_gb, 16)
 
 
+def _attach_disabled_action_state(item: dict[str, Any], *, runtime_detected: bool, runtime_service_reachable: bool) -> None:
+    item["download_action_status"] = "not_connected"
+    item["download_action_enabled"] = False
+    item["download_action_label"] = "Download not connected yet"
+    item["download_action_reason"] = (
+        "Install a supported local runtime before model download can be connected."
+        if not runtime_detected
+        else "Download is planned but not connected in this preview."
+    )
+    item["run_action_status"] = "not_connected"
+    item["run_action_enabled"] = False
+    item["run_action_label"] = "Run not connected yet"
+    item["run_action_reason"] = (
+        "Validate model fit before use; runtime service and execution are not connected yet."
+        if runtime_service_reachable
+        else "Runtime service and model execution are not connected yet."
+    )
+    item["install_guidance"] = (
+        "Install a supported local runtime before model download can be connected."
+        if not runtime_detected
+        else "Catalog examples are not installed models."
+    )
+    item["runtime_guidance"] = (
+        "Runtime service reachability is not checked yet. Download and execution are not connected yet."
+    )
+    item["action_claim_boundary"] = MODEL_ACTION_CLAIM_BOUNDARY
+
+
 def recommend_catalog_models(
     profile: StudioSystemProfile | dict[str, Any],
     capability_estimate: dict[str, Any],
@@ -185,6 +217,11 @@ def recommend_catalog_models(
         item["installed_locally"] = False
         item["download_available"] = False
         item["execution_connected"] = False
+        _attach_disabled_action_state(
+            item,
+            runtime_detected=runtime_detected,
+            runtime_service_reachable=runtime_service_reachable,
+        )
         item["claim_boundary"] = MODEL_CATALOG_CLAIM_BOUNDARY
         recommended.append(item)
 
@@ -204,6 +241,11 @@ def recommend_catalog_models(
         larger["installed_locally"] = False
         larger["download_available"] = False
         larger["execution_connected"] = False
+        _attach_disabled_action_state(
+            larger,
+            runtime_detected=runtime_detected,
+            runtime_service_reachable=runtime_service_reachable,
+        )
         larger["claim_boundary"] = MODEL_CATALOG_CLAIM_BOUNDARY
         recommended.append(larger)
 

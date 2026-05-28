@@ -223,6 +223,28 @@ Acceptance criteria:
 - no model is shown as installed unless safely confirmed
 - no download or execution action is connected
 
+## Phase 3.8 — Disabled Model Action Scaffold
+
+Status: Initial disabled action metadata exists in catalog recommendations. The static preview page shows disabled download/run labels only.
+
+Scope:
+
+- disabled download action metadata
+- disabled run action metadata
+- install/runtime guidance copy
+- action claim boundary
+- no model downloads
+- no model execution
+- no registry calls
+- no provider/cloud route
+
+Acceptance criteria:
+
+- download actions are disabled by default
+- run actions are disabled by default
+- UI copy does not imply models can be downloaded or run
+- catalog examples remain distinct from installed models
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.

@@ -75,6 +75,8 @@ Model catalog scaffold status: the preview server exposes a static curated local
 
 Runtime status scaffold status: the preview server exposes local runtime executable status and an installed-model summary through `/status`. Catalog examples remain distinct from installed models. Service reachability and installed-model detection are fail-closed and may remain `not_checked`; the scaffold does not execute models, download models, call runtime APIs, call providers, or use cloud sync.
 
+Disabled action scaffold status: catalog recommendations expose planned download/run action metadata with actions disabled by default. The preview page may show disabled labels such as "Download not connected yet" and "Run not connected yet", but no download, execution, registry lookup, provider call, or cloud sync is connected.
+
 ### 4. Deterministic route layer
 
 The deterministic route layer captures non-model execution choices and their validation results.

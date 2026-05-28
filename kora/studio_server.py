@@ -190,6 +190,17 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         str(local_candidate.get("recommendation_note", "Model recommendations are estimates until validated on this machine.")),
         quote=True,
     )
+    local_download_label = html.escape(str(local_candidate.get("download_action_label", "Download not connected yet")), quote=True)
+    local_run_label = html.escape(str(local_candidate.get("run_action_label", "Run not connected yet")), quote=True)
+    local_action_boundary = html.escape(
+        str(
+            local_candidate.get(
+                "action_claim_boundary",
+                "Model actions are disabled planning scaffolds. Catalog examples are not installed models.",
+            )
+        ),
+        quote=True,
+    )
     workflow_candidate_name = html.escape(str(workflow_candidate.get("display_name", "Larger workflow example")), quote=True)
     workflow_candidate_note = html.escape(
         str(
@@ -441,6 +452,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Catalog status</h3><p>{catalog_status}</p><p>Download and execution are not connected yet.</p></div>
           <div class=\"card\"><h3>Physically runnable local candidates</h3><p>{local_candidate_name}</p><p>{local_candidate_note}</p></div>
           <div class=\"card\"><h3>Larger-model workflow candidates</h3><p>{workflow_candidate_name}</p><p>{workflow_candidate_note}</p></div>
+          <div class=\"card\"><h3>Disabled actions</h3><p><span class=\"badge\">{local_download_label}</span></p><p style=\"margin-top: 10px;\"><span class=\"badge\">{local_run_label}</span></p><p>{local_action_boundary}</p></div>
           <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p></div>
         </div>
       </section>

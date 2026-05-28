@@ -65,6 +65,11 @@ def test_get_studio_server_status_fields() -> None:
     assert "estimates until validated" in status["model_capability_estimate"]["claim_boundary"]
     assert status["model_catalog_status"] == "static_local_scaffold"
     assert status["recommended_models"]
+    first_model = status["recommended_models"][0]
+    assert first_model["download_action_enabled"] is False
+    assert first_model["run_action_enabled"] is False
+    assert first_model["download_action_label"] == "Download not connected yet"
+    assert first_model["run_action_label"] == "Run not connected yet"
     assert "estimates until validated" in status["model_catalog_claim_boundary"]
     assert "Download and execution are not connected yet" in status["model_catalog_claim_boundary"]
     assert status["runtime_status"]
@@ -250,6 +255,9 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Larger-model workflow candidates" in html
     assert "Model recommendations are estimates until validated on this machine" in html
     assert "Download and execution are not connected yet" in html
+    assert "Disabled actions" in html
+    assert "Download not connected yet" in html
+    assert "Run not connected yet" in html
     assert "Runtime Status" in html
     assert "Installed Models" in html
     assert "Catalog vs Installed" in html
@@ -286,6 +294,8 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Catalog status" in html
     assert "static_local_scaffold" in html
     assert "Download and execution are not connected yet" in html
+    assert "Download not connected yet" in html
+    assert "Run not connected yet" in html
     assert "Runtime Status" in html
     assert "Installed model detection" in html
     assert "Catalog examples are not the same as installed models" in html
