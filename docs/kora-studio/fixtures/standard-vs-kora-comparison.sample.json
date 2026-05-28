@@ -1,0 +1,50 @@
+{
+  "fixture_id": "kora_studio_standard_vs_kora_comparison_v0_1",
+  "fixture_type": "standard_vs_kora_comparison",
+  "mode": "local_fixture_mock_comparison",
+  "provider": "local_fixture",
+  "model": "none",
+  "privacy_class": "synthetic",
+  "comparison_input": "Classify a synthetic support request using a known local route.",
+  "modes": [
+    {
+      "mode": "standard",
+      "display_name": "Standard Mode",
+      "route_summary": "Fixture baseline sends the request to the selected model path by default.",
+      "model_call_count": 1,
+      "deterministic_route_used": false,
+      "structured_lookup_used": false,
+      "validation_result": "not_applicable",
+      "provider_calls_enabled": false,
+      "cloud_sync_enabled": false,
+      "model_execution_connected": false
+    },
+    {
+      "mode": "kora_boost",
+      "display_name": "KORA Boost",
+      "route_summary": "Fixture KORA path checks deterministic and structured routes first; validation passes and model fallback is skipped.",
+      "model_call_count": 0,
+      "deterministic_route_used": true,
+      "structured_lookup_used": true,
+      "validation_result": "pass",
+      "provider_calls_enabled": false,
+      "cloud_sync_enabled": false,
+      "model_execution_connected": false
+    }
+  ],
+  "metrics": {
+    "baseline_model_calls": 1,
+    "kora_model_calls": 0,
+    "avoided_model_calls": 1,
+    "deterministic_routes": 1,
+    "model_escalations": 0,
+    "validation_pass_count": 1
+  },
+  "claim_boundary": "This Standard Mode vs KORA Boost comparison is synthetic local fixture/mock data. It does not execute models, call providers, prove production savings, prove real API billing changes, or prove energy outcomes.",
+  "provider_calls_enabled": false,
+  "cloud_sync_enabled": false,
+  "model_execution_connected": false,
+  "download_connected": false,
+  "cost_claim_enabled": false,
+  "energy_claim_enabled": false
+}

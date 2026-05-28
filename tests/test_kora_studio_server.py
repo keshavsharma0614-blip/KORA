@@ -102,6 +102,15 @@ def test_get_studio_server_status_fields() -> None:
     assert "local fixture/mock data" in status["execution_viewer_claim_boundary"]
     assert status["model_execution_connected"] is False
     assert status["download_connected"] is False
+    assert status["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
+    assert status["standard_vs_kora_metrics"]["baseline_model_calls"] == 1
+    assert status["standard_vs_kora_metrics"]["kora_model_calls"] == 0
+    assert status["standard_vs_kora_metrics"]["avoided_model_calls"] == 1
+    assert status["standard_vs_kora_metrics"]["deterministic_routes"] == 1
+    assert status["standard_vs_kora_metrics"]["model_escalations"] == 0
+    assert status["standard_vs_kora_metrics"]["validation_pass_count"] == 1
+    assert len(status["standard_vs_kora_metric_cards"]) == 6
+    assert "fixture/mock comparison" in status["standard_vs_kora_claim_boundary"]
     assert status["first_run_section_order"] == [
         "Launch/local-only status",
         "Your Computer",
@@ -110,6 +119,7 @@ def test_get_studio_server_status_fields() -> None:
         "Catalog vs Installed",
         "Setup Guidance",
         "KORA Boost Boundary",
+        "Standard Mode vs KORA Boost",
         "Execution Viewer placeholder",
     ]
     assert status["browser_launch_available"] is True
@@ -149,6 +159,8 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["execution_viewer_status"] == "fixture_mock_scaffold"
     assert status["execution_viewer_fixture_event_count"] == 6
     assert status["model_execution_connected"] is False
+    assert status["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
+    assert status["standard_vs_kora_metrics"]["avoided_model_calls"] == 1
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -370,6 +382,15 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Estimated local model tier" in html
     assert "Unknown until validated" in html or "depending on runtime" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
+    assert "Standard Mode vs KORA Boost" in html
+    assert "Fixture/mock comparison only" in html
+    assert "Baseline model calls" in html
+    assert "KORA model calls" in html
+    assert "Avoided model calls" in html
+    assert "Deterministic routes" in html
+    assert "Model escalations" in html
+    assert "Validation passes" in html
+    assert "No cost or energy claim is made" in html
     assert "Model/runtime integration: not connected" in html
     assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html
@@ -425,6 +446,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
         "Catalog vs Installed",
         "Setup Guidance",
         "KORA Boost Boundary",
+        "Standard Mode vs KORA Boost",
         "Execution Viewer Placeholder",
     ]
     positions = [html.index(f"<h2>{section}</h2>") for section in ordered_sections]

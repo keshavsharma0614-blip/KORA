@@ -240,6 +240,8 @@ Forbidden examples:
 
 ## Standard Mode vs KORA Boost Harness
 
+Current scaffold status: the preview server exposes a local fixture/mock Standard Mode vs KORA Boost comparison through `/status`. The comparison shows fixture route and counter differences only; it does not execute models, call providers, or prove production, billing, cost, or energy outcomes.
+
 Standard Mode:
 
 - request goes to selected model path by default

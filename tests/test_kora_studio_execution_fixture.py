@@ -4,8 +4,12 @@ from kora.studio_execution_fixture import (
     EXECUTION_EVENT_SCHEMA_FIELDS,
     EXECUTION_VIEWER_CLAIM_BOUNDARY,
     FINAL_COUNTERS,
+    STANDARD_VS_KORA_CLAIM_BOUNDARY,
+    STANDARD_VS_KORA_METRICS,
     get_execution_viewer_fixture_events,
     get_execution_viewer_fixture_summary,
+    get_standard_vs_kora_comparison_fixture,
+    get_standard_vs_kora_status_fields,
     validate_execution_viewer_event,
 )
 
@@ -94,3 +98,43 @@ def test_execution_viewer_fixture_summary_exposes_status_fields() -> None:
     assert summary["download_connected"] is False
     assert summary["provider_calls_enabled"] is False
     assert summary["cloud_sync_enabled"] is False
+
+
+def test_standard_vs_kora_comparison_fixture_metrics_are_claim_safe() -> None:
+    comparison = get_standard_vs_kora_comparison_fixture()
+    modes = {mode["mode"]: mode for mode in comparison["modes"]}
+
+    assert comparison["comparison_status"] == "fixture_mock_scaffold"
+    assert comparison["metrics"] == STANDARD_VS_KORA_METRICS
+    assert comparison["metrics"]["baseline_model_calls"] == 1
+    assert comparison["metrics"]["kora_model_calls"] == 0
+    assert comparison["metrics"]["avoided_model_calls"] == 1
+    assert comparison["metrics"]["deterministic_routes"] == 1
+    assert comparison["metrics"]["model_escalations"] == 0
+    assert comparison["metrics"]["validation_pass_count"] == 1
+    assert modes["standard"]["model_call_count"] == 1
+    assert modes["kora_boost"]["model_call_count"] == 0
+    assert modes["kora_boost"]["deterministic_route_used"] is True
+    assert modes["kora_boost"]["validation_result"] == "pass"
+    assert comparison["provider_calls_enabled"] is False
+    assert comparison["cloud_sync_enabled"] is False
+    assert comparison["model_execution_connected"] is False
+    assert comparison["download_connected"] is False
+    assert comparison["cost_claim_enabled"] is False
+    assert comparison["energy_claim_enabled"] is False
+    assert comparison["claim_boundary"] == STANDARD_VS_KORA_CLAIM_BOUNDARY
+    assert "prove production savings" in comparison["claim_boundary"]
+    assert "prove energy outcomes" in comparison["claim_boundary"]
+
+
+def test_standard_vs_kora_status_fields_expose_metric_cards() -> None:
+    status_fields = get_standard_vs_kora_status_fields()
+
+    assert status_fields["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
+    assert status_fields["standard_vs_kora_metrics"] == STANDARD_VS_KORA_METRICS
+    assert len(status_fields["standard_vs_kora_metric_cards"]) == 6
+    assert status_fields["standard_vs_kora_claim_boundary"] == STANDARD_VS_KORA_CLAIM_BOUNDARY
+    assert all(
+        card["claim_safety_note"] == "Display as local fixture/mock comparison data only."
+        for card in status_fields["standard_vs_kora_metric_cards"]
+    )

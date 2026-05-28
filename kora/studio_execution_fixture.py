@@ -9,6 +9,10 @@ EXECUTION_VIEWER_CLAIM_BOUNDARY = (
     "Execution Viewer events are local fixture/mock data. They do not execute models, call providers, "
     "download models, or prove production behavior."
 )
+STANDARD_VS_KORA_CLAIM_BOUNDARY = (
+    "Standard Mode vs KORA Boost comparison data is a local fixture/mock comparison. It does not execute models, "
+    "call providers, prove production savings, prove real API billing changes, or prove energy outcomes."
+)
 
 EXECUTION_EVENT_SCHEMA_FIELDS = [
     "run_id",
@@ -47,6 +51,15 @@ FINAL_COUNTERS = {
     "validation_fail_count": 0,
     "error_count": 0,
     "fallback_count": 0,
+}
+
+STANDARD_VS_KORA_METRICS = {
+    "baseline_model_calls": 1,
+    "kora_model_calls": 0,
+    "avoided_model_calls": 1,
+    "deterministic_routes": 1,
+    "model_escalations": 0,
+    "validation_pass_count": 1,
 }
 
 
@@ -188,4 +201,82 @@ def get_execution_viewer_fixture_summary() -> dict[str, Any]:
         "download_connected": False,
         "provider_calls_enabled": False,
         "cloud_sync_enabled": False,
+    }
+
+
+def get_standard_vs_kora_comparison_fixture() -> dict[str, Any]:
+    """Return local fixture comparison data without model execution or provider calls."""
+
+    return {
+        "comparison_status": "fixture_mock_scaffold",
+        "fixture_id": "kora_studio_standard_vs_kora_comparison_v0_1",
+        "fixture_type": "standard_vs_kora_comparison",
+        "privacy_class": "synthetic",
+        "comparison_input": "Classify a synthetic support request using a known local route.",
+        "modes": [
+            {
+                "mode": "standard",
+                "display_name": "Standard Mode",
+                "route_summary": "Fixture baseline sends the request to the selected model path by default.",
+                "model_call_count": 1,
+                "deterministic_route_used": False,
+                "structured_lookup_used": False,
+                "validation_result": "not_applicable",
+                "provider_calls_enabled": False,
+                "cloud_sync_enabled": False,
+                "model_execution_connected": False,
+            },
+            {
+                "mode": "kora_boost",
+                "display_name": "KORA Boost",
+                "route_summary": (
+                    "Fixture KORA path checks deterministic and structured routes first; validation passes and "
+                    "model fallback is skipped."
+                ),
+                "model_call_count": 0,
+                "deterministic_route_used": True,
+                "structured_lookup_used": True,
+                "validation_result": "pass",
+                "provider_calls_enabled": False,
+                "cloud_sync_enabled": False,
+                "model_execution_connected": False,
+            },
+        ],
+        "metrics": deepcopy(STANDARD_VS_KORA_METRICS),
+        "metric_cards": [
+            {
+                "key": key,
+                "label": label,
+                "value": STANDARD_VS_KORA_METRICS[key],
+                "claim_safety_note": "Display as local fixture/mock comparison data only.",
+            }
+            for key, label in [
+                ("baseline_model_calls", "Baseline model calls"),
+                ("kora_model_calls", "KORA model calls"),
+                ("avoided_model_calls", "Avoided model calls"),
+                ("deterministic_routes", "Deterministic routes"),
+                ("model_escalations", "Model escalations"),
+                ("validation_pass_count", "Validation passes"),
+            ]
+        ],
+        "claim_boundary": STANDARD_VS_KORA_CLAIM_BOUNDARY,
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "model_execution_connected": False,
+        "download_connected": False,
+        "cost_claim_enabled": False,
+        "energy_claim_enabled": False,
+    }
+
+
+def get_standard_vs_kora_status_fields() -> dict[str, Any]:
+    """Return /status fields for the Standard Mode vs KORA Boost fixture."""
+
+    comparison = get_standard_vs_kora_comparison_fixture()
+    return {
+        "standard_vs_kora_comparison_status": comparison["comparison_status"],
+        "standard_vs_kora_comparison": comparison,
+        "standard_vs_kora_metrics": deepcopy(comparison["metrics"]),
+        "standard_vs_kora_metric_cards": deepcopy(comparison["metric_cards"]),
+        "standard_vs_kora_claim_boundary": comparison["claim_boundary"],
     }

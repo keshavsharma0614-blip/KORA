@@ -8,7 +8,7 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
-from kora.studio_execution_fixture import get_execution_viewer_fixture_summary
+from kora.studio_execution_fixture import get_execution_viewer_fixture_summary, get_standard_vs_kora_status_fields
 from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, SETUP_GUIDANCE_PATH, recommend_catalog_models
 from kora.studio_runtime_status import get_runtime_status, summarize_installed_models
 from kora.studio_status import get_studio_status
@@ -43,6 +43,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     installed_models_summary = summarize_installed_models(runtime_status)
     recommended_models = recommend_catalog_models(system_profile, model_capability_estimate, runtime_status)
     execution_viewer_fixture = get_execution_viewer_fixture_summary()
+    standard_vs_kora_fixture = get_standard_vs_kora_status_fields()
     return {
         "ok": True,
         "service": "kora-studio",
@@ -69,6 +70,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "setup_guidance_claim_boundary": SETUP_GUIDANCE_CLAIM_BOUNDARY,
         "disabled_actions_route_to_guidance": True,
         **execution_viewer_fixture,
+        **standard_vs_kora_fixture,
         "first_run_section_order": [
             "Launch/local-only status",
             "Your Computer",
@@ -77,6 +79,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
             "Catalog vs Installed",
             "Setup Guidance",
             "KORA Boost Boundary",
+            "Standard Mode vs KORA Boost",
             "Execution Viewer placeholder",
         ],
         "browser_launch_available": True,
@@ -292,6 +295,39 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         ),
         quote=True,
     )
+    standard_vs_kora_status = html.escape(str(status.get("standard_vs_kora_comparison_status", "fixture_mock_scaffold")), quote=True)
+    standard_vs_kora_boundary = html.escape(
+        str(
+            status.get(
+                "standard_vs_kora_claim_boundary",
+                "Standard Mode vs KORA Boost comparison data is local fixture/mock data.",
+            )
+        ),
+        quote=True,
+    )
+    comparison = status.get("standard_vs_kora_comparison", {})
+    comparison_modes = comparison.get("modes", []) if isinstance(comparison, dict) else []
+    standard_mode = next(
+        (item for item in comparison_modes if isinstance(item, dict) and item.get("mode") == "standard"),
+        {},
+    )
+    kora_mode = next(
+        (item for item in comparison_modes if isinstance(item, dict) and item.get("mode") == "kora_boost"),
+        {},
+    )
+    standard_route_summary = html.escape(str(standard_mode.get("route_summary", "")), quote=True)
+    kora_route_summary = html.escape(str(kora_mode.get("route_summary", "")), quote=True)
+    metric_cards = [
+        item for item in status.get("standard_vs_kora_metric_cards", []) if isinstance(item, dict)
+    ]
+    standard_vs_kora_metric_items = "".join(
+        "<div class=\"card\">"
+        f"<h3>{html.escape(str(card.get('label', 'Metric')), quote=True)}</h3>"
+        f"<p class=\"status-value\">{html.escape(str(card.get('value', 0)), quote=True)}</p>"
+        f"<p>{html.escape(str(card.get('claim_safety_note', 'Local fixture/mock comparison data only.')), quote=True)}</p>"
+        "</div>"
+        for card in metric_cards
+    )
     execution_event_items = "".join(
         "<li>"
         f"{html.escape(str(event.get('stage_name', 'Unknown stage')), quote=True)} "
@@ -312,6 +348,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
                 "Catalog vs Installed",
                 "Setup Guidance",
                 "KORA Boost Boundary",
+                "Standard Mode vs KORA Boost",
                 "Execution Viewer placeholder",
             ],
         )
@@ -565,6 +602,17 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>KORA Boost</h3><p>KORA Boost routes deterministic and structured tasks to CPU/local fast paths first.</p><p>Larger-model workflows may become more practical when deterministic work avoids the model path.</p></div>
           <div class=\"card\"><h3>Boundary</h3><p>KORA does not remove model memory requirements.</p><p>Provider/cloud routes are disabled by default.</p></div>
         </div>
+      </section>
+
+      <section>
+        <h2>Standard Mode vs KORA Boost</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Comparison status</h3><p>{standard_vs_kora_status}</p><p>Fixture/mock comparison only.</p><p>No model execution occurs.</p></div>
+          <div class=\"card\"><h3>Standard Mode</h3><p>{standard_route_summary}</p><p>Model call counted in fixture baseline: 1</p></div>
+          <div class=\"card\"><h3>KORA Boost</h3><p>{kora_route_summary}</p><p>Model call counted in fixture KORA path: 0</p></div>
+          <div class=\"card\"><h3>Claim boundary</h3><p>{standard_vs_kora_boundary}</p><p>No cost or energy claim is made.</p></div>
+        </div>
+        <div class=\"grid\">{standard_vs_kora_metric_items}</div>
       </section>
 
       <section>

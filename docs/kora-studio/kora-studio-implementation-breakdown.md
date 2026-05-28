@@ -320,6 +320,29 @@ Acceptance criteria:
 - final counters are shown as fixture counters only
 - no production behavior, cost reduction, energy reduction, or runtime execution claim is made
 
+## Phase 3.12 — Standard Mode vs KORA Boost Comparison Fixture
+
+Status: Initial local fixture/mock comparison exists. `/status` exposes Standard Mode vs KORA Boost comparison data, metrics, metric cards, and claim boundary text. The static preview page shows comparison cards and fixture-only metrics.
+
+Scope:
+
+- shared synthetic fixture input
+- Standard Mode fixture baseline with model call counted
+- KORA Boost fixture path with deterministic route, structured lookup, validation pass, and model call avoided
+- metric cards for baseline model calls, KORA model calls, avoided model calls, deterministic routes, model escalations, and validation passes
+- provider/cloud disabled state
+- no model downloads
+- no model execution
+- no provider/cloud route
+- no cost or energy claim
+
+Acceptance criteria:
+
+- same fixture input is represented for both modes
+- comparison reports route and counter differences
+- metrics are labelled as local fixture/mock data
+- no production behavior, billing, cost, energy, or runtime execution claim is made
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.
