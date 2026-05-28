@@ -73,6 +73,8 @@ Initial implementation status: the preview server exposes a local heuristic mode
 
 Model catalog scaffold status: the preview server exposes a static curated local catalog scaffold through `/status`. It does not fetch remote catalogs, search Hugging Face, call Ollama registries, download models, execute models, or claim all open-source LLM support. Catalog recommendations are estimates until validated and must keep download/execution actions disabled until separate implementation work lands.
 
+Runtime status scaffold status: the preview server exposes local runtime executable status and an installed-model summary through `/status`. Catalog examples remain distinct from installed models. Service reachability and installed-model detection are fail-closed and may remain `not_checked`; the scaffold does not execute models, download models, call runtime APIs, call providers, or use cloud sync.
+
 ### 4. Deterministic route layer
 
 The deterministic route layer captures non-model execution choices and their validation results.

@@ -67,6 +67,9 @@ def test_get_studio_server_status_fields() -> None:
     assert status["recommended_models"]
     assert "estimates until validated" in status["model_catalog_claim_boundary"]
     assert "Download and execution are not connected yet" in status["model_catalog_claim_boundary"]
+    assert status["runtime_status"]
+    assert status["installed_models_summary"]["detection_status"] == "not_checked"
+    assert "Catalog examples are not the same as installed models" in status["catalog_runtime_distinction"]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
     assert status["local_runtime_required"] is False
@@ -96,6 +99,8 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert "model_capability_estimate" in status
     assert "recommended_models" in status
     assert status["model_catalog_status"] == "static_local_scaffold"
+    assert "runtime_status" in status
+    assert "installed_models_summary" in status
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -224,6 +229,8 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "model_capability_estimate" in status
     assert "recommended_models" in status
     assert status["model_catalog_claim_boundary"]
+    assert "runtime_status" in status
+    assert status["installed_models_summary"]["installed_models_detected"] is False
     assert status["ollama_calls_enabled"] is False
     content_type = response.headers.get("Content-Type", "")
 
@@ -243,6 +250,10 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Larger-model workflow candidates" in html
     assert "Model recommendations are estimates until validated on this machine" in html
     assert "Download and execution are not connected yet" in html
+    assert "Runtime Status" in html
+    assert "Installed Models" in html
+    assert "Catalog vs Installed" in html
+    assert "Catalog examples are not the same as installed models" in html
     assert "Estimated local model tier" in html
     assert "KORA Boost Boundary" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
@@ -275,6 +286,9 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Catalog status" in html
     assert "static_local_scaffold" in html
     assert "Download and execution are not connected yet" in html
+    assert "Runtime Status" in html
+    assert "Installed model detection" in html
+    assert "Catalog examples are not the same as installed models" in html
     assert "Estimated local model tier" in html
     assert "Unknown until validated" in html or "depending on runtime" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
@@ -304,6 +318,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "ANTHROPIC_API_KEY" not in html
     assert "provider calls enabled" not in html.lower()
     assert "download now" not in html.lower()
+    assert "run now" not in html.lower()
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
     assert "energy reduction" not in html.lower()

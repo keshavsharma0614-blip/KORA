@@ -6,12 +6,14 @@ from kora.studio_model_catalog import (
     get_static_model_catalog,
     recommend_catalog_models,
 )
+from kora.studio_runtime_status import get_runtime_status
 from kora.studio_system_profile import estimate_model_capability, get_system_profile
 
 
 def _recommend_for_memory(memory_gb: float | None) -> list[dict]:
     profile = get_system_profile(which=lambda command: None, total_memory_gb=memory_gb)
-    return recommend_catalog_models(profile, estimate_model_capability(profile))
+    runtime_status = get_runtime_status(which=lambda command: None)
+    return recommend_catalog_models(profile, estimate_model_capability(profile), runtime_status)
 
 
 def test_catalog_entries_include_required_fields() -> None:
@@ -36,6 +38,9 @@ def test_recommendations_for_unknown_memory_are_conservative() -> None:
     for item in recommendations:
         assert item["download_available"] is False
         assert item["execution_available"] is False
+        assert item["catalog_candidate"] is True
+        assert item["installed_locally"] is False
+        assert item["execution_connected"] is False
         assert "not claimed as physically runnable" in item["recommendation_note"].lower() or "requires" in item[
             "recommendation_note"
         ].lower()
@@ -52,6 +57,21 @@ def test_recommendations_for_small_memory_tier() -> None:
     assert "example-mini-local" in runnable_ids
     assert "example-3b-quantized" not in runnable_ids
     assert any(item["candidate_type"] == "larger_model_workflow_candidate" for item in recommendations)
+
+
+def test_recommendations_distinguish_catalog_runtime_and_installed_status() -> None:
+    runtime_status = get_runtime_status(which=lambda command: "/mock/bin/ollama" if command == "ollama" else None)
+    profile = get_system_profile(which=lambda command: None, total_memory_gb=16)
+    recommendations = recommend_catalog_models(profile, estimate_model_capability(profile), runtime_status)
+
+    assert recommendations
+    for item in recommendations:
+        assert item["catalog_candidate"] is True
+        assert item["runtime_detected"] is True
+        assert item["runtime_service_reachable"] is False
+        assert item["installed_locally"] is False
+        assert item["download_available"] is False
+        assert item["execution_connected"] is False
 
 
 def test_recommendations_for_mid_memory_tiers() -> None:

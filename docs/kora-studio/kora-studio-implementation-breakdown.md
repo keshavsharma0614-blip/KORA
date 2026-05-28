@@ -198,6 +198,31 @@ Acceptance criteria:
 - no unsupported larger-model local execution claim is shown
 - no download or execution action is connected
 
+## Phase 3.7 — Runtime Status and Installed Model Scaffold
+
+Status: Initial local scaffold exists in the preview server. `/status` includes `runtime_status`, `installed_models_summary`, and catalog/runtime distinction copy, and the static preview page shows read-only runtime and installed-model panels.
+
+Scope:
+
+- local runtime executable detection
+- runtime service reachability marked `not_checked`
+- installed model detection marked `not_checked`
+- catalog examples distinguished from installed models
+- download disabled
+- execution disabled
+- no runtime API calls
+- no model execution
+- no model downloads
+- no remote registry calls
+- no provider/cloud route
+
+Acceptance criteria:
+
+- runtime executable detection is local-only
+- catalog examples are not presented as installed models
+- no model is shown as installed unless safely confirmed
+- no download or execution action is connected
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.

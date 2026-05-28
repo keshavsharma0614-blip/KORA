@@ -140,11 +140,15 @@ def _is_candidate_allowed(entry: dict[str, Any], memory_gb: float | None) -> boo
 def recommend_catalog_models(
     profile: StudioSystemProfile | dict[str, Any],
     capability_estimate: dict[str, Any],
+    runtime_status: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """Return claim-safe catalog recommendations from the static local catalog."""
 
     memory_gb = _memory_gb_from_profile(profile)
     recommendation_status = str(capability_estimate.get("recommendation_status", "unknown"))
+    runtimes = runtime_status or []
+    runtime_detected = any(item.get("executable_detected") is True for item in runtimes if isinstance(item, dict))
+    runtime_service_reachable = any(item.get("service_reachable") is True for item in runtimes if isinstance(item, dict))
     recommended: list[dict[str, Any]] = []
 
     for entry in get_static_model_catalog():
@@ -174,6 +178,13 @@ def recommend_catalog_models(
             )
         item["download_available"] = False
         item["execution_available"] = False
+        item["catalog_candidate"] = True
+        item["estimated_runnable"] = item["candidate_type"] == "physically_runnable_local_candidate"
+        item["runtime_detected"] = runtime_detected
+        item["runtime_service_reachable"] = runtime_service_reachable
+        item["installed_locally"] = False
+        item["download_available"] = False
+        item["execution_connected"] = False
         item["claim_boundary"] = MODEL_CATALOG_CLAIM_BOUNDARY
         recommended.append(item)
 
@@ -186,6 +197,13 @@ def recommend_catalog_models(
         )
         larger["download_available"] = False
         larger["execution_available"] = False
+        larger["catalog_candidate"] = True
+        larger["estimated_runnable"] = False
+        larger["runtime_detected"] = runtime_detected
+        larger["runtime_service_reachable"] = runtime_service_reachable
+        larger["installed_locally"] = False
+        larger["download_available"] = False
+        larger["execution_connected"] = False
         larger["claim_boundary"] = MODEL_CATALOG_CLAIM_BOUNDARY
         recommended.append(larger)
 

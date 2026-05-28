@@ -48,6 +48,8 @@ The preview `/status` response includes a local system profile scaffold and mode
 
 The preview also includes a static local model catalog scaffold. Catalog recommendations are curated examples, do not fetch remote registries, do not download or execute models, and do not imply all open-source LLMs are supported.
 
+Runtime status is also exposed as a local scaffold. Executable detection is local-only, catalog examples are not installed models, service reachability and installed-model detection may remain unknown, and download/execution actions are not connected.
+
 The separate FastAPI/React demo scaffold can still be run manually:
 
 From repo root:

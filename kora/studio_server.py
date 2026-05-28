@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
 from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, recommend_catalog_models
+from kora.studio_runtime_status import get_runtime_status, summarize_installed_models
 from kora.studio_status import get_studio_status
 from kora.studio_system_profile import estimate_model_capability, get_system_profile
 
@@ -32,7 +33,9 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     studio_status = get_studio_status()
     system_profile = get_system_profile(default_host=host, default_port=port)
     model_capability_estimate = estimate_model_capability(system_profile)
-    recommended_models = recommend_catalog_models(system_profile, model_capability_estimate)
+    runtime_status = get_runtime_status()
+    installed_models_summary = summarize_installed_models(runtime_status)
+    recommended_models = recommend_catalog_models(system_profile, model_capability_estimate, runtime_status)
     return {
         "ok": True,
         "service": "kora-studio",
@@ -48,6 +51,11 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "model_catalog_status": "static_local_scaffold",
         "recommended_models": recommended_models,
         "model_catalog_claim_boundary": MODEL_CATALOG_CLAIM_BOUNDARY,
+        "runtime_status": runtime_status,
+        "installed_models_summary": installed_models_summary,
+        "catalog_runtime_distinction": (
+            "Catalog examples are not the same as installed models. Download and execution are not connected yet."
+        ),
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
         "local_runtime_required": False,
@@ -188,6 +196,23 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
             workflow_candidate.get(
                 "recommendation_note",
                 "Larger-model workflows may become more practical when deterministic work avoids the model path.",
+            )
+        ),
+        quote=True,
+    )
+    runtime_status = status.get("runtime_status", [])
+    installed_summary = status.get("installed_models_summary", {})
+    first_runtime = runtime_status[0] if isinstance(runtime_status, list) and runtime_status else {}
+    runtime_name = html.escape(str(first_runtime.get("display_name", "Unknown runtime")), quote=True)
+    runtime_detected = "detected" if first_runtime.get("executable_detected") is True else "not detected"
+    service_status = html.escape(str(first_runtime.get("service_check_status", "not_checked")), quote=True)
+    installed_status = html.escape(str(installed_summary.get("detection_status", "not_checked")), quote=True)
+    installed_count = html.escape(str(installed_summary.get("installed_model_count", 0)), quote=True)
+    installed_boundary = html.escape(
+        str(
+            installed_summary.get(
+                "claim_boundary",
+                "Installed model detection is local-only and may be unknown. Catalog examples are not installed models.",
             )
         ),
         quote=True,
@@ -417,6 +442,16 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Physically runnable local candidates</h3><p>{local_candidate_name}</p><p>{local_candidate_note}</p></div>
           <div class=\"card\"><h3>Larger-model workflow candidates</h3><p>{workflow_candidate_name}</p><p>{workflow_candidate_note}</p></div>
           <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Runtime Status</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Runtime detected</h3><p>{runtime_name}: {runtime_detected}</p><p>Runtime reachable: {service_status}</p></div>
+          <div class=\"card\"><h3>Installed Models</h3><p>Installed model detection: {installed_status}</p><p>Installed model count: {installed_count}</p></div>
+          <div class=\"card\"><h3>Catalog vs Installed</h3><p>Catalog examples are not the same as installed models.</p><p>{installed_boundary}</p></div>
+          <div class=\"card\"><h3>Actions</h3><p>Download and execution are not connected yet.</p><p>KORA does not remove model memory requirements.</p></div>
         </div>
       </section>
 
