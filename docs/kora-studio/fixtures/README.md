@@ -26,6 +26,7 @@ Fixtures help future Studio development by providing stable sample data for the 
 - `project-chat-session.sample.json`
 - `report-viewer-metadata.sample.json`
 - `kora-boost-mode-card.sample.json`
+- `execution-viewer-events.sample.json`
 
 ## Claim Boundary
 

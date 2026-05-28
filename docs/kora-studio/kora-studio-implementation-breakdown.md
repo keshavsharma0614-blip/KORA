@@ -295,6 +295,31 @@ Acceptance criteria:
 - setup guidance remains informational only
 - execution viewer remains fixture/demo or placeholder until future harness work
 
+## Phase 3.11 — Execution Viewer Fixture/Event Scaffold
+
+Status: Initial local fixture/mock event scaffold exists. `/status` exposes execution viewer schema fields, fixture event data, fixture event count, and claim boundary text. The static preview page shows the fixture stage sequence without real model execution.
+
+Scope:
+
+- local fixture/mock event schema
+- request received stage
+- deterministic route check stage
+- structured lookup stage
+- validation pass stage
+- model fallback skipped stage
+- final counters stage
+- provider/cloud disabled state in every event
+- no model downloads
+- no model execution
+- no provider/cloud route
+
+Acceptance criteria:
+
+- execution viewer events include required UI/report schema fields
+- preview UI labels events as fixture/mock data
+- final counters are shown as fixture counters only
+- no production behavior, cost reduction, energy reduction, or runtime execution claim is made
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.

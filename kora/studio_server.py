@@ -8,6 +8,7 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
+from kora.studio_execution_fixture import get_execution_viewer_fixture_summary
 from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, SETUP_GUIDANCE_PATH, recommend_catalog_models
 from kora.studio_runtime_status import get_runtime_status, summarize_installed_models
 from kora.studio_status import get_studio_status
@@ -41,6 +42,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     runtime_status = get_runtime_status()
     installed_models_summary = summarize_installed_models(runtime_status)
     recommended_models = recommend_catalog_models(system_profile, model_capability_estimate, runtime_status)
+    execution_viewer_fixture = get_execution_viewer_fixture_summary()
     return {
         "ok": True,
         "service": "kora-studio",
@@ -66,6 +68,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "setup_guidance_url": SETUP_GUIDANCE_PATH,
         "setup_guidance_claim_boundary": SETUP_GUIDANCE_CLAIM_BOUNDARY,
         "disabled_actions_route_to_guidance": True,
+        **execution_viewer_fixture,
         "first_run_section_order": [
             "Launch/local-only status",
             "Your Computer",
@@ -270,6 +273,32 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     setup_guidance_boundary = html.escape(
         str(status.get("setup_guidance_claim_boundary", SETUP_GUIDANCE_CLAIM_BOUNDARY)),
         quote=True,
+    )
+    execution_events = [
+        item for item in status.get("execution_viewer_fixture_events", []) if isinstance(item, dict)
+    ]
+    execution_status = html.escape(str(status.get("execution_viewer_status", "fixture_mock_scaffold")), quote=True)
+    execution_event_count = html.escape(str(status.get("execution_viewer_fixture_event_count", len(execution_events))), quote=True)
+    execution_schema_count = html.escape(
+        str(len(status.get("execution_viewer_event_schema_fields", []))),
+        quote=True,
+    )
+    execution_boundary = html.escape(
+        str(
+            status.get(
+                "execution_viewer_claim_boundary",
+                "Execution Viewer events are local fixture/mock data and do not execute models.",
+            )
+        ),
+        quote=True,
+    )
+    execution_event_items = "".join(
+        "<li>"
+        f"{html.escape(str(event.get('stage_name', 'Unknown stage')), quote=True)} "
+        f"({html.escape(str(event.get('route_class', 'unknown')), quote=True)} / "
+        f"{html.escape(str(event.get('status', 'unknown')), quote=True)})"
+        "</li>"
+        for event in execution_events
     )
     section_order_items = "".join(
         f"<li>{html.escape(str(item), quote=True)}</li>"
@@ -540,11 +569,16 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
 
       <section>
         <h2>Execution Viewer Placeholder</h2>
-        <div class=\"workflow\">
-          <div class=\"step\"><p class=\"step-number\">01</p><h3>Request / System Profile</h3><p>Planned: show what this machine can physically run.</p></div>
-          <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic checks / Route Selection</h3><p>Planned: choose deterministic code, structured lookup, local model, or larger execution path only when needed.</p></div>
-          <div class=\"step\"><p class=\"step-number\">03</p><h3>Local status / KORA Boost</h3><p>Planned: route deterministic and structured work to CPU/local fast paths first.</p></div>
-          <div class=\"step\"><p class=\"step-number\">04</p><h3>Future runtime integration placeholder</h3><p>Placeholder only; no runtime execution occurs on this page.</p></div>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Fixture status</h3><p>{execution_status}</p><p>Fixture/mock events only.</p><p>No real model execution.</p><p>No provider calls.</p><p>No model downloads.</p></div>
+          <div class=\"card\"><h3>Event schema</h3><p>Schema fields: {execution_schema_count}</p><p>Fixture events: {execution_event_count}</p><p>{execution_boundary}</p></div>
+          <div class=\"card\"><h3>Fixture stages</h3><ul>{execution_event_items}</ul></div>
+        </div>
+        <div class=\"workflow\" style=\"margin-top: 16px;\">
+          <div class=\"step\"><p class=\"step-number\">01</p><h3>Request received</h3><p>Local fixture request is received by the Execution Viewer scaffold.</p></div>
+          <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic route check</h3><p>Fixture route selection checks deterministic code before the model path.</p></div>
+          <div class=\"step\"><p class=\"step-number\">03</p><h3>Structured lookup and validation pass</h3><p>Fixture structured lookup succeeds and validation passes.</p></div>
+          <div class=\"step\"><p class=\"step-number\">04</p><h3>Model fallback skipped / Final counters</h3><p>Fixture counters show the model path skipped after validation. No runtime execution occurs on this page.</p></div>
         </div>
       </section>
 

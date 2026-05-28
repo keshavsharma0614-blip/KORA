@@ -94,6 +94,14 @@ def test_get_studio_server_status_fields() -> None:
     assert status["setup_guidance_url"] == "docs/kora-studio/kora-studio-runtime-setup-guidance.md"
     assert status["disabled_actions_route_to_guidance"] is True
     assert "not to an active installer" in status["setup_guidance_claim_boundary"]
+    assert status["execution_viewer_status"] == "fixture_mock_scaffold"
+    assert status["execution_viewer_fixture_event_count"] == 6
+    assert status["execution_viewer_fixture_events"][0]["stage_id"] == "request_received"
+    assert status["execution_viewer_fixture_events"][-1]["stage_id"] == "final_counters"
+    assert status["execution_viewer_fixture_events"][-1]["counters_snapshot"]["avoided_model_calls"] == 1
+    assert "local fixture/mock data" in status["execution_viewer_claim_boundary"]
+    assert status["model_execution_connected"] is False
+    assert status["download_connected"] is False
     assert status["first_run_section_order"] == [
         "Launch/local-only status",
         "Your Computer",
@@ -138,6 +146,9 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["installed_models_summary"]["installed_model_detection_enabled"] is False
     assert status["setup_guidance_status"] == "informational_scaffold"
     assert status["disabled_actions_route_to_guidance"] is True
+    assert status["execution_viewer_status"] == "fixture_mock_scaffold"
+    assert status["execution_viewer_fixture_event_count"] == 6
+    assert status["model_execution_connected"] is False
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -366,11 +377,17 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "/health" in html
     assert "/status" in html
     assert "Execution Viewer Placeholder" in html
-    assert "Request" in html
-    assert "Deterministic checks" in html
-    assert "Local status" in html
-    assert "Future runtime integration placeholder" in html
-    assert "Placeholder only; no runtime execution occurs on this page" in html
+    assert "Fixture/mock events only" in html
+    assert "No real model execution" in html
+    assert "No provider calls" in html
+    assert "No model downloads" in html
+    assert "Request received" in html
+    assert "Deterministic route check" in html
+    assert "Structured lookup" in html
+    assert "Validation pass" in html
+    assert "Model fallback skipped" in html
+    assert "Final counters" in html
+    assert "No runtime execution occurs on this page" in html
     assert "Limitations Panel" in html
     assert "No production/API-cost/energy claims" in html
     assert "No full frontend yet" in html

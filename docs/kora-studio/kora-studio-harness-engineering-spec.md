@@ -122,6 +122,8 @@ Requirements:
 
 The SSE/event capture layer provides local event data for the Execution Viewer and replay surfaces.
 
+Current scaffold status: the preview server exposes local fixture/mock execution viewer events through `/status`. These events are static fixture data for UI and schema validation; they do not execute models, call providers, download models, or prove production behavior.
+
 Requirements:
 
 - event stream for Execution Viewer

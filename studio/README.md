@@ -54,7 +54,7 @@ Catalog action labels are disabled planning scaffolds only. The preview may show
 
 Setup guidance is informational in this scaffold. Disabled actions can point to guidance copy, but they do not install runtimes, download models, execute models, call runtime model list commands, scan private model directories, or enable provider/cloud routes.
 
-The first-run demo surface is ordered around Launch / Local-only Status, Your Computer, Model Capability, Runtime Status, Catalog vs Installed, Setup Guidance, KORA Boost Boundary, and an Execution Viewer placeholder.
+The first-run demo surface is ordered around Launch / Local-only Status, Your Computer, Model Capability, Runtime Status, Catalog vs Installed, Setup Guidance, KORA Boost Boundary, and an Execution Viewer placeholder backed by local fixture/mock events. Those events show request received, deterministic route check, structured lookup, validation pass, model fallback skipped, and final counters. They do not execute models, call providers, download models, or prove production behavior.
 
 The separate FastAPI/React demo scaffold can still be run manually:
 
