@@ -776,8 +776,21 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "id=\"kora-selected-events-status\"" in html
     assert "No selected run events loaded yet" in html
     assert "Events are fetched from <code>GET /api/harness/events?run_id=&lt;id&gt;</code>" in html
+    assert "Selected Run Counters" in html
+    assert "id=\"kora-selected-run-counters\"" in html
+    assert "id=\"kora-selected-counters-status\"" in html
+    assert "Run an approved local harness request to view selected-run counters" in html
+    assert "Selected Run: Standard Mode vs KORA Boost" in html
+    assert "id=\"kora-selected-run-comparison\"" in html
+    assert "id=\"kora-selected-comparison-status\"" in html
+    assert "Run an approved local harness request to view selected-run comparison" in html
+    assert "Generated local harness counters only" in html
+    assert "Not production telemetry" in html
+    assert "Not production cost evidence" in html
     assert "selectedRunId" in html
     assert "selectedRunEvents" in html
+    assert "selectedRunCounters" in html
+    assert "selectedRunComparison" in html
     assert "data-kora-request-id" in html
     assert "Local deterministic harness data only" in html
     assert "Run Local Harness" in html
@@ -888,6 +901,8 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "fetch(\"/api/harness/run\"" in html
     assert "fetch(`/api/harness/events?run_id=${encodeURIComponent(selectedRunId)}`)" in html
     assert html.index("renderRunResponse(payload);") < html.index("await fetchSelectedEvents();")
+    assert "renderSelectedCounters(run.generated_counters" in html
+    assert "renderSelectedComparison(run.comparison_summary" in html
     assert "JSON.stringify({request_id: selectedRequestId})" in html
     assert "src=" not in html.lower()
     assert 'href="http' not in html.lower()

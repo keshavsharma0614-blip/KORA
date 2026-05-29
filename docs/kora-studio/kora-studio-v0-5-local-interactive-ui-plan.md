@@ -178,6 +178,8 @@ Status: Connected in the local preview after a successful approved local harness
 
 Render selected-run counters and Standard Mode vs KORA Boost comparison from local harness output only.
 
+Status: Connected in the local preview from the selected local harness run response. The counters are generated local harness output only, not production telemetry, and the comparison is generated from approved local harness output only, not production cost evidence.
+
 ### Task 446 - Selected-run Report Metadata Rendering
 
 Render selected-run report metadata preview and disabled file export boundary from local harness output only.

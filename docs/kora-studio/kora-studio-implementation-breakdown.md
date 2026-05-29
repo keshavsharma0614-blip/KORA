@@ -494,6 +494,7 @@ Acceptance criteria:
 - selector lists approved request IDs without arbitrary prompt input
 - Run Local Harness calls `POST /api/harness/run` with the selected approved request ID only
 - selected-run event timeline fetches generated local harness events only and does not use SSE yet
+- selected-run counters and comparison render from the selected local harness run response only
 - selected-run state stays browser-local
 - model-needed boundaries remain `execution_not_connected`
 - no production cost, energy, provider, model execution, or unsupported larger-model claim is introduced

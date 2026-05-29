@@ -980,6 +980,12 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <div class=\"card\" style=\"margin-top: 16px;\"><h3>Selected Run Event Timeline</h3><p>Generated local harness events only. Not model token streaming. No model execution. No provider calls. No downloads.</p><p>Events are fetched from <code>GET /api/harness/events?run_id=&lt;id&gt;</code> after a successful approved local harness run.</p><p id=\"kora-selected-events-status\">No selected run events loaded yet.</p></div>
         <div class=\"grid\" id=\"kora-selected-run-events\" aria-live=\"polite\"></div>
         <div class=\"grid\" style=\"margin-top: 16px;\">
+          <div class=\"card\"><h3>Selected Run Counters</h3><p>Generated local harness counters only. Not production telemetry. No model execution. No provider calls. No cost or energy claim.</p><p id=\"kora-selected-counters-status\">Run an approved local harness request to view selected-run counters.</p></div>
+          <div class=\"card\"><h3>Selected Run: Standard Mode vs KORA Boost</h3><p>Comparison is generated from approved local harness output. This is not production cost evidence. This does not execute a model.</p><p>Model-needed boundaries remain <code>execution_not_connected</code>.</p><p id=\"kora-selected-comparison-status\">Run an approved local harness request to view selected-run comparison.</p></div>
+        </div>
+        <div class=\"grid\" id=\"kora-selected-run-counters\" aria-live=\"polite\"></div>
+        <div class=\"grid\" id=\"kora-selected-run-comparison\" aria-live=\"polite\"></div>
+        <div class=\"grid\" style=\"margin-top: 16px;\">
           <div class=\"card\"><h3>Run Local Harness action state</h3><p><span class=\"badge\">Run Local Harness</span></p><p>The browser button calls only the local harness run endpoint for an approved request id.</p><p>Use <code>POST /api/harness/run</code> with an approved <code>request_id</code>.</p><p>Generated harness events only.</p></div>
           <div class=\"card\"><h3>Trigger boundary</h3><p>Approved deterministic sample requests only.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>This is local preview/demo data, not production evidence.</p></div>
           <div class=\"card\"><h3>Result surfaces</h3><p><code>GET /api/harness/run/&lt;run_id&gt;</code></p><p><code>GET /api/harness/events?run_id=&lt;id&gt;</code></p><p><code>GET /api/harness/sse?run_id=&lt;id&gt;</code></p><p>Model-needed boundary returns <code>execution_not_connected</code>.</p></div>
@@ -1083,6 +1089,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       let selectedRequestId = approvedRequests.length ? approvedRequests[0].request_id : "";
       let selectedRunId = "";
       let selectedRunEvents = [];
+      let selectedRunCounters = {{}};
+      let selectedRunComparison = {{}};
 
       const text = (id, value) => {{
         const element = document.getElementById(id);
@@ -1116,6 +1124,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       const renderRunError = (message) => {{
         text("kora-run-status", "failed");
         text("kora-run-claim-boundary", `${{message}} No model execution was attempted. Provider calls remain disabled. Try again or inspect the local server logs.`);
+        renderCountersUnavailable("Selected-run counters unavailable.");
+        renderComparisonUnavailable("Selected-run comparison unavailable.");
       }};
 
       const renderEventError = (message) => {{
@@ -1125,6 +1135,104 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         if (container) {{
           container.replaceChildren();
         }}
+      }};
+
+      const clearSelectedCards = (id) => {{
+        const container = document.getElementById(id);
+        if (container) {{
+          container.replaceChildren();
+        }}
+      }};
+
+      const renderCountersUnavailable = (message) => {{
+        selectedRunCounters = {{}};
+        text("kora-selected-counters-status", `${{message}} Generated local harness output only. No model execution. No provider calls.`);
+        clearSelectedCards("kora-selected-run-counters");
+      }};
+
+      const renderComparisonUnavailable = (message) => {{
+        selectedRunComparison = {{}};
+        text("kora-selected-comparison-status", `${{message}} This is not production cost evidence. No model execution. No provider calls.`);
+        clearSelectedCards("kora-selected-run-comparison");
+      }};
+
+      const renderSelectedCounters = (counters, eventCount) => {{
+        selectedRunCounters = counters && typeof counters === "object" ? counters : {{}};
+        const container = document.getElementById("kora-selected-run-counters");
+        if (!container) {{
+          return;
+        }}
+        container.replaceChildren();
+        const counterKeys = [
+          "total_requests",
+          "baseline_model_calls",
+          "kora_model_calls",
+          "avoided_model_calls",
+          "deterministic_routes",
+          "model_escalations",
+          "validation_pass_count",
+          "validation_fail_count"
+        ];
+        if (!Object.keys(selectedRunCounters).length) {{
+          renderCountersUnavailable("Selected-run counters unavailable.");
+          return;
+        }}
+        text("kora-selected-counters-status", "Selected-run counters loaded from generated local harness output. Not production telemetry.");
+        counterKeys.concat(["event_count"]).forEach((key) => {{
+          const value = key === "event_count" ? eventCount : selectedRunCounters[key];
+          const card = document.createElement("div");
+          card.className = "card";
+          const title = document.createElement("h3");
+          title.textContent = key;
+          const number = document.createElement("p");
+          number.className = "status-value";
+          number.textContent = String(value === undefined ? 0 : value);
+          const note = document.createElement("p");
+          note.textContent = "Generated local harness counters only. No cost or energy claim.";
+          card.appendChild(title);
+          card.appendChild(number);
+          card.appendChild(note);
+          container.appendChild(card);
+        }});
+      }};
+
+      const renderSelectedComparison = (comparison, modelExecutionStatus) => {{
+        selectedRunComparison = comparison && typeof comparison === "object" ? comparison : {{}};
+        const container = document.getElementById("kora-selected-run-comparison");
+        if (!container) {{
+          return;
+        }}
+        container.replaceChildren();
+        const metrics = selectedRunComparison.metrics || selectedRunComparison.comparison_counters || {{}};
+        const comparisonFields = [
+          ["comparison_status", selectedRunComparison.comparison_status || "unknown"],
+          ["baseline_model_calls", metrics.baseline_model_calls],
+          ["kora_model_calls", metrics.kora_model_calls],
+          ["avoided_model_calls", metrics.avoided_model_calls],
+          ["model_escalations", metrics.model_escalations],
+          ["deterministic_routes", metrics.deterministic_routes],
+          ["model_execution_status", modelExecutionStatus || "execution_not_connected"]
+        ];
+        if (!Object.keys(selectedRunComparison).length) {{
+          renderComparisonUnavailable("Selected-run comparison unavailable.");
+          return;
+        }}
+        text("kora-selected-comparison-status", "Selected-run comparison loaded from approved local harness output. Not production cost evidence.");
+        comparisonFields.forEach(([label, value]) => {{
+          const card = document.createElement("div");
+          card.className = "card";
+          const title = document.createElement("h3");
+          title.textContent = label;
+          const display = document.createElement("p");
+          display.className = "status-value";
+          display.textContent = String(value === undefined ? 0 : value);
+          const note = document.createElement("p");
+          note.textContent = "Comparison is generated from approved local harness output. This does not execute a model.";
+          card.appendChild(title);
+          card.appendChild(display);
+          card.appendChild(note);
+          container.appendChild(card);
+        }});
       }};
 
       const renderSelectedEvents = (events) => {{
@@ -1198,6 +1306,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         text("kora-run-cloud-sync-enabled", run.cloud_sync_enabled === true ? "true" : "false");
         text("kora-run-file-export-enabled", report.file_export_enabled === true ? "true" : "false");
         text("kora-run-claim-boundary", run.claim_boundary || "Generated local harness output only. No model execution.");
+        renderSelectedCounters(run.generated_counters, run.event_count || 0);
+        renderSelectedComparison(run.comparison_summary, run.model_execution_status || "execution_not_connected");
       }};
 
       document.querySelectorAll("[data-kora-request-id]").forEach((button) => {{
@@ -1244,7 +1354,9 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       window.koraStudioSelectedRunState = {{
         get selected_request_id() {{ return selectedRequestId; }},
         get selected_run_id() {{ return selectedRunId; }},
-        get selected_run_events() {{ return selectedRunEvents.slice(); }}
+        get selected_run_events() {{ return selectedRunEvents.slice(); }},
+        get selected_run_counters() {{ return Object.assign({{}}, selectedRunCounters); }},
+        get selected_run_comparison() {{ return Object.assign({{}}, selectedRunComparison); }}
       }};
     }})();
   </script>

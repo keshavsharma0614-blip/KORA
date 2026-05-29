@@ -196,6 +196,14 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             kora-selected-run-events
             kora-selected-events-status
             No selected run events loaded yet
+            Selected Run Counters
+            kora-selected-run-counters
+            kora-selected-counters-status
+            Selected Run: Standard Mode vs KORA Boost
+            kora-selected-run-comparison
+            kora-selected-comparison-status
+            Not production telemetry
+            Not production cost evidence
             kora-run-local-harness-button
             data-kora-request-id
             fetch("/api/harness/run"
