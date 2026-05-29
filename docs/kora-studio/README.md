@@ -132,9 +132,10 @@ Status:
 - installed model detection is disabled/not connected by default
 - `/status` includes informational runtime setup guidance metadata
 - disabled model actions route to setup guidance, not an active installer
+- `/status` includes local deterministic harness requests, a sample run, counters, and claim boundaries
 - `/status` includes local fixture/mock execution viewer events for the preview surface
-- `/status` includes a local fixture/mock Standard Mode vs KORA Boost comparison
-- `/status` includes a local report viewer/export placeholder based on fixture metadata
+- `/status` includes a local harness-generated Standard Mode vs KORA Boost comparison
+- `/status` includes a local report viewer/export placeholder based on local harness summary metadata
 - browser launch enabled by default unless `--no-browser` is set
 - no Ollama calls
 - no runtime model list commands
@@ -161,7 +162,7 @@ Open locally:
 http://127.0.0.1:8765/
 ```
 
-The page shows a first-run flow ordered around launch/local-only status, Your Computer, Model Capability Estimate, Runtime Status, Catalog vs Installed, Setup Guidance, Disabled Download/Run Actions, KORA Boost Boundary, Execution Viewer, Standard Mode vs KORA Boost, and Report Viewer Placeholder. It uses embedded HTML/CSS, can be opened automatically by the CLI, does not call Ollama or providers, does not enable cloud sync, does not connect a model/runtime, does not download models, does not require API keys, and does not use a frontend framework yet. Use `python3 -m kora studio --no-browser` to keep serving locally without opening a browser. The model capability estimate and model catalog recommendations are local and heuristic; recommendations are estimates until validated and do not claim unsupported larger models can run. Catalog examples are not installed models. Runtime executable detection is local-only; service reachability is a localhost-only scaffold and is not model execution readiness. Installed model detection remains not connected unless future work implements a safe local method. The default path does not scan private model directories and does not run runtime model list commands. Download and run actions are visible only as disabled/planned UI scaffolding and route to informational setup guidance, not an active installer. The execution viewer events, Standard Mode vs KORA Boost comparison, and report viewer data are fixture/mock data and do not execute models, call providers, download models, scan arbitrary local report files, upload reports, or prove production behavior. KORA does not support all open-source LLMs by default.
+The page shows a first-run flow ordered around launch/local-only status, Your Computer, Model Capability Estimate, Runtime Status, Catalog vs Installed, Setup Guidance, Disabled Download/Run Actions, KORA Boost Boundary, Local Harness Preview, Execution Viewer, Standard Mode vs KORA Boost, and Report Viewer Placeholder. It uses embedded HTML/CSS, can be opened automatically by the CLI, does not call Ollama or providers, does not enable cloud sync, does not connect a model/runtime, does not download models, does not require API keys, and does not use a frontend framework yet. Use `python3 -m kora studio --no-browser` to keep serving locally without opening a browser. The model capability estimate and model catalog recommendations are local and heuristic; recommendations are estimates until validated and do not claim unsupported larger models can run. Catalog examples are not installed models. Runtime executable detection is local-only; service reachability is a localhost-only scaffold and is not model execution readiness. Installed model detection remains not connected unless future work implements a safe local method. The default path does not scan private model directories and does not run runtime model list commands. Download and run actions are visible only as disabled/planned UI scaffolding and route to informational setup guidance, not an active installer. The Local Harness Preview, Standard Mode vs KORA Boost comparison, and report viewer placeholder now use local deterministic harness metadata; the Execution Viewer also retains fixture/mock data for compatibility. These surfaces do not execute models, call providers, download models, scan arbitrary local report files, upload reports, or prove production behavior. KORA does not support all open-source LLMs by default.
 
 ## Implementation Planning
 
@@ -172,6 +173,8 @@ The page shows a first-run flow ordered around launch/local-only status, Your Co
 - [KORA Studio v0.2 readiness report](kora-studio-v0-2-readiness-report.md)
 - [KORA Studio v0.2 goal report](kora-studio-v0-2-goal-report.md)
 - [KORA Studio v0.3 live harness plan](kora-studio-v0-3-live-harness-plan.md)
+- [KORA Studio v0.3 readiness report](kora-studio-v0-3-readiness-report.md)
+- [KORA Studio v0.3 goal report](kora-studio-v0-3-goal-report.md)
 - [Harness engineering specification](kora-studio-harness-engineering-spec.md)
 - [Runtime setup guidance](kora-studio-runtime-setup-guidance.md)
 - [Report viewer requirements](report-viewer-requirements.md)
