@@ -465,6 +465,35 @@ Acceptance criteria:
 - report metadata preview does not scan arbitrary local files, write report files, upload reports, or create production evidence
 - smoke checks cover planned harness endpoints if implemented
 
+## Phase 3.16 — v0.5 Local Interactive UI Plan
+
+Status: Planning only. See `docs/kora-studio/kora-studio-v0-5-local-interactive-ui-plan.md`.
+
+Goal: Add a local interactive UI for approved deterministic sample requests and selected-run state.
+
+Scope:
+
+- approved request selector
+- Run Local Harness button
+- browser-local selected-run state
+- generated event timeline rendering for selected run
+- selected-run counters and comparison rendering
+- selected-run report metadata preview
+- no arbitrary prompt input
+- no model execution
+- no provider calls
+- no downloads
+- no cloud sync
+- no private model directory scans
+- no runtime model list commands
+
+Acceptance criteria:
+
+- interactive UI only calls existing localhost harness endpoints
+- selected-run state stays browser-local
+- model-needed boundaries remain `execution_not_connected`
+- no production cost, energy, provider, model execution, or unsupported larger-model claim is introduced
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.
