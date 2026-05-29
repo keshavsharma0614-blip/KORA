@@ -467,7 +467,7 @@ Acceptance criteria:
 
 ## Phase 3.16 — v0.5 Local Interactive UI Plan
 
-Status: Planning only. See `docs/kora-studio/kora-studio-v0-5-local-interactive-ui-plan.md`.
+Status: Initial request selector scaffold exists. See `docs/kora-studio/kora-studio-v0-5-local-interactive-ui-plan.md`.
 
 Goal: Add a local interactive UI for approved deterministic sample requests and selected-run state.
 
@@ -475,6 +475,7 @@ Scope:
 
 - approved request selector
 - Run Local Harness button
+- selected request preview
 - browser-local selected-run state
 - generated event timeline rendering for selected run
 - selected-run counters and comparison rendering
@@ -490,6 +491,7 @@ Scope:
 Acceptance criteria:
 
 - interactive UI only calls existing localhost harness endpoints
+- selector scaffold lists approved request IDs without arbitrary prompt input
 - selected-run state stays browser-local
 - model-needed boundaries remain `execution_not_connected`
 - no production cost, energy, provider, model execution, or unsupported larger-model claim is introduced

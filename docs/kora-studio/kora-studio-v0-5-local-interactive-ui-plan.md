@@ -160,6 +160,8 @@ Tests must not:
 
 Add a dependency-free or existing-stack UI scaffold that renders approved deterministic sample requests as selectable local items. Do not add arbitrary prompt input.
 
+Status: Initial selector scaffold exists as a non-JavaScript preview. It lists approved deterministic sample requests, shows a selected request preview, and keeps the Run Local Harness action planned/disabled until Task 443.
+
 ### Task 443 - Run Local Harness Button and Selected-run State
 
 Connect the selected approved request to `POST /api/harness/run` and store the selected run response in browser state only.

@@ -184,6 +184,13 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             No file export in this preview
             File export: disabled
             File written: false
+            Approved Request Selector
+            Selector preview only
+            Approved local harness requests only
+            Selected request preview
+            Run action will use local harness endpoint in a later task
+            Disabled Run Local Harness action
+            Run Local Harness planned
             api_endpoint_connected
             Run Local Harness
             Approved deterministic sample requests only

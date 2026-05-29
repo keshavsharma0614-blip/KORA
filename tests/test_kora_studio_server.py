@@ -761,6 +761,16 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "local_deterministic_harness_available" in html
     assert "generated_events_available" in html
     assert "Run trigger: api_endpoint_connected" in html
+    assert "Approved Request Selector" in html
+    assert "Selector preview only" in html
+    assert "Approved local harness requests only" in html
+    assert "Selected request preview" in html
+    assert "Run action will use local harness endpoint in a later task" in html
+    assert "Disabled Run Local Harness action" in html
+    assert "Run Local Harness planned" in html
+    assert "The interactive POST trigger is not connected in this selector scaffold" in html
+    assert "Selected request state is preview-only and browser-local state is planned for Task 443" in html
+    assert "Local deterministic harness data only" in html
     assert "Run Local Harness" in html
     assert "Run Local Harness action state" in html
     assert "Approved deterministic sample requests only" in html

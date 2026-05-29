@@ -608,6 +608,22 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         "</div>"
         for request in local_harness_requests
     )
+    selector_preview_request = local_harness_requests[0] if local_harness_requests else {}
+    selector_preview_id = html.escape(str(selector_preview_request.get("request_id", "unknown")), quote=True)
+    selector_preview_text = html.escape(str(selector_preview_request.get("input_text", "No approved request selected.")), quote=True)
+    selector_preview_route = html.escape(str(selector_preview_request.get("expected_route_class", "unknown")), quote=True)
+    selector_preview_model_needed = html.escape(str(selector_preview_request.get("expected_model_needed", "unknown")), quote=True)
+    local_harness_selector_items = "".join(
+        "<div class=\"card\">"
+        "<h3>Selector option</h3>"
+        f"<p><code>{html.escape(str(request.get('request_id', 'unknown')), quote=True)}</code></p>"
+        f"<p>{html.escape(str(request.get('input_text', 'Approved local sample request.')), quote=True)}</p>"
+        f"<p>Route class: {html.escape(str(request.get('expected_route_class', 'unknown')), quote=True)}</p>"
+        f"<p>Model-needed boundary: {html.escape(str(request.get('expected_model_needed', False)), quote=True)}</p>"
+        "<p><span class=\"badge\">Approved local harness requests only</span></p>"
+        "</div>"
+        for request in local_harness_requests
+    )
     local_harness_event_items = "".join(
         "<li>"
         f"{html.escape(str(event.get('stage_name', 'Unknown stage')), quote=True)} "
@@ -913,6 +929,12 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Sample request</h3><p><code>{sample_request_id}</code></p><p>{sample_input}</p><p>Family: {sample_family}</p><p>Expected route: {sample_route}</p><p>Validation: {sample_validation}</p><p>Model needed: {sample_model_needed}</p></div>
           <div class=\"card\"><h3>Boundary</h3><p>{local_harness_boundary}</p><p>Model-needed boundaries do not execute models in this milestone.</p><p>No provider call, download, or cloud sync is connected.</p></div>
         </div>
+        <div class=\"grid\" style=\"margin-top: 16px;\">
+          <div class=\"card\"><h3>Approved Request Selector</h3><p>Selector preview only.</p><p>Approved local harness requests only.</p><p>Run action will use local harness endpoint in a later task.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>Local deterministic harness data only.</p></div>
+          <div class=\"card\"><h3>Selected request preview</h3><p><code>{selector_preview_id}</code></p><p>{selector_preview_text}</p><p>Route class: {selector_preview_route}</p><p>Model-needed boundary: {selector_preview_model_needed}</p><p>Selected request state is preview-only and browser-local state is planned for Task 443.</p></div>
+          <div class=\"card\"><h3>Disabled Run Local Harness action</h3><p><span class=\"badge\">Run Local Harness planned</span></p><p>The interactive POST trigger is not connected in this selector scaffold.</p><p>No external scripts, no arbitrary input, and no model path are connected.</p></div>
+        </div>
+        <div class=\"grid\" style=\"margin-top: 16px;\">{local_harness_selector_items}</div>
         <div class=\"grid\" style=\"margin-top: 16px;\">
           <div class=\"card\"><h3>Run Local Harness action state</h3><p><span class=\"badge\">Run Local Harness</span></p><p>Static preview guidance only; no browser-side JavaScript is connected in this panel.</p><p>Use <code>POST /api/harness/run</code> with an approved <code>request_id</code>.</p><p>Generated harness events only.</p></div>
           <div class=\"card\"><h3>Trigger boundary</h3><p>Approved deterministic sample requests only.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>This is local preview/demo data, not production evidence.</p></div>
