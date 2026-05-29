@@ -150,6 +150,12 @@ def test_get_studio_server_status_fields() -> None:
     assert status["local_harness_counters"]["kora_model_calls"] == 0
     assert status["local_harness_counters"]["avoided_model_calls"] == 1
     assert "synthetic deterministic requests" in status["local_harness_claim_boundary"]
+    assert status["local_harness_comparison_status"] == "local_deterministic_harness_generated"
+    assert status["local_harness_comparison"]["comparison_source"] == "local_harness_summary"
+    assert status["comparison_counters"]["baseline_model_calls"] == 1
+    assert status["comparison_counters"]["kora_model_calls"] == 0
+    assert status["comparison_counters"]["avoided_model_calls"] == 1
+    assert "local deterministic harness data" in status["comparison_claim_boundary"]
     assert status["execution_viewer_status"] == "fixture_mock_scaffold"
     assert status["execution_viewer_fixture_event_count"] == 6
     assert status["execution_viewer_fixture_events"][0]["stage_id"] == "request_received"
@@ -189,6 +195,7 @@ def test_get_studio_server_status_fields() -> None:
         "standard_vs_kora",
         "report_viewer",
         "local_harness",
+        "local_harness_comparison",
     }
     assert "not a production release" in status["claim_boundaries"]["studio"]
     assert "localhost-only" in status["claim_boundaries"]["launch"]
@@ -200,6 +207,7 @@ def test_get_studio_server_status_fields() -> None:
     assert "fixture/mock comparison" in status["claim_boundaries"]["standard_vs_kora"]
     assert "local fixture metadata only" in status["claim_boundaries"]["report_viewer"]
     assert "synthetic deterministic requests" in status["claim_boundaries"]["local_harness"]
+    assert "local deterministic harness data" in status["claim_boundaries"]["local_harness_comparison"]
     assert status["first_run_section_order"] == [
         "Launch/local-only status",
         "Your Computer",
@@ -256,6 +264,9 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["local_harness_sample_run"]["status"] == "completed"
     assert status["local_harness_counters"]["avoided_model_calls"] == 1
     assert status["local_harness_status"]["model_execution_connected"] is False
+    assert status["local_harness_comparison_status"] == "local_deterministic_harness_generated"
+    assert status["comparison_counters"]["avoided_model_calls"] == 1
+    assert status["local_harness_comparison"]["model_execution_connected"] is False
     assert status["model_execution_connected"] is False
     assert status["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
     assert status["standard_vs_kora_metrics"]["avoided_model_calls"] == 1
@@ -286,6 +297,10 @@ def test_status_payload_exposes_v0_2_contract_fields() -> None:
         "local_harness_sample_run",
         "local_harness_counters",
         "local_harness_claim_boundary",
+        "local_harness_comparison_status",
+        "local_harness_comparison",
+        "comparison_counters",
+        "comparison_claim_boundary",
         "standard_vs_kora_comparison_status",
         "standard_vs_kora_comparison",
         "standard_vs_kora_metrics",
@@ -564,7 +579,8 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Model-needed boundaries do not execute models in this milestone" in html
     assert "Local deterministic harness output" in html
     assert "Standard Mode vs KORA Boost" in html
-    assert "Fixture/mock comparison only" in html
+    assert "Local deterministic harness comparison" in html
+    assert "local_deterministic_harness_generated" in html
     assert "Baseline model calls" in html
     assert "KORA model calls" in html
     assert "Avoided model calls" in html

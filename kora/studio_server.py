@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
 from kora.studio_execution_fixture import get_execution_viewer_fixture_summary, get_standard_vs_kora_status_fields
+from kora.studio_harness_comparison import get_local_harness_comparison_status_fields
 from kora.studio_harness_events import LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY, build_local_harness_events
 from kora.studio_harness_requests import get_local_harness_request_summary, get_local_harness_requests
 from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, SETUP_GUIDANCE_PATH, recommend_catalog_models
@@ -52,6 +53,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     local_harness_request_summary = get_local_harness_request_summary()
     local_harness_sample_run = build_local_harness_events(local_harness_requests[0])
     local_harness_counters = dict(local_harness_sample_run["counters_snapshot"])
+    local_harness_comparison = get_local_harness_comparison_status_fields(str(local_harness_requests[0]["request_id"]))
     local_harness_status = {
         "status": "local_deterministic_harness_available",
         "event_source_status": "status_sample_only",
@@ -136,6 +138,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "standard_vs_kora": str(standard_vs_kora_fixture.get("standard_vs_kora_claim_boundary", "")),
         "report_viewer": str(report_viewer_fixture.get("report_viewer_claim_boundary", "")),
         "local_harness": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
+        "local_harness_comparison": str(local_harness_comparison.get("comparison_claim_boundary", "")),
     }
     return {
         "ok": True,
@@ -181,6 +184,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "local_harness_claim_boundary": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
         **execution_viewer_fixture,
         **standard_vs_kora_fixture,
+        **local_harness_comparison,
         **report_viewer_fixture,
         "claim_boundaries": claim_boundaries,
         "first_run_section_order": first_run_section_order,
@@ -397,17 +401,23 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         ),
         quote=True,
     )
-    standard_vs_kora_status = html.escape(str(status.get("standard_vs_kora_comparison_status", "fixture_mock_scaffold")), quote=True)
+    standard_vs_kora_status = html.escape(
+        str(status.get("local_harness_comparison_status", status.get("standard_vs_kora_comparison_status", "fixture_mock_scaffold"))),
+        quote=True,
+    )
     standard_vs_kora_boundary = html.escape(
         str(
             status.get(
-                "standard_vs_kora_claim_boundary",
-                "Standard Mode vs KORA Boost comparison data is local fixture/mock data.",
+                "comparison_claim_boundary",
+                status.get(
+                    "standard_vs_kora_claim_boundary",
+                    "Standard Mode vs KORA Boost comparison data is local fixture/mock data.",
+                ),
             )
         ),
         quote=True,
     )
-    comparison = status.get("standard_vs_kora_comparison", {})
+    comparison = status.get("local_harness_comparison") or status.get("standard_vs_kora_comparison", {})
     comparison_modes = comparison.get("modes", []) if isinstance(comparison, dict) else []
     standard_mode = next(
         (item for item in comparison_modes if isinstance(item, dict) and item.get("mode") == "standard"),
@@ -420,7 +430,12 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     standard_route_summary = html.escape(str(standard_mode.get("route_summary", "")), quote=True)
     kora_route_summary = html.escape(str(kora_mode.get("route_summary", "")), quote=True)
     metric_cards = [
-        item for item in status.get("standard_vs_kora_metric_cards", []) if isinstance(item, dict)
+        item
+        for item in (
+            status.get("local_harness_comparison_metric_cards")
+            or status.get("standard_vs_kora_metric_cards", [])
+        )
+        if isinstance(item, dict)
     ]
     standard_vs_kora_metric_items = "".join(
         "<div class=\"card\">"
@@ -835,7 +850,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <section>
         <h2>Standard Mode vs KORA Boost</h2>
         <div class=\"grid\">
-          <div class=\"card\"><h3>Comparison status</h3><p>{standard_vs_kora_status}</p><p>Fixture/mock comparison only.</p><p>No model execution occurs.</p></div>
+          <div class=\"card\"><h3>Comparison status</h3><p>{standard_vs_kora_status}</p><p>Local deterministic harness comparison.</p><p>No model execution occurs.</p></div>
           <div class=\"card\"><h3>Standard Mode</h3><p>{standard_route_summary}</p><p>Model call counted in fixture baseline: 1</p></div>
           <div class=\"card\"><h3>KORA Boost</h3><p>{kora_route_summary}</p><p>Model call counted in fixture KORA path: 0</p></div>
           <div class=\"card\"><h3>Claim boundary</h3><p>{standard_vs_kora_boundary}</p><p>No cost or energy claim is made.</p></div>
