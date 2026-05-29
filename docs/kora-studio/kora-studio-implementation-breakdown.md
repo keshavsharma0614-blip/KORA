@@ -395,6 +395,64 @@ Acceptance criteria:
 - preview UI displays claim boundary text
 - no local report file scan, upload, provider call, or generated report commit is connected
 
+## Phase 3.14 — v0.3 Local Harness Preview
+
+Status: Initial v0.3 local harness preview exists. `/status` exposes approved deterministic sample requests, a generated sample run, generated counters, a local harness-generated Standard Mode vs KORA Boost comparison, and report viewer metadata sourced from local harness summary data.
+
+Scope:
+
+- approved deterministic sample requests
+- local harness event generation
+- generated counters
+- model-needed boundary without model execution
+- Local Harness Preview UI panel
+- local harness-generated comparison output
+- report viewer placeholder sourced from local harness summary metadata
+- no POST run endpoint
+- no SSE stream
+- no model downloads
+- no model execution
+- no provider/cloud route
+
+Acceptance criteria:
+
+- local harness data is visible in `/status`
+- preview UI shows local harness status, sample request, event stages, and counters
+- comparison metrics are labelled as local deterministic harness output
+- report viewer remains placeholder behavior
+- claim boundaries remain visible
+
+## Phase 3.15 — v0.4 Local Run Trigger Plan
+
+Status: Planning only. See `docs/kora-studio/kora-studio-v0-4-local-run-trigger-plan.md`.
+
+Goal: Add a future local run trigger surface for approved deterministic sample requests and optional event-stream scaffolding for generated harness events.
+
+Scope:
+
+- approved request selection
+- local-only run trigger
+- generated event retrieval
+- generated counters
+- optional SSE/event-stream scaffold
+- selected-run comparison update
+- selected-run report metadata update
+- no arbitrary prompt execution unless explicitly bounded in a later task
+- no provider calls
+- no cloud sync
+- no model downloads
+- no real model execution
+- no private model directory scans
+- no runtime model list commands
+
+Acceptance criteria:
+
+- approved sample request can be triggered locally
+- invalid request ids are rejected
+- model-needed boundaries return `execution_not_connected`
+- run state and counters remain local deterministic harness output
+- smoke checks cover planned harness endpoints if implemented
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.
