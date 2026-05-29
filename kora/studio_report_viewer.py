@@ -7,7 +7,7 @@ from typing import Any
 
 REPORT_VIEWER_FIXTURE_PATH = "docs/kora-studio/fixtures/report-viewer-metadata.sample.json"
 REPORT_VIEWER_CLAIM_BOUNDARY = (
-    "Report viewer data is local fixture metadata only. It does not scan arbitrary local files, upload reports, "
+    "Report viewer data is local summary metadata only. It does not scan arbitrary local files, upload reports, "
     "commit generated reports, call providers, or create new benchmark evidence."
 )
 REPORT_EXPORT_CLAIM_BOUNDARY = (
@@ -29,16 +29,34 @@ REPORT_VIEWER_COUNTERS = {
 }
 
 
-def get_report_viewer_placeholder() -> dict[str, Any]:
+def get_report_viewer_placeholder(
+    counters: dict[str, Any] | None = None,
+    *,
+    report_source: str = "fixture_metadata",
+) -> dict[str, Any]:
     """Return claim-safe report viewer placeholder data without local file scanning."""
 
+    report_status = (
+        "local_harness_summary_placeholder"
+        if report_source == "local_harness_summary"
+        else "fixture_metadata_placeholder"
+    )
+    report_title = (
+        "Local Harness Summary Report"
+        if report_source == "local_harness_summary"
+        else "Local No-Network Validation Report"
+    )
+    report_path_display = "local_harness_summary" if report_source == "local_harness_summary" else "/tmp/kora_customer_support_validation.md"
+
     return {
-        "report_viewer_status": "fixture_metadata_placeholder",
+        "report_viewer_status": report_status,
+        "report_status": report_status,
+        "report_source": report_source,
         "fixture_id": "kora_studio_report_viewer_metadata_v0_1",
         "fixture_type": "report_viewer_metadata",
-        "report_title": "Local No-Network Validation Report",
+        "report_title": report_title,
         "report_fixture_path": REPORT_VIEWER_FIXTURE_PATH,
-        "report_path_display": "/tmp/kora_customer_support_validation.md",
+        "report_path_display": report_path_display,
         "privacy_class": "synthetic",
         "supported_fixture_only": True,
         "arbitrary_local_file_scan_enabled": False,
@@ -48,13 +66,13 @@ def get_report_viewer_placeholder() -> dict[str, Any]:
         "cloud_sync_enabled": False,
         "generated_report_commit_enabled": False,
         "sections": ["Summary", "Counters", "Boundary", "Reproduction", "Notes"],
-        "counters": deepcopy(REPORT_VIEWER_COUNTERS),
+        "counters": deepcopy(counters or REPORT_VIEWER_COUNTERS),
         "boundary_warnings": [
-            "Local/no-network fixture metadata only.",
+            "Local/no-network summary metadata only.",
             "No arbitrary local file scan is performed.",
             "No cloud upload is connected.",
             "Do not commit generated reports by default.",
-            "Do not treat fixture counters as production evidence.",
+            "Do not treat local harness counters as production evidence.",
         ],
         "claim_boundary": REPORT_VIEWER_CLAIM_BOUNDARY,
     }
@@ -76,10 +94,14 @@ def get_report_export_placeholder() -> dict[str, Any]:
     }
 
 
-def get_report_viewer_status_fields() -> dict[str, Any]:
+def get_report_viewer_status_fields(
+    counters: dict[str, Any] | None = None,
+    *,
+    report_source: str = "fixture_metadata",
+) -> dict[str, Any]:
     """Return /status fields for the report viewer placeholder."""
 
-    viewer = get_report_viewer_placeholder()
+    viewer = get_report_viewer_placeholder(counters, report_source=report_source)
     export = get_report_export_placeholder()
     return {
         "report_viewer_status": viewer["report_viewer_status"],

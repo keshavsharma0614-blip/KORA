@@ -48,12 +48,15 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     recommended_models = recommend_catalog_models(system_profile, model_capability_estimate, runtime_status)
     execution_viewer_fixture = get_execution_viewer_fixture_summary()
     standard_vs_kora_fixture = get_standard_vs_kora_status_fields()
-    report_viewer_fixture = get_report_viewer_status_fields()
     local_harness_requests = get_local_harness_requests()
     local_harness_request_summary = get_local_harness_request_summary()
     local_harness_sample_run = build_local_harness_events(local_harness_requests[0])
     local_harness_counters = dict(local_harness_sample_run["counters_snapshot"])
     local_harness_comparison = get_local_harness_comparison_status_fields(str(local_harness_requests[0]["request_id"]))
+    report_viewer_fixture = get_report_viewer_status_fields(
+        local_harness_counters,
+        report_source="local_harness_summary",
+    )
     local_harness_status = {
         "status": "local_deterministic_harness_available",
         "event_source_status": "status_sample_only",
@@ -862,7 +865,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <h2>Report Viewer Placeholder</h2>
         <div class=\"grid\">
           <div class=\"card\"><h3>Report metadata</h3><p>{report_viewer_status}</p><p>{report_title}</p><p><code>{report_fixture_path}</code></p><p>Displayed path: <code>{report_path_display}</code></p></div>
-          <div class=\"card\"><h3>Local-only boundary</h3><p>No arbitrary local file scan is performed.</p><p>No cloud upload is connected.</p><p>No provider calls are made.</p><p>Fixture summary only.</p></div>
+          <div class=\"card\"><h3>Local-only boundary</h3><p>No arbitrary local file scan is performed.</p><p>No cloud upload is connected.</p><p>No provider calls are made.</p><p>Local harness summary only.</p></div>
           <div class=\"card\"><h3>Export placeholder</h3><p>{report_export_status}</p><p><span class=\"badge\">{report_export_label}</span></p><p>{report_export_reason}</p><p>{report_export_boundary}</p></div>
           <div class=\"card\"><h3>Claim boundary</h3><p>{report_boundary}</p><p>No new benchmark evidence is created.</p></div>
         </div>

@@ -15,6 +15,7 @@ def test_report_viewer_placeholder_is_fixture_only_and_local_safe() -> None:
     viewer = get_report_viewer_placeholder()
 
     assert viewer["report_viewer_status"] == "fixture_metadata_placeholder"
+    assert viewer["report_source"] == "fixture_metadata"
     assert viewer["fixture_type"] == "report_viewer_metadata"
     assert viewer["report_fixture_path"] == REPORT_VIEWER_FIXTURE_PATH
     assert viewer["privacy_class"] == "synthetic"
@@ -51,4 +52,25 @@ def test_report_viewer_status_fields_expose_boundaries() -> None:
     assert status_fields["report_export_status"] == "placeholder_not_connected"
     assert status_fields["report_export_claim_boundary"] == REPORT_EXPORT_CLAIM_BOUNDARY
     assert status_fields["report_viewer_placeholder"]["counters"]["avoided_model_calls"] == 8
+    assert status_fields["report_export_placeholder"]["export_action_enabled"] is False
+
+
+def test_report_viewer_can_use_local_harness_summary_counters() -> None:
+    counters = {
+        "total_requests": 1,
+        "baseline_model_calls": 1,
+        "kora_model_calls": 0,
+        "avoided_model_calls": 1,
+    }
+    status_fields = get_report_viewer_status_fields(counters, report_source="local_harness_summary")
+    viewer = status_fields["report_viewer_placeholder"]
+
+    assert status_fields["report_viewer_status"] == "local_harness_summary_placeholder"
+    assert viewer["report_status"] == "local_harness_summary_placeholder"
+    assert viewer["report_source"] == "local_harness_summary"
+    assert viewer["report_title"] == "Local Harness Summary Report"
+    assert viewer["report_path_display"] == "local_harness_summary"
+    assert viewer["counters"] == counters
+    assert viewer["arbitrary_local_file_scan_enabled"] is False
+    assert viewer["upload_enabled"] is False
     assert status_fields["report_export_placeholder"]["export_action_enabled"] is False

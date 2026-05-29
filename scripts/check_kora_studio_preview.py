@@ -108,7 +108,7 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "/status comparison is not fixture",
     )
     _require(
-        status.get("report_viewer_status") == "fixture_metadata_placeholder",
+        status.get("report_viewer_status") in {"fixture_metadata_placeholder", "local_harness_summary_placeholder"},
         "/status report viewer is not placeholder",
     )
     results.append("/status ok")

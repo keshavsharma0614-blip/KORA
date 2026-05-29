@@ -72,7 +72,7 @@ def _fake_opener(url: str, timeout: float) -> FakeResponse:
                     },
                     "execution_viewer_status": "fixture_mock_scaffold",
                     "standard_vs_kora_comparison_status": "fixture_mock_scaffold",
-                    "report_viewer_status": "fixture_metadata_placeholder",
+                    "report_viewer_status": "local_harness_summary_placeholder",
                     "provider_calls_enabled": False,
                     "cloud_sync_enabled": False,
                     "claim_boundaries": {},

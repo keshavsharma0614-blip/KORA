@@ -173,17 +173,19 @@ def test_get_studio_server_status_fields() -> None:
     assert status["standard_vs_kora_metrics"]["validation_pass_count"] == 1
     assert len(status["standard_vs_kora_metric_cards"]) == 6
     assert "fixture/mock comparison" in status["standard_vs_kora_claim_boundary"]
-    assert status["report_viewer_status"] == "fixture_metadata_placeholder"
+    assert status["report_viewer_status"] == "local_harness_summary_placeholder"
+    assert status["report_viewer_placeholder"]["report_source"] == "local_harness_summary"
     assert status["report_viewer_placeholder"]["report_fixture_path"] == (
         "docs/kora-studio/fixtures/report-viewer-metadata.sample.json"
     )
     assert status["report_viewer_placeholder"]["arbitrary_local_file_scan_enabled"] is False
     assert status["report_viewer_placeholder"]["upload_enabled"] is False
     assert status["report_viewer_placeholder"]["generated_report_commit_enabled"] is False
-    assert status["report_viewer_placeholder"]["counters"]["avoided_model_calls"] == 8
+    assert status["report_viewer_placeholder"]["counters"] == status["local_harness_counters"]
+    assert status["report_viewer_placeholder"]["counters"]["avoided_model_calls"] == 1
     assert status["report_export_status"] == "placeholder_not_connected"
     assert status["report_export_placeholder"]["export_action_enabled"] is False
-    assert "local fixture metadata only" in status["report_viewer_claim_boundary"]
+    assert "local summary metadata only" in status["report_viewer_claim_boundary"]
     assert set(status["claim_boundaries"]) == {
         "studio",
         "launch",
@@ -205,7 +207,7 @@ def test_get_studio_server_status_fields() -> None:
     assert "remain disabled" in status["claim_boundaries"]["disabled_actions"]
     assert "local fixture/mock data" in status["claim_boundaries"]["execution_viewer"]
     assert "fixture/mock comparison" in status["claim_boundaries"]["standard_vs_kora"]
-    assert "local fixture metadata only" in status["claim_boundaries"]["report_viewer"]
+    assert "local summary metadata only" in status["claim_boundaries"]["report_viewer"]
     assert "synthetic deterministic requests" in status["claim_boundaries"]["local_harness"]
     assert "local deterministic harness data" in status["claim_boundaries"]["local_harness_comparison"]
     assert status["first_run_section_order"] == [
@@ -270,7 +272,8 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["model_execution_connected"] is False
     assert status["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
     assert status["standard_vs_kora_metrics"]["avoided_model_calls"] == 1
-    assert status["report_viewer_status"] == "fixture_metadata_placeholder"
+    assert status["report_viewer_status"] == "local_harness_summary_placeholder"
+    assert status["report_viewer_placeholder"]["report_source"] == "local_harness_summary"
     assert status["report_export_status"] == "placeholder_not_connected"
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
@@ -321,7 +324,7 @@ def test_status_payload_exposes_v0_2_contract_fields() -> None:
     assert status["disabled_action_state"]["model_execution_connected"] is False
     assert status["execution_viewer_status"] == "fixture_mock_scaffold"
     assert status["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
-    assert status["report_viewer_status"] == "fixture_metadata_placeholder"
+    assert status["report_viewer_status"] == "local_harness_summary_placeholder"
     assert status["provider_calls_enabled"] is False
     assert status["cloud_sync_enabled"] is False
 
@@ -512,12 +515,12 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Ollama integration: not connected" in html
     assert "No production/API-cost/energy claims" in html
     assert "Report Viewer Placeholder" in html
-    assert "Local No-Network Validation Report" in html
+    assert "Local Harness Summary Report" in html
     assert "docs/kora-studio/fixtures/report-viewer-metadata.sample.json" in html
     assert "No arbitrary local file scan is performed" in html
     assert "No cloud upload is connected" in html
     assert "Export not connected yet" in html
-    assert "Fixture summary only" in html
+    assert "Local harness summary only" in html
     assert "No new benchmark evidence is created" in html
     assert "provider calls enabled" not in html.lower()
     assert "production cost reduction" not in html.lower()
