@@ -34,6 +34,27 @@ def test_trigger_local_harness_run_accepts_approved_request_id() -> None:
     assert run["generated_counters"]["avoided_model_calls"] == 1
     assert run["comparison_summary"]["metrics"]["avoided_model_calls"] == 1
     assert run["report_metadata_summary"]["report_source"] == "local_harness_summary"
+    assert run["report_metadata_summary"]["report_source_detail"] == "local deterministic harness output / fixture metadata"
+    assert run["report_metadata_summary"]["run_id"] == run["run_id"]
+    assert run["report_metadata_summary"]["request_id"] == run["request_id"]
+    assert run["report_metadata_summary"]["created_at"] == run["created_at"]
+    assert run["report_metadata_summary"]["generated_at"] == run["completed_at"]
+    assert run["report_metadata_summary"]["event_count"] == len(run["generated_events"])
+    assert run["report_metadata_summary"]["counter_summary"]["avoided_model_calls"] == 1
+    assert run["report_metadata_summary"]["comparison_summary_status"] == "local_deterministic_harness_generated"
+    assert run["report_metadata_summary"]["model_execution_status"] == "not_needed"
+    assert run["report_metadata_summary"]["provider_calls_enabled"] is False
+    assert run["report_metadata_summary"]["cloud_sync_enabled"] is False
+    assert run["report_metadata_summary"]["file_export_enabled"] is False
+    assert run["report_metadata_summary"]["file_written"] is False
+    assert run["report_metadata_summary"]["export_action_enabled"] is False
+    assert run["report_metadata_summary"]["writes_generated_reports"] is False
+    assert run["report_metadata_summary"]["uploads_reports"] is False
+    assert run["report_metadata_summary"]["commits_generated_reports"] is False
+    assert run["report_metadata_summary"]["production_evidence_claim"] is False
+    assert run["report_metadata_summary"]["cost_claim_enabled"] is False
+    assert run["report_metadata_summary"]["energy_claim_enabled"] is False
+    assert "local summary metadata only" in run["report_metadata_summary"]["claim_boundary"]
     assert run["event_count"] == len(run["generated_events"])
     assert run["model_needed_boundary_status"] == "not_needed"
     assert run["model_execution_status"] == "not_needed"
@@ -56,6 +77,9 @@ def test_trigger_local_harness_run_preserves_model_needed_boundary_without_execu
     assert run["selected_request"]["expected_model_needed"] is True
     assert run["model_needed_boundary_status"] == "execution_not_connected"
     assert run["model_execution_status"] == "execution_not_connected"
+    assert run["report_metadata_summary"]["model_execution_status"] == "execution_not_connected"
+    assert run["report_metadata_summary"]["file_export_enabled"] is False
+    assert run["report_metadata_summary"]["file_written"] is False
     assert run["generated_counters"]["model_escalations"] == 1
     assert run["generated_counters"]["kora_model_calls"] == 0
     assert run["generated_counters"]["avoided_model_calls"] == 0

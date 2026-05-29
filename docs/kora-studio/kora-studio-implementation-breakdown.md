@@ -440,7 +440,7 @@ Scope:
 - local harness Standard Mode vs KORA Boost comparison boundary in the preview UI
 - generated event SSE stream through `GET /api/harness/sse?run_id=<id>`
 - selected-run comparison update
-- selected-run report metadata update
+- selected-run report metadata update with disabled file export state
 - no arbitrary prompt execution unless explicitly bounded in a later task
 - no browser-side JavaScript trigger yet
 - no provider calls
@@ -461,6 +461,8 @@ Acceptance criteria:
 - generated event retrieval is non-SSE and does not stream model tokens
 - SSE streams generated harness events only and does not stream model tokens, provider output, or model output
 - generated counters and comparison panels are local harness output only, not production evidence
+- generated run report metadata includes report source, run/request relationship, event count, counter summary, comparison status, and disabled export state
+- report metadata preview does not scan arbitrary local files, write report files, upload reports, or create production evidence
 - smoke checks cover planned harness endpoints if implemented
 
 ## Phase 4 — Report Viewer

@@ -173,6 +173,14 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         status["report_viewer_placeholder"].get("arbitrary_local_file_scan_enabled") is False,
         "/status report viewer scans arbitrary local files",
     )
+    _require(
+        status["report_viewer_placeholder"].get("file_export_enabled") is False,
+        "/status report viewer reports file export enabled",
+    )
+    _require(
+        status["report_viewer_placeholder"].get("file_written") is False,
+        "/status report viewer reports a file was written",
+    )
     results.append("/status ok")
 
     run_status, run_content_type, run_body = _post_json(
@@ -261,6 +269,15 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "Execution Viewer",
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",
+        "Local Harness Report",
+        "Report Metadata Preview",
+        "Report metadata preview only",
+        "Report Boundary",
+        "Local deterministic harness output only",
+        "Not production evidence",
+        "No file export in this preview",
+        "File export: disabled",
+        "File written: false",
         "api_endpoint_connected",
         "Run Local Harness",
         "Approved deterministic sample requests only",

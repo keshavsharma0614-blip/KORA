@@ -16,6 +16,8 @@ Task 437 adds a static Run Local Harness trigger panel to the local preview UI. 
 
 Task 438 hardens the preview panels for the generated local harness sample run. The preview now shows a generated event timeline with stage order, route class, status, model-called state, deterministic route state, validation result, and latency; generated counters; and a local harness Standard Mode vs KORA Boost comparison boundary. These panels remain local deterministic harness output only and do not create production cost, energy, provider, or model-execution evidence.
 
+Task 439 hardens the report metadata preview for generated local harness runs. Run responses include report source, run/request relationship, event count, counter summary, comparison summary status, model execution boundary, provider/cloud disabled fields, and disabled file export state. The preview report panel remains metadata-only: no file export is connected, no report file is written, no arbitrary local file scan is performed, and the panel is not production evidence.
+
 v0.4 remains a local preview/demo milestone. It is not a production release, hosted service, provider billing dashboard, cost-reduction dashboard, energy dashboard, generic local chatbot, or LM Studio replacement.
 
 ## Scope
@@ -180,6 +182,8 @@ Update the comparison and counter panels from the selected generated run.
 ### Task 439 - Report Metadata from Selected Run
 
 Update report placeholder metadata from the selected generated run. Do not scan arbitrary local files or write report exports.
+
+Status: Initial report metadata hardening exists. Generated run responses expose claim-safe report metadata summary fields, and the preview shows a local harness report metadata panel with disabled file export state.
 
 ### Task 440 - v0.4 Smoke Check and Readiness Report
 

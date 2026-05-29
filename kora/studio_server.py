@@ -508,6 +508,15 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     report_export_label = html.escape(str(report_export.get("export_action_label", "Export not connected yet")), quote=True)
     report_export_reason = html.escape(str(report_export.get("export_action_reason", "")), quote=True)
     report_export_boundary = html.escape(str(status.get("report_export_claim_boundary", "")), quote=True)
+    report_source = html.escape(str(report_viewer.get("report_source", "local_harness_summary")), quote=True)
+    report_comparison_status = html.escape(
+        str(status.get("local_harness_comparison_status", "local_deterministic_harness_generated")),
+        quote=True,
+    )
+    report_file_export_enabled = "enabled" if report_viewer.get("file_export_enabled") is True else "disabled"
+    report_file_export_enabled = html.escape(report_file_export_enabled, quote=True)
+    report_file_written = "true" if report_viewer.get("file_written") is True else "false"
+    report_file_written = html.escape(report_file_written, quote=True)
     report_sections = "".join(
         f"<li>{html.escape(str(item), quote=True)}</li>"
         for item in report_viewer.get("sections", [])
@@ -521,7 +530,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         "<div class=\"card\">"
         f"<h3>{html.escape(str(key), quote=True)}</h3>"
         f"<p class=\"status-value\">{html.escape(str(value), quote=True)}</p>"
-        "<p>Fixture metadata only.</p>"
+        "<p>Local deterministic harness output only.</p>"
         "</div>"
         for key, value in report_counters.items()
         if key in {"total_requests", "baseline_model_calls", "kora_model_calls", "avoided_model_calls"}
@@ -561,6 +570,15 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     )
     local_harness_boundary = html.escape(str(status.get("local_harness_claim_boundary", "")), quote=True)
     sample_request = local_harness_sample_run.get("request", {}) if isinstance(local_harness_sample_run, dict) else {}
+    report_sample_run_id = html.escape(str(local_harness_sample_run.get("run_id", "local-harness-sample")), quote=True)
+    report_sample_request_id = html.escape(
+        str(local_harness_sample_run.get("request_id", sample_request.get("request_id", "unknown"))),
+        quote=True,
+    )
+    report_event_count = html.escape(
+        str(local_harness_sample_run.get("event_count", len(local_harness_sample_run.get("events", [])))),
+        quote=True,
+    )
     sample_request_id = html.escape(
         str(sample_request.get("request_id", local_harness_sample_run.get("request_id", "unknown"))),
         quote=True,
@@ -940,12 +958,13 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <section>
         <h2>Report Viewer Placeholder</h2>
         <div class=\"grid\">
-          <div class=\"card\"><h3>Report metadata</h3><p>{report_viewer_status}</p><p>{report_title}</p><p><code>{report_fixture_path}</code></p><p>Displayed path: <code>{report_path_display}</code></p></div>
-          <div class=\"card\"><h3>Local-only boundary</h3><p>No arbitrary local file scan is performed.</p><p>No cloud upload is connected.</p><p>No provider calls are made.</p><p>Local harness summary only.</p></div>
-          <div class=\"card\"><h3>Export placeholder</h3><p>{report_export_status}</p><p><span class=\"badge\">{report_export_label}</span></p><p>{report_export_reason}</p><p>{report_export_boundary}</p></div>
-          <div class=\"card\"><h3>Claim boundary</h3><p>{report_boundary}</p><p>No new benchmark evidence is created.</p></div>
+          <div class=\"card\"><h3>Local Harness Report</h3><p>{report_viewer_status}</p><p>{report_title}</p><p>Source: {report_source}</p><p>Local deterministic harness output only.</p></div>
+          <div class=\"card\"><h3>Report Metadata Preview</h3><p>Report metadata preview only.</p><p>Run: <code>{report_sample_run_id}</code></p><p>Request: <code>{report_sample_request_id}</code></p><p>Event count: {report_event_count}</p><p>Comparison summary: {report_comparison_status}</p></div>
+          <div class=\"card\"><h3>File export status</h3><p>Export placeholder</p><p>{report_export_status}</p><p><span class=\"badge\">{report_export_label}</span></p><p>File export: {report_file_export_enabled}</p><p>File written: {report_file_written}</p><p>No file export in this preview.</p><p>{report_export_reason}</p><p>{report_export_boundary}</p></div>
+          <div class=\"card\"><h3>Report Boundary</h3><p>{report_boundary}</p><p>Not production evidence.</p><p>No model execution.</p><p>No provider calls.</p><p>No cloud sync.</p><p>No new benchmark evidence is created.</p></div>
         </div>
         <div class=\"grid\">
+          <div class=\"card\"><h3>Local-only boundary</h3><p>No arbitrary local file scan is performed.</p><p>No cloud upload is connected.</p><p>No provider calls are made.</p><p>Local harness summary only.</p><p>Report source path: <code>{report_path_display}</code></p><p>Fixture metadata path: <code>{report_fixture_path}</code></p></div>
           <div class=\"card\"><h3>Report sections</h3><ul>{report_sections}</ul></div>
           <div class=\"card\"><h3>Boundary warnings</h3><ul>{report_warnings}</ul></div>
         </div>

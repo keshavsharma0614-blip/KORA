@@ -21,6 +21,68 @@ LOCAL_HARNESS_RUN_CLAIM_BOUNDARY = (
 _LOCAL_HARNESS_RUNS: dict[str, dict[str, Any]] = {}
 
 
+def _counter_summary(counters: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "total_requests": counters.get("total_requests", 0),
+        "baseline_model_calls": counters.get("baseline_model_calls", 0),
+        "kora_model_calls": counters.get("kora_model_calls", 0),
+        "avoided_model_calls": counters.get("avoided_model_calls", 0),
+        "deterministic_routes": counters.get("deterministic_routes", 0),
+        "structured_lookup_routes": counters.get("structured_lookup_routes", 0),
+        "policy_routes": counters.get("policy_routes", 0),
+        "model_escalations": counters.get("model_escalations", 0),
+        "validation_pass_count": counters.get("validation_pass_count", 0),
+        "validation_fail_count": counters.get("validation_fail_count", 0),
+    }
+
+
+def _report_metadata_summary(
+    *,
+    report_fields: dict[str, Any],
+    run_id: str,
+    request_id: str,
+    created_at: str,
+    completed_at: str,
+    event_count: int,
+    counters: dict[str, Any],
+    comparison_status: str,
+    model_execution_status: str,
+) -> dict[str, Any]:
+    viewer = report_fields["report_viewer_placeholder"]
+    export = report_fields["report_export_placeholder"]
+    return {
+        "report_status": viewer["report_status"],
+        "report_viewer_status": report_fields["report_viewer_status"],
+        "report_source": viewer["report_source"],
+        "report_source_detail": "local deterministic harness output / fixture metadata",
+        "run_id": run_id,
+        "request_id": request_id,
+        "created_at": created_at,
+        "generated_at": completed_at,
+        "event_count": event_count,
+        "counter_summary": _counter_summary(counters),
+        "comparison_summary_status": comparison_status,
+        "model_execution_status": model_execution_status,
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "file_export_enabled": False,
+        "file_written": False,
+        "report_export_status": report_fields["report_export_status"],
+        "export_action_enabled": export["export_action_enabled"],
+        "writes_generated_reports": export["writes_generated_reports"],
+        "uploads_reports": export["uploads_reports"],
+        "commits_generated_reports": export["commits_generated_reports"],
+        "arbitrary_local_file_scan_enabled": False,
+        "upload_enabled": False,
+        "generated_report_commit_enabled": False,
+        "production_evidence_claim": False,
+        "cost_claim_enabled": False,
+        "energy_claim_enabled": False,
+        "claim_boundary": report_fields["report_viewer_claim_boundary"],
+        "export_claim_boundary": report_fields["report_export_claim_boundary"],
+    }
+
+
 def _selected_request_summary(request: dict[str, Any]) -> dict[str, Any]:
     return {
         "request_id": request["request_id"],
@@ -61,7 +123,21 @@ def trigger_local_harness_run(request_id: str) -> dict[str, Any]:
     generated_events = deepcopy(harness_run["events"])
     generated_counters = deepcopy(harness_run["counters_snapshot"])
     model_needed = bool(selected_request["expected_model_needed"])
+    model_execution_status = "execution_not_connected" if model_needed else "not_needed"
     completed_at = datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    event_count = len(generated_events)
+    comparison_status = str(comparison["comparison_status"])
+    report_metadata_summary = _report_metadata_summary(
+        report_fields=report_fields,
+        run_id=run_id,
+        request_id=str(selected_request["request_id"]),
+        created_at=created_at,
+        completed_at=completed_at,
+        event_count=event_count,
+        counters=generated_counters,
+        comparison_status=comparison_status,
+        model_execution_status=model_execution_status,
+    )
 
     run_record = {
         "ok": True,
@@ -86,20 +162,10 @@ def trigger_local_harness_run(request_id: str) -> dict[str, Any]:
             "model_execution_connected": False,
             "download_connected": False,
         },
-        "report_metadata_summary": {
-            "report_viewer_status": report_fields["report_viewer_status"],
-            "report_source": report_fields["report_viewer_placeholder"]["report_source"],
-            "report_status": report_fields["report_viewer_placeholder"]["report_status"],
-            "report_export_status": report_fields["report_export_status"],
-            "claim_boundary": report_fields["report_viewer_claim_boundary"],
-            "export_claim_boundary": report_fields["report_export_claim_boundary"],
-            "arbitrary_local_file_scan_enabled": False,
-            "upload_enabled": False,
-            "generated_report_commit_enabled": False,
-        },
-        "event_count": len(generated_events),
+        "report_metadata_summary": report_metadata_summary,
+        "event_count": event_count,
         "model_needed_boundary_status": "execution_not_connected" if model_needed else "not_needed",
-        "model_execution_status": "execution_not_connected" if model_needed else "not_needed",
+        "model_execution_status": model_execution_status,
         "provider_calls_enabled": False,
         "cloud_sync_enabled": False,
         "model_execution_connected": False,

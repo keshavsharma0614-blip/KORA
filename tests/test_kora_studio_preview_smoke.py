@@ -107,6 +107,8 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
                     "report_viewer_placeholder": {
                         "report_source": "local_harness_summary",
                         "arbitrary_local_file_scan_enabled": False,
+                        "file_export_enabled": False,
+                        "file_written": False,
                     },
                     "provider_calls_enabled": False,
                     "cloud_sync_enabled": False,
@@ -173,6 +175,15 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             Execution Viewer
             Standard Mode vs KORA Boost
             Report Viewer Placeholder
+            Local Harness Report
+            Report Metadata Preview
+            Report metadata preview only
+            Report Boundary
+            Local deterministic harness output only
+            Not production evidence
+            No file export in this preview
+            File export: disabled
+            File written: false
             api_endpoint_connected
             Run Local Harness
             Approved deterministic sample requests only

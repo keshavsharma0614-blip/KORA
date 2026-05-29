@@ -196,6 +196,12 @@ def test_get_studio_server_status_fields() -> None:
     assert status["report_viewer_placeholder"]["arbitrary_local_file_scan_enabled"] is False
     assert status["report_viewer_placeholder"]["upload_enabled"] is False
     assert status["report_viewer_placeholder"]["generated_report_commit_enabled"] is False
+    assert status["report_viewer_placeholder"]["file_export_enabled"] is False
+    assert status["report_viewer_placeholder"]["file_written"] is False
+    assert status["report_viewer_placeholder"]["model_execution_connected"] is False
+    assert status["report_viewer_placeholder"]["production_evidence_claim"] is False
+    assert status["report_viewer_placeholder"]["cost_claim_enabled"] is False
+    assert status["report_viewer_placeholder"]["energy_claim_enabled"] is False
     assert status["report_viewer_placeholder"]["counters"] == status["local_harness_counters"]
     assert status["report_viewer_placeholder"]["counters"]["avoided_model_calls"] == 1
     assert status["report_export_status"] == "placeholder_not_connected"
@@ -614,6 +620,20 @@ def test_request_handler_triggers_and_retrieves_local_harness_run() -> None:
     assert run["generated_counters"]["kora_model_calls"] == 0
     assert run["comparison_summary"]["metrics"]["avoided_model_calls"] == 1
     assert run["report_metadata_summary"]["report_source"] == "local_harness_summary"
+    assert run["report_metadata_summary"]["report_source_detail"] == "local deterministic harness output / fixture metadata"
+    assert run["report_metadata_summary"]["run_id"] == run["run_id"]
+    assert run["report_metadata_summary"]["request_id"] == run["request_id"]
+    assert run["report_metadata_summary"]["event_count"] == len(run["generated_events"])
+    assert run["report_metadata_summary"]["counter_summary"]["structured_lookup_routes"] == 1
+    assert run["report_metadata_summary"]["comparison_summary_status"] == "local_deterministic_harness_generated"
+    assert run["report_metadata_summary"]["model_execution_status"] == "not_needed"
+    assert run["report_metadata_summary"]["provider_calls_enabled"] is False
+    assert run["report_metadata_summary"]["cloud_sync_enabled"] is False
+    assert run["report_metadata_summary"]["file_export_enabled"] is False
+    assert run["report_metadata_summary"]["file_written"] is False
+    assert run["report_metadata_summary"]["export_action_enabled"] is False
+    assert run["report_metadata_summary"]["production_evidence_claim"] is False
+    assert "local summary metadata only" in run["report_metadata_summary"]["claim_boundary"]
     assert run["provider_calls_enabled"] is False
     assert run["cloud_sync_enabled"] is False
     assert run["model_execution_connected"] is False
@@ -801,6 +821,15 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Final counters" in html
     assert "No runtime execution occurs on this page" in html
     assert "Report Viewer Placeholder" in html
+    assert "Local Harness Report" in html
+    assert "Report Metadata Preview" in html
+    assert "Report metadata preview only" in html
+    assert "Report Boundary" in html
+    assert "Local deterministic harness output only" in html
+    assert "Not production evidence" in html
+    assert "No file export in this preview" in html
+    assert "File export: disabled" in html
+    assert "File written: false" in html
     assert "Report metadata" in html
     assert "Export placeholder" in html
     assert "Boundary warnings" in html
@@ -827,6 +856,12 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
     assert "energy reduction" not in html.lower()
+    assert "production report" not in html.lower()
+    assert "cost reduction proven" not in html.lower()
+    assert "real provider report" not in html.lower()
+    assert "model output report" not in html.lower()
+    assert "download report" not in html.lower()
+    assert "export now" not in html.lower()
     assert "<script" not in html.lower()
     assert "src=" not in html.lower()
     assert 'href="http' not in html.lower()
