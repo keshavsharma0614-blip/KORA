@@ -424,7 +424,7 @@ Acceptance criteria:
 
 ## Phase 3.15 — v0.4 Local Run Trigger Scaffold
 
-Status: Initial endpoint scaffold connected. See `docs/kora-studio/kora-studio-v0-4-local-run-trigger-plan.md`.
+Status: v0.4 local preview/demo readiness is documented. See `docs/kora-studio/kora-studio-v0-4-local-run-trigger-plan.md`, `docs/kora-studio/kora-studio-v0-4-readiness-report.md`, and `docs/kora-studio/kora-studio-v0-4-goal-report.md`.
 
 Goal: Add a local run trigger surface for approved deterministic sample requests and optional event-stream scaffolding for generated harness events.
 
