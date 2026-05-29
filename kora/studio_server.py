@@ -9,6 +9,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
 from kora.studio_execution_fixture import get_execution_viewer_fixture_summary, get_standard_vs_kora_status_fields
+from kora.studio_harness_events import LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY, build_local_harness_events
+from kora.studio_harness_requests import get_local_harness_request_summary, get_local_harness_requests
 from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, SETUP_GUIDANCE_PATH, recommend_catalog_models
 from kora.studio_report_viewer import get_report_viewer_status_fields
 from kora.studio_runtime_status import get_runtime_status, summarize_installed_models
@@ -46,6 +48,22 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     execution_viewer_fixture = get_execution_viewer_fixture_summary()
     standard_vs_kora_fixture = get_standard_vs_kora_status_fields()
     report_viewer_fixture = get_report_viewer_status_fields()
+    local_harness_requests = get_local_harness_requests()
+    local_harness_request_summary = get_local_harness_request_summary()
+    local_harness_sample_run = build_local_harness_events(local_harness_requests[0])
+    local_harness_counters = dict(local_harness_sample_run["counters_snapshot"])
+    local_harness_status = {
+        "status": "local_deterministic_harness_available",
+        "event_source_status": "status_sample_only",
+        "run_trigger_status": "not_connected",
+        "sample_request_count": len(local_harness_requests),
+        "sample_run_id": local_harness_sample_run["run_id"],
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "model_execution_connected": False,
+        "download_connected": False,
+        "claim_boundary": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
+    }
     first_run_section_order = [
         "Launch/local-only status",
         "Your Computer",
@@ -116,6 +134,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "execution_viewer": str(execution_viewer_fixture.get("execution_viewer_claim_boundary", "")),
         "standard_vs_kora": str(standard_vs_kora_fixture.get("standard_vs_kora_claim_boundary", "")),
         "report_viewer": str(report_viewer_fixture.get("report_viewer_claim_boundary", "")),
+        "local_harness": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
     }
     return {
         "ok": True,
@@ -153,6 +172,12 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "setup_guidance_claim_boundary": SETUP_GUIDANCE_CLAIM_BOUNDARY,
         "disabled_actions_route_to_guidance": True,
         "disabled_action_state": disabled_action_state,
+        "local_harness_status": local_harness_status,
+        "local_harness_request_summary": local_harness_request_summary,
+        "local_harness_requests": local_harness_requests,
+        "local_harness_sample_run": local_harness_sample_run,
+        "local_harness_counters": local_harness_counters,
+        "local_harness_claim_boundary": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
         **execution_viewer_fixture,
         **standard_vs_kora_fixture,
         **report_viewer_fixture,
