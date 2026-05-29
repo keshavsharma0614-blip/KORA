@@ -86,8 +86,13 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "setup_guidance_status",
         "disabled_action_state",
         "execution_viewer_status",
+        "local_harness_status",
+        "local_harness_sample_run",
+        "local_harness_comparison",
+        "comparison_counters",
         "standard_vs_kora_comparison_status",
         "report_viewer_status",
+        "report_viewer_placeholder",
         "provider_calls_enabled",
         "cloud_sync_enabled",
         "claim_boundaries",
@@ -104,12 +109,34 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
     )
     _require(status.get("execution_viewer_status") == "fixture_mock_scaffold", "/status execution viewer is not fixture")
     _require(
+        status["local_harness_status"].get("status") == "local_deterministic_harness_available",
+        "/status local harness is not available",
+    )
+    _require(
+        status["local_harness_status"].get("model_execution_connected") is False,
+        "/status local harness reports model execution connected",
+    )
+    _require(status["local_harness_sample_run"].get("status") == "completed", "/status local harness sample is not completed")
+    _require(
+        status["local_harness_comparison"].get("comparison_source") == "local_harness_summary",
+        "/status local harness comparison source is not harness summary",
+    )
+    _require(status["comparison_counters"].get("kora_model_calls") == 0, "/status comparison reports KORA model calls")
+    _require(
         status.get("standard_vs_kora_comparison_status") == "fixture_mock_scaffold",
         "/status comparison is not fixture",
     )
     _require(
         status.get("report_viewer_status") in {"fixture_metadata_placeholder", "local_harness_summary_placeholder"},
         "/status report viewer is not placeholder",
+    )
+    _require(
+        status["report_viewer_placeholder"].get("report_source") == "local_harness_summary",
+        "/status report source is not local harness summary",
+    )
+    _require(
+        status["report_viewer_placeholder"].get("arbitrary_local_file_scan_enabled") is False,
+        "/status report viewer scans arbitrary local files",
     )
     results.append("/status ok")
 
@@ -126,6 +153,10 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "Disabled Download/Run Actions",
         "KORA Boost Boundary",
         "Local Harness Preview",
+        "local_deterministic_harness_available",
+        "local-harness-json-required-fields-001",
+        "Local deterministic harness comparison",
+        "Local Harness Summary Report",
         "Execution Viewer",
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",

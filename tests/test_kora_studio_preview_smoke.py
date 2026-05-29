@@ -71,8 +71,19 @@ def _fake_opener(url: str, timeout: float) -> FakeResponse:
                         "model_execution_connected": False,
                     },
                     "execution_viewer_status": "fixture_mock_scaffold",
+                    "local_harness_status": {
+                        "status": "local_deterministic_harness_available",
+                        "model_execution_connected": False,
+                    },
+                    "local_harness_sample_run": {"status": "completed"},
+                    "local_harness_comparison": {"comparison_source": "local_harness_summary"},
+                    "comparison_counters": {"kora_model_calls": 0},
                     "standard_vs_kora_comparison_status": "fixture_mock_scaffold",
                     "report_viewer_status": "local_harness_summary_placeholder",
+                    "report_viewer_placeholder": {
+                        "report_source": "local_harness_summary",
+                        "arbitrary_local_file_scan_enabled": False,
+                    },
                     "provider_calls_enabled": False,
                     "cloud_sync_enabled": False,
                     "claim_boundaries": {},
@@ -93,6 +104,10 @@ def _fake_opener(url: str, timeout: float) -> FakeResponse:
             Disabled Download/Run Actions
             KORA Boost Boundary
             Local Harness Preview
+            local_deterministic_harness_available
+            local-harness-json-required-fields-001
+            Local deterministic harness comparison
+            Local Harness Summary Report
             Execution Viewer
             Standard Mode vs KORA Boost
             Report Viewer Placeholder
