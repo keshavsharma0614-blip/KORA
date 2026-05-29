@@ -225,6 +225,22 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
     _require(events_payload.get("model_execution_connected") is False, "/api/harness/events reports model execution")
     results.append("/api/harness/events ok")
 
+    sse_status, sse_content_type, sse_body = _read_url(
+        base_url,
+        f"/api/harness/sse?run_id={run_id}",
+        timeout=timeout,
+        opener=opener,
+    )
+    _require(sse_status == 200, f"/api/harness/sse returned HTTP {sse_status}")
+    _require("text/event-stream" in sse_content_type, "/api/harness/sse did not return an SSE content type")
+    _require("event: stream_started" in sse_body, "/api/harness/sse missing stream_started event")
+    _require("event: harness_stage" in sse_body, "/api/harness/sse missing harness_stage events")
+    _require("event: stream_completed" in sse_body, "/api/harness/sse missing stream_completed event")
+    _require(run_id in sse_body, "/api/harness/sse returned wrong run")
+    _require("model_token_streaming_connected" in sse_body, "/api/harness/sse missing model token boundary")
+    _require("provider output" not in sse_body.lower(), "/api/harness/sse appears to stream provider output")
+    results.append("/api/harness/sse ok")
+
     root_status, root_content_type, root_body = _read_url(base_url, "/", timeout=timeout, opener=opener)
     _require(root_status == 200, f"/ returned HTTP {root_status}")
     _require("text/html" in root_content_type, "/ did not return HTML")
@@ -247,6 +263,7 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "Report Viewer Placeholder",
         "api_endpoint_connected",
         "/api/harness/events",
+        "/api/harness/sse",
         "Provider calls: disabled",
         "Cloud sync: disabled",
         "No model is downloaded",

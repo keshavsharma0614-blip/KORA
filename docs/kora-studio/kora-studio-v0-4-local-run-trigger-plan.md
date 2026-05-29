@@ -10,6 +10,8 @@ Task 434 adds the first local run trigger endpoint scaffold. `POST /api/harness/
 
 Task 435 adds non-SSE generated event retrieval through `GET /api/harness/events?run_id=<id>`. The endpoint returns generated harness events for an existing in-memory local run. It is not SSE, not token streaming, and not model output. Arbitrary prompt execution, model execution, provider calls, downloads, runtime model listing, private directory scanning, and persistence remain out of scope.
 
+Task 436 adds optional SSE formatting through `GET /api/harness/sse?run_id=<id>`. The stream emits only already-generated local harness events for an existing in-memory run, including stream start, harness stage, and stream completion markers. It is not model token streaming, provider streaming, model output streaming, or arbitrary prompt execution.
+
 v0.4 remains a local preview/demo milestone. It is not a production release, hosted service, provider billing dashboard, cost-reduction dashboard, energy dashboard, generic local chatbot, or LM Studio replacement.
 
 ## Scope
@@ -45,7 +47,7 @@ Planned endpoints:
 - `POST /api/harness/run`
 - `GET /api/harness/run/{run_id}`
 - optional `GET /api/harness/events?run_id=<id>`
-- optional `GET /api/harness/sse?run_id=<id>`
+- `GET /api/harness/sse?run_id=<id>`
 
 `POST /api/harness/run` must accept only approved request IDs or approved sample payloads. v0.4 should not introduce arbitrary prompt execution unless the prompt shape is explicitly bounded, validated, synthetic/local-only, and routed through the same claim-safe harness path.
 

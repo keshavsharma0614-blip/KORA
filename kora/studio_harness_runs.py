@@ -146,6 +146,84 @@ def get_local_harness_run_events(run_id: str) -> dict[str, Any] | None:
     }
 
 
+def format_local_harness_sse(run_id: str) -> str | None:
+    """Return a Server-Sent Events stream for generated local harness events."""
+
+    record = get_local_harness_run_record(run_id)
+    if record is None:
+        return None
+
+    def sse_event(event_name: str, payload: dict[str, Any]) -> str:
+        return f"event: {event_name}\ndata: {json_dumps(payload)}\n\n"
+
+    chunks = [
+        sse_event(
+            "stream_started",
+            {
+                "run_id": record["run_id"],
+                "request_id": record["request_id"],
+                "run_status": record["run_status"],
+                "event_count": record["event_count"],
+                "stream_type": "generated_local_harness_events",
+                "provider_calls_enabled": False,
+                "cloud_sync_enabled": False,
+                "model_execution_connected": False,
+                "download_connected": False,
+                "model_token_streaming_connected": False,
+                "claim_boundary": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
+            },
+        )
+    ]
+    for event in record["generated_events"]:
+        chunks.append(
+            sse_event(
+                "harness_stage",
+                {
+                    "run_id": record["run_id"],
+                    "request_id": record["request_id"],
+                    "stage_id": event["stage_id"],
+                    "stage_name": event["stage_name"],
+                    "route_class": event["route_class"],
+                    "status": event["status"],
+                    "event": event,
+                    "provider_calls_enabled": False,
+                    "cloud_sync_enabled": False,
+                    "model_execution_connected": False,
+                    "download_connected": False,
+                    "model_token_streaming_connected": False,
+                    "claim_boundary": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
+                },
+            )
+        )
+    chunks.append(
+        sse_event(
+            "stream_completed",
+            {
+                "run_id": record["run_id"],
+                "request_id": record["request_id"],
+                "run_status": record["run_status"],
+                "event_count": record["event_count"],
+                "stream_type": "generated_local_harness_events",
+                "provider_calls_enabled": False,
+                "cloud_sync_enabled": False,
+                "model_execution_connected": False,
+                "download_connected": False,
+                "model_token_streaming_connected": False,
+                "claim_boundary": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
+            },
+        )
+    )
+    return "".join(chunks)
+
+
+def json_dumps(payload: dict[str, Any]) -> str:
+    """Serialize SSE payload data deterministically."""
+
+    import json
+
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+
 def get_local_harness_run_store_status() -> dict[str, Any]:
     """Return claim-safe in-memory run store metadata."""
 

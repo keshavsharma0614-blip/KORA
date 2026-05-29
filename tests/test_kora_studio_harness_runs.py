@@ -5,6 +5,7 @@ import pytest
 from kora.studio_harness_runs import (
     LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
     clear_local_harness_run_records,
+    format_local_harness_sse,
     get_local_harness_run_record,
     get_local_harness_run_events,
     get_local_harness_run_store_status,
@@ -106,3 +107,26 @@ def test_local_harness_run_events_payload_returns_generated_events_only() -> Non
     assert events_payload["sse_connected"] is False
     assert "approved synthetic deterministic request IDs" in events_payload["claim_boundary"]
     assert get_local_harness_run_events("missing-run") is None
+
+
+def test_local_harness_sse_stream_formats_generated_events_only() -> None:
+    clear_local_harness_run_records()
+    run = trigger_local_harness_run("local-harness-ambiguous-model-needed-001")
+
+    stream = format_local_harness_sse(run["run_id"])
+
+    assert stream is not None
+    assert stream.startswith("event: stream_started\n")
+    assert "event: harness_stage\n" in stream
+    assert stream.rstrip().endswith("}")
+    assert "event: stream_completed\n" in stream
+    assert run["run_id"] in stream
+    assert "model_needed_boundary" in stream
+    assert "execution_not_connected" in stream
+    assert "generated_local_harness_events" in stream
+    assert "model_token_streaming_connected" in stream
+    assert "approved synthetic deterministic request IDs" in stream
+    assert stream.index("event: stream_started") < stream.index("event: harness_stage")
+    assert stream.index("stage_id\":\"request_received") < stream.index("stage_id\":\"final_counters")
+    assert all(forbidden not in stream.lower() for forbidden in ["provider output", "model token"])
+    assert format_local_harness_sse("missing-run") is None

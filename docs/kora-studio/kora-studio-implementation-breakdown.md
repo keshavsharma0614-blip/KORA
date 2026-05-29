@@ -435,7 +435,7 @@ Scope:
 - in-memory run retrieval through `GET /api/harness/run/{run_id}`
 - generated event retrieval through `GET /api/harness/events?run_id=<id>`
 - generated counters
-- optional SSE/event-stream scaffold remains planned
+- generated event SSE stream through `GET /api/harness/sse?run_id=<id>`
 - selected-run comparison update
 - selected-run report metadata update
 - no arbitrary prompt execution unless explicitly bounded in a later task
@@ -454,6 +454,7 @@ Acceptance criteria:
 - run state and counters remain local deterministic harness output
 - run records are in-memory only and are not persisted
 - generated event retrieval is non-SSE and does not stream model tokens
+- SSE streams generated harness events only and does not stream model tokens, provider output, or model output
 - smoke checks cover planned harness endpoints if implemented
 
 ## Phase 4 — Report Viewer

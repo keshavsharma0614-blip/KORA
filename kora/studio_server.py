@@ -15,6 +15,7 @@ from kora.studio_harness_events import LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY, build
 from kora.studio_harness_requests import get_local_harness_request_summary, get_local_harness_requests
 from kora.studio_harness_runs import (
     LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
+    format_local_harness_sse,
     get_local_harness_run_record,
     get_local_harness_run_events,
     get_local_harness_run_store_status,
@@ -73,7 +74,8 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "run_retrieval_endpoint": "/api/harness/run/{run_id}",
         "events_endpoint": "/api/harness/events?run_id=<id>",
         "events_endpoint_status": "generated_events_retrieval_connected",
-        "sse_endpoint_status": "not_connected",
+        "sse_endpoint": "/api/harness/sse?run_id=<id>",
+        "sse_endpoint_status": "generated_events_stream_connected",
         "approved_request_ids_only": True,
         "arbitrary_prompt_execution_connected": False,
         "sample_request_count": len(local_harness_requests),
@@ -923,6 +925,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>/api/harness/run</h3><p>POST accepts only approved local deterministic sample request IDs and returns generated local harness events. Arbitrary prompt execution is not connected.</p></div>
           <div class=\"card\"><h3>/api/harness/run/&lt;run_id&gt;</h3><p>GET returns an in-memory local harness run record if it exists. No persistence, provider call, download, or model execution is connected.</p></div>
           <div class=\"card\"><h3>/api/harness/events?run_id=&lt;id&gt;</h3><p>GET returns generated harness events for an existing local run. This is not SSE, not model token streaming, and not model output.</p></div>
+          <div class=\"card\"><h3>/api/harness/sse?run_id=&lt;id&gt;</h3><p>GET streams generated harness events as Server-Sent Events. It streams no model tokens, provider output, or model output.</p></div>
         </div>
       </section>
 
@@ -983,6 +986,16 @@ def create_studio_request_handler(status_provider: StatusProvider | None = None)
             self.end_headers()
             self.wfile.write(body)
 
+        def _write_sse(self, stream: str, status_code: int = 200) -> None:
+            body = stream.encode("utf-8")
+            self.send_response(status_code)
+            self.send_header("Content-Type", "text/event-stream; charset=utf-8")
+            self.send_header("Cache-Control", "no-cache")
+            self.send_header("Connection", "close")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+
         def _read_json_body(self) -> dict[str, Any] | None:
             try:
                 content_length = int(self.headers.get("Content-Length", "0") or "0")
@@ -1033,6 +1046,30 @@ def create_studio_request_handler(status_provider: StatusProvider | None = None)
                     )
                     return
                 self._write_json(events_payload)
+                return
+            if path == "/api/harness/sse":
+                query = parse_qs(parsed_path.query)
+                run_id = query.get("run_id", [""])[0]
+                if not run_id:
+                    self._write_json(
+                        get_harness_run_error_payload(
+                            "missing_run_id",
+                            "GET /api/harness/sse expects an existing local harness run_id query parameter.",
+                        ),
+                        status_code=400,
+                    )
+                    return
+                sse_stream = format_local_harness_sse(run_id)
+                if sse_stream is None:
+                    self._write_json(
+                        get_harness_run_error_payload(
+                            "run_not_found",
+                            "No generated local harness SSE stream exists for this run_id.",
+                        ),
+                        status_code=404,
+                    )
+                    return
+                self._write_sse(sse_stream)
                 return
             if path.startswith("/api/harness/run/"):
                 run_id = path.removeprefix("/api/harness/run/")

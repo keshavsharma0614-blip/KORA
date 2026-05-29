@@ -139,6 +139,19 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
                 }
             ),
         )
+    if url.endswith("/api/harness/sse?run_id=local-harness-trigger-test"):
+        return FakeResponse(
+            status=200,
+            content_type="text/event-stream; charset=utf-8",
+            body=(
+                "event: stream_started\n"
+                'data: {"run_id":"local-harness-trigger-test","model_token_streaming_connected":false}\n\n'
+                "event: harness_stage\n"
+                'data: {"run_id":"local-harness-trigger-test","stage_id":"request_received"}\n\n'
+                "event: stream_completed\n"
+                'data: {"run_id":"local-harness-trigger-test","model_token_streaming_connected":false}\n\n'
+            ),
+        )
     if url.endswith("/"):
         return FakeResponse(
             status=200,
@@ -162,6 +175,7 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             Report Viewer Placeholder
             api_endpoint_connected
             /api/harness/events
+            /api/harness/sse
             Provider calls: disabled
             Cloud sync: disabled
             No model is downloaded
@@ -180,6 +194,7 @@ def test_check_preview_uses_local_endpoints_only() -> None:
         "/api/harness/run ok",
         "/api/harness/run/<run_id> ok",
         "/api/harness/events ok",
+        "/api/harness/sse ok",
         "/ ok",
     ]
 

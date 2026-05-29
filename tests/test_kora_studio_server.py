@@ -142,7 +142,8 @@ def test_get_studio_server_status_fields() -> None:
     assert status["local_harness_status"]["run_retrieval_endpoint"] == "/api/harness/run/{run_id}"
     assert status["local_harness_status"]["events_endpoint"] == "/api/harness/events?run_id=<id>"
     assert status["local_harness_status"]["events_endpoint_status"] == "generated_events_retrieval_connected"
-    assert status["local_harness_status"]["sse_endpoint_status"] == "not_connected"
+    assert status["local_harness_status"]["sse_endpoint"] == "/api/harness/sse?run_id=<id>"
+    assert status["local_harness_status"]["sse_endpoint_status"] == "generated_events_stream_connected"
     assert status["local_harness_status"]["approved_request_ids_only"] is True
     assert status["local_harness_status"]["arbitrary_prompt_execution_connected"] is False
     assert status["local_harness_status"]["sample_request_count"] == 5
@@ -484,6 +485,10 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "deterministic-first local workflow exploration" in html
     assert "/health" in html
     assert "/status" in html
+    assert "/api/harness/run" in html
+    assert "/api/harness/events" in html
+    assert "/api/harness/sse" in html
+    assert "not model token streaming" in html
     assert "Provider calls: disabled" in html
     assert "Cloud sync: disabled" in html
     assert "Your Computer" in html
@@ -572,6 +577,9 @@ def test_request_handler_triggers_and_retrieves_local_harness_run() -> None:
             retrieved_run = json.loads(response.read().decode("utf-8"))
         with urllib.request.urlopen(f"{base_url}/api/harness/events?run_id={run['run_id']}", timeout=2) as response:
             events_payload = json.loads(response.read().decode("utf-8"))
+        with urllib.request.urlopen(f"{base_url}/api/harness/sse?run_id={run['run_id']}", timeout=2) as response:
+            sse_content_type = response.headers.get("Content-Type", "")
+            sse_stream = response.read().decode("utf-8")
     finally:
         server.shutdown()
         thread.join(timeout=2)
@@ -601,6 +609,17 @@ def test_request_handler_triggers_and_retrieves_local_harness_run() -> None:
     assert events_payload["sse_connected"] is False
     assert events_payload["streaming_connected"] is False
     assert events_payload["model_execution_connected"] is False
+    assert "text/event-stream" in sse_content_type
+    assert "event: stream_started" in sse_stream
+    assert "event: harness_stage" in sse_stream
+    assert "event: stream_completed" in sse_stream
+    assert run["run_id"] in sse_stream
+    assert "request_received" in sse_stream
+    assert "final_counters" in sse_stream
+    assert "approved synthetic deterministic request IDs" in sse_stream
+    assert "model_token_streaming_connected" in sse_stream
+    assert sse_stream.index("event: stream_started") < sse_stream.index("event: harness_stage")
+    assert sse_stream.index("stage_id\":\"request_received") < sse_stream.index("stage_id\":\"final_counters")
 
 
 def test_request_handler_rejects_invalid_local_harness_run_request() -> None:
@@ -631,6 +650,9 @@ def test_request_handler_rejects_invalid_local_harness_run_request() -> None:
         with pytest.raises(urllib.error.HTTPError) as missing_events_exc:
             urllib.request.urlopen(f"{base_url}/api/harness/events?run_id=missing-run", timeout=2)
         missing_events_body = json.loads(missing_events_exc.value.read().decode("utf-8"))
+        with pytest.raises(urllib.error.HTTPError) as missing_sse_exc:
+            urllib.request.urlopen(f"{base_url}/api/harness/sse?run_id=missing-run", timeout=2)
+        missing_sse_body = json.loads(missing_sse_exc.value.read().decode("utf-8"))
     finally:
         server.shutdown()
         thread.join(timeout=2)
@@ -649,6 +671,9 @@ def test_request_handler_rejects_invalid_local_harness_run_request() -> None:
     assert missing_events_exc.value.code == 404
     assert missing_events_body["error"] == "run_not_found"
     assert missing_events_body["model_execution_connected"] is False
+    assert missing_sse_exc.value.code == 404
+    assert missing_sse_body["error"] == "run_not_found"
+    assert missing_sse_body["model_execution_connected"] is False
 
 
 def test_static_preview_html_content_is_safe_and_complete() -> None:
@@ -720,6 +745,10 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Endpoint Panel" in html
     assert "/health" in html
     assert "/status" in html
+    assert "/api/harness/run" in html
+    assert "/api/harness/events" in html
+    assert "/api/harness/sse" in html
+    assert "It streams no model tokens" in html
     assert "Execution Viewer" in html
     assert "Fixture/mock events only" in html
     assert "No real model execution" in html
