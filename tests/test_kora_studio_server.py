@@ -771,7 +771,13 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "id=\"kora-selected-run-state\"" in html
     assert "Selected run state" in html
     assert "Generated local harness output only" in html
+    assert "Selected Run Event Timeline" in html
+    assert "id=\"kora-selected-run-events\"" in html
+    assert "id=\"kora-selected-events-status\"" in html
+    assert "No selected run events loaded yet" in html
+    assert "Events are fetched from <code>GET /api/harness/events?run_id=&lt;id&gt;</code>" in html
     assert "selectedRunId" in html
+    assert "selectedRunEvents" in html
     assert "data-kora-request-id" in html
     assert "Local deterministic harness data only" in html
     assert "Run Local Harness" in html
@@ -880,6 +886,8 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "<script" in html.lower()
     assert "type=\"application/json\" id=\"kora-approved-requests-data\"" in html
     assert "fetch(\"/api/harness/run\"" in html
+    assert "fetch(`/api/harness/events?run_id=${encodeURIComponent(selectedRunId)}`)" in html
+    assert html.index("renderRunResponse(payload);") < html.index("await fetchSelectedEvents();")
     assert "JSON.stringify({request_id: selectedRequestId})" in html
     assert "src=" not in html.lower()
     assert 'href="http' not in html.lower()

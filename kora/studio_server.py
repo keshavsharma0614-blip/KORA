@@ -977,6 +977,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Selected run state</h3><p>Generated local harness output only.</p><div class=\"run-state\" id=\"kora-selected-run-state\" aria-live=\"polite\"><p>Status: <span id=\"kora-run-status\">not_started</span></p><p>Run id: <code id=\"kora-selected-run-id\">not run yet</code></p><p>Request id: <code id=\"kora-run-request-id\">not run yet</code></p><p>Event count: <span id=\"kora-run-event-count\">0</span></p><p>Model execution status: <span id=\"kora-run-model-execution-status\">not_connected</span></p><p>Provider calls: <span id=\"kora-run-provider-calls-enabled\">false</span></p><p>Cloud sync: <span id=\"kora-run-cloud-sync-enabled\">false</span></p><p>File export: <span id=\"kora-run-file-export-enabled\">false</span></p><p>Claim boundary: <span id=\"kora-run-claim-boundary\">No run has been generated yet.</span></p></div></div>
           <div class=\"card\"><h3>Interactive run boundary</h3><p>Model-needed boundary returns <code>execution_not_connected</code>.</p><p>No model execution was attempted.</p><p>Provider calls remain disabled.</p><p>No downloads.</p><p>Selected run state is local browser memory only.</p></div>
         </div>
+        <div class=\"card\" style=\"margin-top: 16px;\"><h3>Selected Run Event Timeline</h3><p>Generated local harness events only. Not model token streaming. No model execution. No provider calls. No downloads.</p><p>Events are fetched from <code>GET /api/harness/events?run_id=&lt;id&gt;</code> after a successful approved local harness run.</p><p id=\"kora-selected-events-status\">No selected run events loaded yet.</p></div>
+        <div class=\"grid\" id=\"kora-selected-run-events\" aria-live=\"polite\"></div>
         <div class=\"grid\" style=\"margin-top: 16px;\">
           <div class=\"card\"><h3>Run Local Harness action state</h3><p><span class=\"badge\">Run Local Harness</span></p><p>The browser button calls only the local harness run endpoint for an approved request id.</p><p>Use <code>POST /api/harness/run</code> with an approved <code>request_id</code>.</p><p>Generated harness events only.</p></div>
           <div class=\"card\"><h3>Trigger boundary</h3><p>Approved deterministic sample requests only.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>This is local preview/demo data, not production evidence.</p></div>
@@ -1080,6 +1082,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       const requestById = new Map(approvedRequests.map((request) => [request.request_id, request]));
       let selectedRequestId = approvedRequests.length ? approvedRequests[0].request_id : "";
       let selectedRunId = "";
+      let selectedRunEvents = [];
 
       const text = (id, value) => {{
         const element = document.getElementById(id);
@@ -1113,6 +1116,74 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       const renderRunError = (message) => {{
         text("kora-run-status", "failed");
         text("kora-run-claim-boundary", `${{message}} No model execution was attempted. Provider calls remain disabled. Try again or inspect the local server logs.`);
+      }};
+
+      const renderEventError = (message) => {{
+        selectedRunEvents = [];
+        text("kora-selected-events-status", `${{message}} No model execution was attempted. Provider calls remain disabled.`);
+        const container = document.getElementById("kora-selected-run-events");
+        if (container) {{
+          container.replaceChildren();
+        }}
+      }};
+
+      const renderSelectedEvents = (events) => {{
+        selectedRunEvents = Array.isArray(events) ? events : [];
+        const container = document.getElementById("kora-selected-run-events");
+        if (!container) {{
+          return;
+        }}
+        container.replaceChildren();
+        if (!selectedRunEvents.length) {{
+          text("kora-selected-events-status", "Generated events unavailable for this local run. No model execution was attempted. Provider calls remain disabled.");
+          return;
+        }}
+        text("kora-selected-events-status", `Loaded ${{selectedRunEvents.length}} generated local harness events for the selected run.`);
+        selectedRunEvents.forEach((event) => {{
+          const card = document.createElement("div");
+          card.className = "card";
+          const fields = [
+            ["Stage", event.stage_id || "unknown"],
+            ["Name", event.stage_name || "Unknown stage"],
+            ["Route class", event.route_class || "unknown"],
+            ["Status", event.status || "unknown"],
+            ["Model called", event.model_called === true ? "true" : "false"],
+            ["Deterministic route used", event.deterministic_route_used === true ? "true" : "false"],
+            ["Validation result", event.validation_result || "not_applicable"],
+            ["Latency", `${{event.latency_ms || 0}} ms`],
+            ["Model execution status", event.model_execution_status || "execution_not_connected"]
+          ];
+          const title = document.createElement("h3");
+          title.textContent = event.stage_name || event.stage_id || "Selected run event";
+          card.appendChild(title);
+          fields.forEach(([label, value]) => {{
+            const row = document.createElement("p");
+            row.textContent = `${{label}}: ${{value}}`;
+            card.appendChild(row);
+          }});
+          const boundary = document.createElement("p");
+          boundary.textContent = "Generated local harness events only. No model execution. No provider output. No downloads.";
+          card.appendChild(boundary);
+          container.appendChild(card);
+        }});
+      }};
+
+      const fetchSelectedEvents = async () => {{
+        if (!selectedRunId) {{
+          renderEventError("Generated events unavailable for this local run.");
+          return;
+        }}
+        text("kora-selected-events-status", "Loading generated local harness events.");
+        try {{
+          const response = await fetch(`/api/harness/events?run_id=${{encodeURIComponent(selectedRunId)}}`);
+          const payload = await response.json();
+          if (!response.ok || payload.ok === false || !Array.isArray(payload.events)) {{
+            throw new Error(payload.message || "Generated events unavailable for this local run.");
+          }}
+          renderSelectedEvents(payload.events);
+        }} catch (error) {{
+          renderEventError(error && error.message ? error.message : "Generated events unavailable for this local run.");
+        }}
       }};
 
       const renderRunResponse = (run) => {{
@@ -1160,6 +1231,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
               throw new Error(payload.message || "Local harness run failed.");
             }}
             renderRunResponse(payload);
+            await fetchSelectedEvents();
           }} catch (error) {{
             renderRunError(error && error.message ? error.message : "Local harness run failed.");
           }} finally {{
@@ -1171,7 +1243,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       renderSelectedRequest();
       window.koraStudioSelectedRunState = {{
         get selected_request_id() {{ return selectedRequestId; }},
-        get selected_run_id() {{ return selectedRunId; }}
+        get selected_run_id() {{ return selectedRunId; }},
+        get selected_run_events() {{ return selectedRunEvents.slice(); }}
       }};
     }})();
   </script>

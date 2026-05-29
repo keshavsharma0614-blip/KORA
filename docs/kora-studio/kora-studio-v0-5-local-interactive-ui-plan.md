@@ -172,6 +172,8 @@ Status: Connected in the local preview with minimal vanilla JavaScript. It sends
 
 Render generated event stages for the selected run from the local run response or `GET /api/harness/events?run_id=<id>`.
 
+Status: Connected in the local preview after a successful approved local harness run. The UI fetches `GET /api/harness/events?run_id=<id>` and renders generated local harness events only. The selected-run timeline is not SSE, not model token streaming, not provider output, and does not execute a model.
+
 ### Task 445 - Selected-run Comparison and Counters Rendering
 
 Render selected-run counters and Standard Mode vs KORA Boost comparison from local harness output only.

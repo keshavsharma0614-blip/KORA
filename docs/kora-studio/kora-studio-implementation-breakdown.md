@@ -477,7 +477,7 @@ Scope:
 - Run Local Harness button
 - selected request preview
 - browser-local selected-run state
-- generated event timeline rendering for selected run
+- generated event timeline rendering for selected run through `GET /api/harness/events?run_id=<id>`
 - selected-run counters and comparison rendering
 - selected-run report metadata preview
 - no arbitrary prompt input
@@ -493,6 +493,7 @@ Acceptance criteria:
 - interactive UI only calls existing localhost harness endpoints
 - selector lists approved request IDs without arbitrary prompt input
 - Run Local Harness calls `POST /api/harness/run` with the selected approved request ID only
+- selected-run event timeline fetches generated local harness events only and does not use SSE yet
 - selected-run state stays browser-local
 - model-needed boundaries remain `execution_not_connected`
 - no production cost, energy, provider, model execution, or unsupported larger-model claim is introduced
